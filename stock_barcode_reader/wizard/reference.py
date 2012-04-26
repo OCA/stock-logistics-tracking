@@ -83,7 +83,9 @@ class stock_reference(osv.osv_memory):
                         'acquisition_id': track_id,
                         'type': barcode_type,
                         })        
-                    text = reference + '\n' + text
+                    text += reference
+                    if text:                    
+                        text += '\n'
                 
             else:
                 raise osv.except_osv(_('Warning!'),_('Barcode Not found!')) # Return of the wraning msg !!
