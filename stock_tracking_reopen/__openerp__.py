@@ -46,5 +46,4 @@ This module Change reference of the packaging if it's re-open.
     'test': [],
     'installable': True,
     'active': False,
-    'certificate': '',
 }

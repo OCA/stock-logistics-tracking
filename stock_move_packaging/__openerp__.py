@@ -47,5 +47,4 @@ and adds fields for source location and destination location in History.
     'test': [],
     'installable': True,
     'active': False,
-    'certificate': '',
 }

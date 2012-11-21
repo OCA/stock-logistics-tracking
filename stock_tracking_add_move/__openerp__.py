@@ -50,5 +50,4 @@ Adding to the historical movements and parent objects
     'test': [],
     'installable': True,
     'active': False,
-    'certificate': '',
 }

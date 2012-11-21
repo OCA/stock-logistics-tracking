@@ -46,5 +46,4 @@ This module allows to define and identify package in parent or child
     'test': [],
     'installable': True,
     'active': False,
-    'certificate': '',
 }
