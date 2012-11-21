@@ -131,8 +131,8 @@ class stock_tracking(osv.osv):
                     allowed = False
                     raise osv.except_osv(_('Not allowed !'),_('You can\'t close this pack because there is at least one not closed child'))
                     break
-#            if allowed:
-#                self.write(cr, uid, [pack.id], {'state': 'close'})
+            if allowed:
+                self.write(cr, uid, [pack.id], {'state': 'close'})
         return True
 
     def get_products(self, cr, uid, ids, context=None):
