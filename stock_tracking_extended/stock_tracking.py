@@ -104,12 +104,12 @@ class stock_tracking(osv.osv):
     }
 
     def reset_open(self, cr, uid, ids, context=None):
-        pack_ids = self.browse(cr, uid, ids, context)
+        pack_ids = self.browse(cr, uid, ids, context=context)
         for pack in pack_ids:
             allowed = True
             if pack.parent_id:
                 if pack.parent_id and pack.parent_id != 'open':
-                    self.write(cr, uid, [pack.parent_id.id], {'state': 'open'})
+                    self.write(cr, uid, [pack.parent_id.id], {'state': 'open'}, context=context)
 #                    allowed = False
 #                    raise osv.except_osv(_('Not allowed !'),_('You can\'t re-open this pack because the parent pack is close'))
             if allowed:
@@ -119,11 +119,11 @@ class stock_tracking(osv.osv):
                         raise osv.except_osv(_('Not allowed !'),_('You can\'t re-open this pack because there is at least one not closed child'))
                         break
             if allowed:
-                self.write(cr, uid, [pack.id], {'state': 'open'})
+                self.write(cr, uid, [pack.id], {'state': 'open'}, context=context)
         return True
 
     def set_close(self, cr, uid, ids, context=None):
-        pack_ids = self.browse(cr, uid, ids, context)
+        pack_ids = self.browse(cr, uid, ids, context=context)
         for pack in pack_ids:
             allowed = True
             for child in pack.child_ids:
@@ -131,8 +131,8 @@ class stock_tracking(osv.osv):
                     allowed = False
                     raise osv.except_osv(_('Not allowed !'),_('You can\'t close this pack because there is at least one not closed child'))
                     break
-#            if allowed:
-#                self.write(cr, uid, [pack.id], {'state': 'close'})
+            if allowed:
+                self.write(cr, uid, [pack.id], {'state': 'close'}, context=context)
         return True
 
     def get_products(self, cr, uid, ids, context=None):
@@ -172,8 +172,8 @@ class stock_tracking(osv.osv):
                             serial_list[x.prodlot_id.id] += x.product_qty
                 for serial in serial_list.keys():
                     if serial:
-                        serial_track.create(cr, uid, {'serial_id': serial, 'quantity': serial_list[serial], 'tracking_id': child.id})
-                        serial_obj.write(cr, uid, [serial], {'tracking_id': child.id})
+                        serial_track.create(cr, uid, {'serial_id': serial, 'quantity': serial_list[serial], 'tracking_id': child.id}, context=context)
+                        serial_obj.write(cr, uid, [serial], {'tracking_id': child.id}, context=context)
         return True
 
 stock_tracking()
@@ -286,29 +286,29 @@ class stock_move(osv.osv):
     }
 
     def write(self, cr, uid, ids, vals, context=None):
-        result = super(stock_move,self).write(cr, uid, ids, vals, context)
+        result = super(stock_move,self).write(cr, uid, ids, vals, context=context)
         if not isinstance(ids, list):
             ids = [ids]
         for id in ids:
-            state = self.browse(cr, uid, id, context).state
-            move_ori_id = self.browse(cr, uid, id, context).move_ori_id
+            state = self.browse(cr, uid, id, context=context).state
+            move_ori_id = self.browse(cr, uid, id, context=context).move_ori_id
             if state == 'done' and move_ori_id:
-                self.write(cr, uid, [move_ori_id.id], {'state':'done'}, context)
+                self.write(cr, uid, [move_ori_id.id], {'state':'done'}, context=context)
         return result
 
     def create(self, cr, uid, vals, context=None):
         production_lot_obj = self.pool.get('stock.production.lot')
         stock_tracking_obj = self.pool.get('stock.tracking')
         if vals.get('prodlot_id',False):
-            production_lot_data = production_lot_obj.browse(cr, uid, vals['prodlot_id'])
-            last_production_lot_move_id = self.search(cr, uid, [('prodlot_id', '=', production_lot_data.id)], limit=1, order='date')
+            production_lot_data = production_lot_obj.browse(cr, uid, vals['prodlot_id'], context=context)
+            last_production_lot_move_id = self.search(cr, uid, [('prodlot_id', '=', production_lot_data.id)], limit=1, order='date', context=context)
             if last_production_lot_move_id:
                 last_production_lot_move = self.browse(cr,uid,last_production_lot_move_id[0])
                 if last_production_lot_move.tracking_id:
                     ids = [last_production_lot_move.tracking_id.id]
-                    stock_tracking_obj.reset_open(cr, uid, ids, context=None)
+                    stock_tracking_obj.reset_open(cr, uid, ids, context=context)
 
-        return super(stock_move,self).create(cr, uid, vals, context)
+        return super(stock_move,self).create(cr, uid, vals, context=context)
 
 stock_move()
 
@@ -321,7 +321,7 @@ class split_in_production_lot(osv.osv_memory):
         'use_exist': lambda *a: True,
     }
     def default_get(self, cr, uid, fields, context=None):
-        res = super(split_in_production_lot, self).default_get(cr, uid, fields, context)
+        res = super(split_in_production_lot, self).default_get(cr, uid, fields, context=context)
         res.update({'use_exist': True})
         return res
 
