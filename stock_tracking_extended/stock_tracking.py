@@ -110,8 +110,6 @@ class stock_tracking(osv.osv):
             if pack.parent_id:
                 if pack.parent_id and pack.parent_id != 'open':
                     self.write(cr, uid, [pack.parent_id.id], {'state': 'open'}, context=context)
-#                    allowed = False
-#                    raise osv.except_osv(_('Not allowed !'),_('You can\'t re-open this pack because the parent pack is close'))
             if allowed:
                 for child in pack.child_ids:
                     if child.state == 'open':
@@ -195,7 +193,6 @@ class product_stock_tracking(osv.osv):
         'product_id': fields.many2one('product.product', 'Product'),
         'quantity': fields.float('Quantity'),
         'tracking_id': fields.many2one('stock.tracking', 'Tracking'),
-#        'tracking_history_id': fields.many2one('stock.tracking.history', 'Tracking History'),
     }
 
 product_stock_tracking()
@@ -211,7 +208,6 @@ class serial_stock_tracking(osv.osv):
         'product_id': fields.related('serial_id', 'product_id', type='many2one', relation='product.product', string='Product'),
         'quantity': fields.float('Quantity'),
         'tracking_id': fields.many2one('stock.tracking', 'Tracking'),
-#        'tracking_history_id': fields.many2one('stock.tracking.history', 'Tracking History'),
     }
 
 serial_stock_tracking()
@@ -221,34 +217,13 @@ class stock_tracking_history(osv.osv):
     _name = "stock.tracking.history"
 
     def _get_types(self, cr, uid, context={}):
-#        res = [('pack_in','Add parent'),('pack_out','Unlink parent'),('move','Move')]
         res = []
         return res
 
-#    def hierarchy_ids(self, tracking):
-#        result_list = [tracking]
-#        for child in tracking.child_ids:
-#            result_list.extend(self.hierarchy_ids(child))
-#        return result_list
-#
-#    def _get_child_products(self, cr, uid, ids, field_name, arg, context=None):
-#        packs = self.browse(cr, uid, ids)
-#        res = {}
-#        for pack in packs:
-#            res[pack.id] = []
-#            childs = self.hierarchy_ids(pack)
-#            for child in childs:
-#                for prod in child.product_ids:
-#                    res[pack.id].append(prod.id)
-#        return res
 
     _columns = {
         'tracking_id': fields.many2one('stock.tracking', 'Pack', required=True),
         'type': fields.selection(_get_types, 'Type'),
-#        'product_ids': fields.one2many('product.stock.tracking', 'tracking_history_id', 'Products'),
-#        'child_product_ids': fields.function(_get_child_products, method=True, type='one2many', obj='product.stock.tracking', string='Child Products'),
-#        'parent_hist_id': fields.many2one('stock.tracking.history', 'Parent history pack'),
-#        'child_ids': fields.one2many('stock.tracking.history', 'parent_hist_id', 'Child history pack'),
     }
 
     _rec_name = "tracking_id"
@@ -261,7 +236,17 @@ class stock_production_lot(osv.osv):
     _columns = {
         'tracking_id': fields.many2one('stock.tracking', 'pack'),
     }
-
+    def copy(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        default.update({
+            'state': 'draft',
+            'shipped': False,
+            'tracking_id': False,
+            'move_ids': [],
+        })
+        return super(stock_production_lot, self).copy(cr, uid, id, default, context=context)
+    
 stock_production_lot()
 
 class product_category(osv.osv):
@@ -282,7 +267,6 @@ class stock_move(osv.osv):
     _inherit = 'stock.move'
     _columns = {
          'move_ori_id': fields.many2one('stock.move', 'Origin Move', select=True),
-#        'cancel_cascade': fields.boolean('Cancel Cascade', help='If checked, when this move is cancelled, cancel the linked move too')
     }
 
     def write(self, cr, uid, ids, vals, context=None):
