@@ -45,6 +45,6 @@ and adds fields for source location and destination location in History.
                     'wizard/move_pack_view.xml',
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }

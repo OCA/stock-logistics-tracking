@@ -57,6 +57,6 @@ This module adds a submenu for acquisition setting with a field Barcode and Acti
         "security/ir.model.access.csv",
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }

@@ -44,6 +44,6 @@ This module Change reference of the packaging if it's re-open.
         'stock_view.xml',
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }

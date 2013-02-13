@@ -44,6 +44,6 @@ This module allows to define and identify package in parent or child
         "security/ir.model.access.csv",
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
