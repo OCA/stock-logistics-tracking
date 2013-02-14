@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 #################################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -19,31 +19,27 @@
 #
 #################################################################################
 
-{
-    "name" : "Stock Tracking extended",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
-    "description" : """
+from datetime import datetime
+from osv import fields, osv
+from tools.translate import _
+import netsvc
 
-Presentation:
 
-This module allows to define and identify package in parent or child
-
-""",
-    "website" : "http://www.julius.fr",
-    "depends" : [
-        "stock",
-    ],
-    "category" : "Stock",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "images" : ['images/Tracking extended.png'],
-    "update_xml" : [
-        'stock_tracking_view.xml',
-#        'inventory_sequence.xml',
-        "security/ir.model.access.csv",
-    ],
-    'test': [],
-    'installable': True,
-    'active': False,
-}
+'''Add a field in order to store the current pack in a production lot'''
+class stock_production_lot(osv.osv):
+    _inherit = 'stock.production.lot'
+    _columns = {
+        'tracking_id': fields.many2one('stock.tracking', 'pack'),
+    }
+    def copy(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        default.update({
+            'state': 'draft',
+            'shipped': False,
+            'tracking_id': False,
+            'move_ids': [],
+        })
+        return super(stock_production_lot, self).copy(cr, uid, id, default, context=context)
+    
+stock_production_lot()

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 #################################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -19,31 +19,15 @@
 #
 #################################################################################
 
-{
-    "name" : "Stock Tracking extended",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
-    "description" : """
+from datetime import datetime
+from osv import fields, osv
+from tools.translate import _
+import netsvc
 
-Presentation:
+class stock_inventory(osv.osv):
+    _inherit = 'stock.inventory'
+    _defaults = {
+        'name': lambda x, y, z, c: x.pool.get('ir.sequence').get(y, z, 'stock.inventory') or '/'
+    }
+stock_inventory()
 
-This module allows to define and identify package in parent or child
-
-""",
-    "website" : "http://www.julius.fr",
-    "depends" : [
-        "stock",
-    ],
-    "category" : "Stock",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "images" : ['images/Tracking extended.png'],
-    "update_xml" : [
-        'stock_tracking_view.xml',
-#        'inventory_sequence.xml',
-        "security/ir.model.access.csv",
-    ],
-    'test': [],
-    'installable': True,
-    'active': False,
-}

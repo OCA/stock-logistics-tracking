@@ -40,10 +40,10 @@ This module allows to define and identify package in parent or child
     "images" : ['images/Tracking extended.png'],
     "update_xml" : [
         'stock_tracking_view.xml',
-#        'inventory_sequence.xml',
+        'inventory_sequence.xml',
         "security/ir.model.access.csv",
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
