@@ -19,23 +19,25 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
 import time
-from tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 
-class stock_prodlot_swap(osv.osv_memory):
-    _name = "stock.prodlot.swap"
+class stock_tracking_swap(osv.osv_memory):
+    _name = "stock.tracking.swap"
 
     _columns = {
         'location_id': fields.many2one('stock.location', 'Location'),
         'parent_pack_id': fields.many2one('stock.tracking', 'Parent Pack'),
         'previous_prodlot_id': fields.many2one('stock.production.lot', 'Previous Production Lot'),
         'new_prodlot_id': fields.many2one('stock.production.lot', 'New Production Lot'),
+        'previous_product_id': fields.many2one('product.product', 'Previous Product'),
+        'new_product_id': fields.many2one('product.product', 'New Product'),
     }
     
     def default_get(self, cr, uid, fields, context=None):
-        res=super(stock_prodlot_swap, self).default_get(cr, uid, fields, context=context)
+        res=super(stock_tracking_swap, self).default_get(cr, uid, fields, context=context)
         if context is None:
             context = {}                                                                      
         res.update({
@@ -46,20 +48,27 @@ class stock_prodlot_swap(osv.osv_memory):
     def onchange_location(self, cr , uid, ids, location_id, parent_pack_id):
         tracking_obj = self.pool.get('stock.tracking')            
         prodlot_ids = []
+        product_ids = []
         domain_prodlot_id = []
+        domain_product_id = []
         if parent_pack_id:
             move_ids = tracking_obj.browse(cr, uid, parent_pack_id).current_move_ids
             for move_id in move_ids:
                 if move_id.prodlot_id.id not in prodlot_ids:
                     prodlot_ids.append(move_id.prodlot_id.id)
+                if (move_id.product_id.id not in product_ids) and not move_id.prodlot_id:
+                    product_ids.append(move_id.product_id.id)
         var = ('id','in', tuple(prodlot_ids))
         domain_prodlot_id.append(var)
+        var = ('id','in', tuple(product_ids))
+        domain_product_id.append(var)
         return {
             'domain': {
-                'previous_prodlot_id': str(domain_prodlot_id)
+                'previous_prodlot_id': str(domain_prodlot_id),
+                'previous_product_id': str(domain_product_id),
             }
         }
-    
+
     def swap_object(self, cr, uid, ids, context=None):
         move_obj = self.pool.get('stock.move')
         picking_obj = self.pool.get('stock.picking')
@@ -67,6 +76,7 @@ class stock_prodlot_swap(osv.osv_memory):
         history_obj = self.pool.get('stock.tracking.history')
         if context == None:
             context = {}
+        swap_type = context.get('swap_type') or 'product'
         for current in self.browse(cr, uid, ids, context=context):
             if not context.get('active_id'):
                 raise osv.except_osv(_('Warning!'),_('Should Not Happen !'))
@@ -89,12 +99,34 @@ class stock_prodlot_swap(osv.osv_memory):
                'location_id': destination_id,
                'location_dest_id': origin_id,
             }, context=context)
-            # Previous prodlot
+            # Previous prodlot or product
             move_ids = [x.id for x in parent_pack.current_move_ids]
-            move_ids = move_obj.search(cr, uid, [('id','in',move_ids),('prodlot_id','=',current.previous_prodlot_id.id)], limit=1, context=context)
+            domain = [('id','in',move_ids)]
+            if swap_type == 'product':
+                domain += [('product_id','=',current.previous_product_id.id),('prodlot_id','=',False)]
+            elif swap_type == 'prodlot':
+                domain += [('prodlot_id','=',current.previous_prodlot_id.id)]
+            move_ids = move_obj.search(cr, uid, domain, limit=1, context=context)
             if not move_ids:
-                raise osv.except_osv(_('Warning!'),_('Production Lot Not Found !'))
+                if swap_type == 'product':
+                    raise osv.except_osv(_('Warning!'),_('Product Not Found !'))
+                if swap_type == 'prodlot':
+                    raise osv.except_osv(_('Warning!'),_('Production Lot Not Found !'))
             move_id = move_ids[0]
+            if swap_type == 'product':
+                move_data = move_obj.browse(cr, uid, move_ids[0], context=context)
+                move_qty = move_data.product_qty
+                if move_qty != 1.0:
+                    defaults = {
+                        'location_id': origin_id,
+                        'location_dest_id': origin_id,
+                        'date': date,
+                        'date_expected': date,
+                        'tracking_id': parent_pack.id,
+                        'product_qty': move_qty - 1.0,
+                        'state': 'done',
+                    }
+                    new_id = move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
             defaults = {
                 'location_id': origin_id,
                 'location_dest_id': destination_id,
@@ -104,8 +136,12 @@ class stock_prodlot_swap(osv.osv_memory):
                 'tracking_id': False,
                 'state': 'done',
             }
+            if swap_type == 'product':
+                defaults.update({
+                    'product_qty': 1.0,
+                })
             new_id = move_obj.copy(cr, uid, move_id, default=defaults, context=context)
-            # New prodlot
+            # New prodlot, product
             defaults = {
                 'location_id': destination_id,
                 'location_dest_id': origin_id,
@@ -113,16 +149,23 @@ class stock_prodlot_swap(osv.osv_memory):
                 'date': date,
                 'date_expected': date,
                 'tracking_id': parent_pack.id,
-                'prodlot_id': current.new_prodlot_id.id,
-                'product_id': current.new_prodlot_id.product_id.id,
                 'product_qty': 1.0,
                 'state': 'done',
             }
+            if swap_type == 'product':
+                defaults.update({
+                    'product_id': current.new_product_id.id,
+                })
+            elif swap_type == 'prodlot':
+                defaults.update({
+                    'prodlot_id': current.new_prodlot_id.id,
+                    'product_id': current.new_prodlot_id.product_id.id,
+                })
             new_id = move_obj.copy(cr, uid, move_id, default=defaults, context=context)
             move_obj.write(cr, uid, [move_id], {'pack_history_id': hist_id}, context=context)
-        tracking_obj.get_serials(cr, uid, [parent_pack.id], context=context)
+        tracking_obj.get_products(cr, uid, [parent_pack.id], context=context)
         return {'type': 'ir.actions.act_window_close'}
        
-stock_prodlot_swap()
+stock_tracking_swap()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

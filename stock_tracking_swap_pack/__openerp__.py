@@ -20,12 +20,12 @@
 #################################################################################
 
 {
-    "name" : "Stock tracking swap pack",
+    "name" : "Stock tracking swap",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
     "description" : """Presentation:
 
-This module add a wizard to swap pack in packaging.
+This module add a wizard to swap packs in packaging.
 This wizard is used to replace an object from a package.
 Adding to the historical movements and parent objects
 
@@ -35,15 +35,16 @@ Adding to the historical movements and parent objects
          "stock",
          "stock_tracking_extended",
          "stock_move_packaging",
-         "stock_tracking_add_product",
-         "stock_tracking_add_pack",
+         "stock_tracking_child",
+#         "stock_tracking_add_product",
+#         "stock_tracking_add_pack",
     ],
     "category" : "Warehouse Management",
     "init_xml" : [],
     "demo_xml" : [],
     "images" : [],
     "update_xml" : [
-        "wizard/swap_pack_view.xml",
+        "wizard/swap_view.xml",
         'stock_view.xml',
     ],
     'test': [],

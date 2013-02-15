@@ -19,33 +19,6 @@
 #
 #################################################################################
 
-{
-    "name" : "Stock tracking swap product",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
-    "description" : """Presentation:
-
-This module add a wizard to swap product in packaging.
-This wizard is used to replace an object from a package.
-Adding to the historical movements and parent objects
-
-""",
-    "website" : "http://www.julius.fr",
-    "depends" : [
-        "stock_tracking_swap_pack",
-        "stock_tracking_add_product",
-    ],
-    "category" : "Warehouse Management",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "images" : [],
-    "update_xml" : [
-        "wizard/swap_product_view.xml",
-        'stock_view.xml',
-    ],
-    'test': [],
-    'installable': False,
-    'active': False,
-}
+import swap
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

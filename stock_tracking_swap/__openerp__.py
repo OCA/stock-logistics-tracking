@@ -20,31 +20,32 @@
 #################################################################################
 
 {
-    "name" : "Stock tracking swap moves",
+    "name" : "Stock tracking swap",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
     "description" : """Presentation:
 
-This module add a wizard to swap prodlot in packaging.
+This module add a wizard to swap products or prodlots in packaging.
 This wizard is used to replace an object from a package.
 Adding to the historical movements and parent objects
 
 """,
     "website" : "http://www.julius.fr",
     "depends" : [
-        "stock_tracking_swap_pack",
-        "stock_tracking_add_prodlot",
+         "stock",
+         "stock_tracking_extended",
+#         "stock_move_packaging",
     ],
     "category" : "Warehouse Management",
     "init_xml" : [],
     "demo_xml" : [],
     "images" : [],
     "update_xml" : [
-        "wizard/swap_prodlot_view.xml",
+        "wizard/swap_view.xml",
         'stock_view.xml',
     ],
     'test': [],
-    'installable': False,
+    'installable': True,
     'active': False,
 }
 

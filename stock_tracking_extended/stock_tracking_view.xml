@@ -23,12 +23,28 @@
 				<field name="move_ids" position="replace">
 					<notebook>
 						<page string="Products">
-							<field name="product_ids" nolabel="1" colspan="4" />
-							<button name="get_products" string="Update product list" colspan="2" type="object" icon="gtk-ok"/>
+							<group name="products">
+								<div>
+                            		<div>
+										<field name="product_ids" nolabel="1" colspan="4"/>
+									</div>
+                            		<div name="product_buttons">
+										<button name="get_products" string="Update product list" colspan="2" type="object"/>
+									</div>
+								</div>
+							</group>
 						</page>
 						<page string="Serial Code">
-							<field name="serial_ids" nolabel="1" colspan="4" />
-							<button name="get_serials" string="Update Serial list" colspan="2" type="object" icon="gtk-ok"/>
+							<group name="serials">
+								<div>
+                            		<div>
+										<field name="serial_ids" nolabel="1" colspan="4"/>
+									</div>
+                            		<div name="prodlot_buttons">
+										<button name="get_serials" string="Update Serial list" colspan="2" type="object"/>
+									</div>
+								</div>
+							</group>
 						</page>
 						<page string="History">
 							<field name="history_ids" nolabel="1" colspan="4"/>

@@ -19,10 +19,10 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
 import time
-from tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 
 class stock_packaging_swap(osv.osv_memory):
     _name = "stock.packaging.swap"
