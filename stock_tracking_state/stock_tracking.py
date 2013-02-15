@@ -31,6 +31,9 @@ class stock_tracking(osv.osv):
     _columns = { 
                 'state': fields.selection([('open','Open'),('close','Close')], 'State', readonly=True),        
             }
+    _defaults = {
+        'state': 'open',
+    }
     
     def reset_open(self, cr, uid, ids, context=None):
         pack_ids = self.browse(cr, uid, ids, context=context)

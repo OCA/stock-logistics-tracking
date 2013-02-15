@@ -33,14 +33,13 @@ This module allows to define and identify package in parent or child
     "website" : "http://www.julius.fr",
     "depends" : [
         "stock",
+        "stock_tracking_extended",
     ],
     "category" : "Stock",
     "init_xml" : [],
     "demo_xml" : [],
-    "images" : ['images/Tracking extended.png'],
     "update_xml" : [
-#        'stock_tracking_view.xml',
-        
+        'stock_tracking_view.xml',
     ],
     'test': [],
     'installable': True,

@@ -20,7 +20,7 @@
 #################################################################################
 
 {
-    "name" : "Stock Tracking extended",
+    "name" : "Stock Tracking Prodlot",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
     "description" : """
@@ -37,14 +37,9 @@ This module allows to define and identify package in parent or child
     "category" : "Stock",
     "init_xml" : [],
     "demo_xml" : [],
-    "images" : ['images/Tracking extended.png'],
-    "update_xml" : [
-        'stock_tracking_view.xml',
-        'inventory_sequence.xml',
-        "security/ir.model.access.csv",
-    ],
+    "update_xml" : [],
     'test': [],
-    'installable': False,
+    'installable': True,
     'active': False,
 }
 
