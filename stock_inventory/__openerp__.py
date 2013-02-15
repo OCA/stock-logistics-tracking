@@ -37,7 +37,6 @@ This module allows to define and identify package in parent or child
     "category" : "Stock",
     "init_xml" : [],
     "demo_xml" : [],
-    "images" : ['images/Tracking extended.png'],
     "update_xml" : [
         'stock_tracking_view.xml',
         'inventory_sequence.xml',
@@ -47,3 +46,5 @@ This module allows to define and identify package in parent or child
     'installable': False,
     'active': False,
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

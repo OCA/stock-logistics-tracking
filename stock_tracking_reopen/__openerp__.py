@@ -47,3 +47,5 @@ This module Change reference of the packaging if it's re-open.
     'installable': False,
     'active': False,
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

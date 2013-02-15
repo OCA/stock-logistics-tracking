@@ -28,7 +28,6 @@ class stock_tracking(osv.osv):
 
     _inherit = 'stock.tracking'
     
-    
     def hierarchy_ids(self, tracking):
         result_list = [tracking]
         for child in tracking.child_ids:
@@ -78,10 +77,6 @@ class stock_tracking(osv.osv):
 #            for child in pack.child_ids:
 #                pack_ids.extend(self.hierarchy_ids(child))
 #        return super(stock_tracking, self).get_serial_process(cr, uid, pack_ids, context=context)
-        
-    
-
-
 
     def get_products(self, cr, uid, ids, context=None):
         pack_ids = self.browse(cr, uid, ids, context)
@@ -141,7 +136,6 @@ class stock_tracking(osv.osv):
     
 stock_tracking()
     
-    
 class product_ul(osv.osv):
         _inherit = "product.ul"
         _description = "Shipping Unit"
@@ -150,3 +144,5 @@ class product_ul(osv.osv):
         }
         _order = 'capacity_index'
 product_ul()
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

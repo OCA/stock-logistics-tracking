@@ -47,3 +47,5 @@ This module allows to define and identify package in parent or child
     'installable': False,
     'active': False,
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

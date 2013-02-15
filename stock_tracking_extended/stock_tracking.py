@@ -19,10 +19,10 @@
 #
 #################################################################################
 
-from datetime import datetime
+#from datetime import datetime
 from osv import fields, osv
 from tools.translate import _
-import netsvc
+#import netsvc
 
 class one2many_special(fields.one2many):
     def get(self, cr, obj, ids, name, user=None, offset=0, context=None, values=None):
@@ -43,24 +43,21 @@ class one2many_special(fields.one2many):
 class stock_tracking(osv.osv):
     _inherit = 'stock.tracking'
 
-
     _columns = {
-        'location_id': fields.many2one('stock.location', 'Location', required=True, readonly=True),
+        'location_id': fields.many2one('stock.location', 'Location', readonly=True),
         'product_ids': fields.one2many('product.stock.tracking', 'tracking_id', 'Products', readonly=True),
         'history_ids': fields.one2many('stock.tracking.history', 'tracking_id', 'History'),
         'current_move_ids': one2many_special('stock.move', 'tracking_id', 'Current moves', domain=[('pack_history_id', '=', False)], readonly=True),
-        'name': fields.char('Pack Reference', size=64, required=True, readonly=True),
+#        'name': fields.char('Pack Reference', size=64, required=True, readonly=True),
         'date': fields.datetime('Creation Date', required=True, readonly=True),
         'serial_ids': fields.one2many('serial.stock.tracking', 'tracking_id', 'Products', readonly=True),
     }
-
-
 
     def get_products_process(self, cr, uid, pack_ids, context=None):
         stock_track = self.pool.get('product.stock.tracking')
         for pack in pack_ids:
             product_ids = [x.id for x in pack.product_ids]
-            stock_track.unlink(cr, uid, product_ids)
+            stock_track.unlink(cr, uid, product_ids, context=context)
             product_list = {}
             for x in pack.current_move_ids:
                 if x.location_dest_id.id == pack.location_id.id:
@@ -71,7 +68,7 @@ class stock_tracking(osv.osv):
             for product in product_list.keys():
                 stock_track.create(cr, uid, {'product_id': product, 'quantity': product_list[product], 'tracking_id': pack.id})
         return True
-    
+
     def get_serial_process(self, cr, uid, pack_ids, context=None):
         serial_track = self.pool.get('serial.stock.tracking')
         serial_obj = self.pool.get('stock.production.lot')
@@ -91,23 +88,15 @@ class stock_tracking(osv.osv):
                     serial_obj.write(cr, uid, [serial], {'tracking_id': pack.id}, context=context)
         return True
 
-
     def get_products(self, cr, uid, ids, context=None):
         pack_ids = self.browse(cr, uid, ids, context)
         return self.get_products_process(cr, uid, pack_ids, context=context)
- 
-  
+
     def get_serial(self, cr, uid, ids, context=None):
         pack_ids = self.browse(cr, uid, ids, context)
         return self.get_serial(cr, uid, pack_ids, context=context)
-    
-    
-
 
 stock_tracking()
-
-
-
 
 class product_stock_tracking(osv.osv):
 
@@ -140,10 +129,9 @@ class stock_tracking_history(osv.osv):
 
     _name = "stock.tracking.history"
 
-    def _get_types(self, cr, uid, context={}):
+    def _get_types(self, cr, uid, context=None):
         res = []
         return res
-
 
     _columns = {
         'tracking_id': fields.many2one('stock.tracking', 'Pack', required=True),
@@ -153,14 +141,5 @@ class stock_tracking_history(osv.osv):
     _rec_name = "tracking_id"
 
 stock_tracking_history()
-
-
-
-
-
-
-
-
-
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

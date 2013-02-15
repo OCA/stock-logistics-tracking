@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-     
-		
-       
-		
+
 		<record id="view_tracking_child_tree" model="ir.ui.view">
 			<field name="name">stock.tracking.child.tree</field>
 			<field name="model">stock.tracking</field>
@@ -17,9 +14,6 @@
 				</field>
 			</field>
 		</record>
-		
-		
-        
         
 		<record id="view_tracking_child_form" model="ir.ui.view">
 			<field name="name">stock.tracking.child.form</field>
@@ -44,8 +38,6 @@
 				</page>
 			</field>
 		</record>
-		
-
 
 		<!--<record id="action_stock_tracking_tree" model="ir.actions.act_window">
 			<field name="name">Packs Structure</field>
@@ -60,11 +52,6 @@
 			action="action_stock_tracking_tree"
 			id="menu_action_stock_tracking_tree"
 			parent="stock.menu_stock_inventory_control" />-->
-
-		
-		
-		
-	
 
         <record id="product_ul_tree" model="ir.ui.view">
             <field name="name">product.ul.tree.inherit</field>
@@ -89,7 +76,6 @@
                 </field>
             </field>
         </record>
-        
 		
     </data>
 </openerp>        

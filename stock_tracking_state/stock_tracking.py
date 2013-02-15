@@ -62,3 +62,4 @@ class stock_tracking(osv.osv):
                 self.write(cr, uid, [pack.id], {'state': 'close'}, context=context)
         return True
 
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -24,7 +24,6 @@ from osv import fields, osv
 from tools.translate import _
 import netsvc
 
-
 '''Add a field in order to store the current pack in a production lot'''
 class stock_production_lot(osv.osv):
     _inherit = 'stock.production.lot'
@@ -43,3 +42,5 @@ class stock_production_lot(osv.osv):
         return super(stock_production_lot, self).copy(cr, uid, id, default, context=context)
     
 stock_production_lot()
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

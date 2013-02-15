@@ -60,3 +60,5 @@ This module adds a submenu for acquisition setting with a field Barcode and Acti
     'installable': False,
     'active': False,
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

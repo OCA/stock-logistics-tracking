@@ -48,3 +48,6 @@ and adds fields for source location and destination location in History.
     'installable': False,
     'active': False,
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
