@@ -31,6 +31,9 @@ class stock_tracking(osv.osv):
     _columns = { 
                 'state': fields.selection([('open','Open'),('close','Close')], 'State', readonly=True),        
             }
+    _defaults = {
+        'state': 'open',
+    }
     
     def reset_open(self, cr, uid, ids, context=None):
         pack_ids = self.browse(cr, uid, ids, context=context)
@@ -62,3 +65,4 @@ class stock_tracking(osv.osv):
                 self.write(cr, uid, [pack.id], {'state': 'close'}, context=context)
         return True
 
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
