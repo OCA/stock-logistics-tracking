@@ -101,6 +101,7 @@ stock_tracking()
 class product_stock_tracking(osv.osv):
 
     _name = 'product.stock.tracking'
+    _description = 'Products in Packs'
 
     _columns = {
         'product_id': fields.many2one('product.product', 'Product'),
@@ -113,6 +114,7 @@ product_stock_tracking()
 class serial_stock_tracking(osv.osv):
 
     _name = 'serial.stock.tracking'
+    _description = 'Serials in Packs'
 
     _order = 'tracking_id,serial_id'
 
@@ -128,6 +130,7 @@ serial_stock_tracking()
 class stock_tracking_history(osv.osv):
 
     _name = "stock.tracking.history"
+    _description = 'Packs history'
 
     def _get_types(self, cr, uid, context=None):
         res = []

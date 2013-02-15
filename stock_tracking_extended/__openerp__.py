@@ -27,7 +27,7 @@
 
 Presentation:
 
-This module allows to define and identify package in parent or child
+This module adds some info into packs to get a better tracking of products and serial lots inside of these packs
 
 """,
     "website" : "http://www.julius.fr",

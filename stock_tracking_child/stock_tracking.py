@@ -19,10 +19,10 @@
 #
 #################################################################################
 
-from datetime import datetime
+#from datetime import datetime
 from osv import fields, osv
 from tools.translate import _
-import netsvc
+#import netsvc
 
 class stock_tracking(osv.osv):
 
@@ -57,14 +57,12 @@ class stock_tracking(osv.osv):
         return res
     
     _columns = { 
-                
-            'parent_id': fields.many2one('stock.tracking', 'Parent'),
-            'child_ids': fields.one2many('stock.tracking', 'parent_id', 'Children', readonly=True),
-            'ul_id': fields.many2one('product.ul', 'Logistic unit'),
-            'child_product_ids': fields.function(_get_child_products, method=True, type='one2many', obj='product.stock.tracking', string='Child Products'),
-            'child_serial_ids': fields.function(_get_child_serials, method=True, type='one2many', obj='serial.stock.tracking', string='Child Serials'),
-            
-        }
+        'parent_id': fields.many2one('stock.tracking', 'Parent'),
+        'child_ids': fields.one2many('stock.tracking', 'parent_id', 'Children', readonly=True),
+        'ul_id': fields.many2one('product.ul', 'Logistic unit'),
+        'child_product_ids': fields.function(_get_child_products, method=True, type='one2many', obj='product.stock.tracking', string='Child Products'),
+        'child_serial_ids': fields.function(_get_child_serials, method=True, type='one2many', obj='serial.stock.tracking', string='Child Serials'),
+    }
     
 #    def get_products_process(self, cr, uid, pack_ids, context=None):
 #        for pack in pack_ids:
@@ -137,12 +135,15 @@ class stock_tracking(osv.osv):
 stock_tracking()
     
 class product_ul(osv.osv):
-        _inherit = "product.ul"
-        _description = "Shipping Unit"
-        _columns = {
-             'capacity_index': fields.integer('Capacity index'),
-        }
-        _order = 'capacity_index'
+    _inherit = "product.ul"
+    _description = "Shipping Unit"
+    
+    _columns = {
+        'capacity_index': fields.integer('Capacity index'),
+    }
+    
+    _order = 'capacity_index'
+
 product_ul()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
