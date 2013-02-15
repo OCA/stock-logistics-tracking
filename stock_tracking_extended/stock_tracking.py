@@ -1,4 +1,4 @@
- # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #################################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -19,25 +19,34 @@
 #
 #################################################################################
 
-#from datetime import datetime
-from osv import fields, osv
-from tools.translate import _
-#import netsvc
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
 
 class one2many_special(fields.one2many):
     def get(self, cr, obj, ids, name, user=None, offset=0, context=None, values=None):
-        if not values:
+        if context is None:
+            context = {}
+        if self._context:
+            context = context.copy()
+        context.update(self._context)
+        if values is None:
             values = {}
+
         res = {}
         location_ids = []
         for id in ids:
             res[id] = []
-            location_id = obj.pool.get('stock.tracking').read(cr, user, id, ['location_id'])['location_id']
+            location_id = obj.read(cr, user, id, ['location_id'])['location_id']
             if location_id and location_id[0] and location_id[0] not in location_ids:
                 location_ids.append(location_id[0])
-        ids2 = obj.pool.get(self._obj).search(cr, user, self._domain + [(self._fields_id, 'in', ids), ('location_dest_id', 'in', location_ids)], limit=self._limit)
+        domain = self._domain(obj) if callable(self._domain) else self._domain
+        domain2 = [(self._fields_id, 'in', ids)]
+        if location_ids:
+            domain2 += [('location_dest_id', 'in', location_ids)]
+        ids2 = obj.pool.get(self._obj).search(cr, user, domain + domain2, limit=self._limit, context=context)
         for r in obj.pool.get(self._obj)._read_flat(cr, user, ids2, [self._fields_id], context=context, load='_classic_write'):
-            res[r[self._fields_id]].append( r['id'] )
+            if r[self._fields_id] in res:
+                res[r[self._fields_id]].append(r['id'])
         return res
 
 class stock_tracking(osv.osv):
@@ -144,5 +153,13 @@ class stock_tracking_history(osv.osv):
     _rec_name = "tracking_id"
 
 stock_tracking_history()
+
+class stock_move(osv.osv):
+    _inherit = 'stock.move'
+    _columns = {
+        'pack_history_id': fields.many2one('stock.tracking.history', 'Pack history'),
+    }
+
+stock_move()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

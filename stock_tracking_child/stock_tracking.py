@@ -19,10 +19,8 @@
 #
 #################################################################################
 
-#from datetime import datetime
-from osv import fields, osv
-from tools.translate import _
-#import netsvc
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
 
 class stock_tracking(osv.osv):
 
@@ -64,18 +62,6 @@ class stock_tracking(osv.osv):
         'child_serial_ids': fields.function(_get_child_serials, method=True, type='one2many', obj='serial.stock.tracking', string='Child Serials'),
     }
     
-#    def get_products_process(self, cr, uid, pack_ids, context=None):
-#        for pack in pack_ids:
-#            for child in pack.child_ids:
-#                pack_ids.extend(self.hierarchy_ids(child))
-#        return super(stock_tracking, self).get_products_process(cr, uid, pack_ids, context=context)
-#    
-#    def get_serial_process(self, cr, uid, pack_ids, context=None):
-#        for pack in pack_ids:
-#            for child in pack.child_ids:
-#                pack_ids.extend(self.hierarchy_ids(child))
-#        return super(stock_tracking, self).get_serial_process(cr, uid, pack_ids, context=context)
-
     def get_products(self, cr, uid, ids, context=None):
         pack_ids = self.browse(cr, uid, ids, context)
         stock_track = self.pool.get('product.stock.tracking')
@@ -119,7 +105,6 @@ class stock_tracking(osv.osv):
     
     def _check_parent_id(self, cr, uid, ids, context=None):
         lines = self.browse(cr, uid, ids, context=context)
-
         if lines[0].parent_id:
             if lines[0].ul_id.capacity_index > lines[0].parent_id.ul_id.capacity_index:
                 return False
@@ -128,7 +113,6 @@ class stock_tracking(osv.osv):
     _constraints = [(_check_parent_id, 'Bad parent type selection. Please try again.',['parent_id'] ),]
 
     _defaults = {
-#        'state': 'open',
         'location_id': lambda x, y, z, c: c and c.get('location_id') or False,
     }
     
@@ -136,7 +120,6 @@ stock_tracking()
     
 class product_ul(osv.osv):
     _inherit = "product.ul"
-    _description = "Shipping Unit"
     
     _columns = {
         'capacity_index': fields.integer('Capacity index'),
