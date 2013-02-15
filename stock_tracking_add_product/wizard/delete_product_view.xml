@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!-- Delete Product -->
+	    
+	    <record id="view_stock_packaging_delete_wizard" model="ir.ui.view">
+			<field name="name">Stock packaging delete</field>
+			<field name="model">stock.packaging.delete</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Delete object">
+					<group colspan="4" col="4">
+						<field name="type_id" colspan="1" on_change="onchange_type_id(type_id, pack_id)" widget="selection" invisible="1"/>
+						<newline/>
+						<field name="pack_id" invisible="True"/>
+						<field name="type" invisible="True"/>
+					</group>
+					<group colspan="4" col="4">
+						<group name="products" colspan="4" col="4">
+							<separator string="Object" colspan="4"/>
+							<newline/>
+							<field name="product_id" colspan="2" attrs="{'invisible': [('type','!=','product')]}"/>
+						</group>
+					</group>
+					<newline/>
+					<separator string="" colspan="4" />
+					<button icon='gtk-cancel' special="cancel" string="_Cancel" />
+					<button name="delete_object" string="Delete Object" type="object" icon="gtk-ok"/>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_stock_packaging_delete" model="ir.actions.act_window">
+			<field name="name">Stock packaging delete</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">stock.packaging.delete</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		
+    </data>
+</openerp>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="view_stock_packaging_add_wizard" model="ir.ui.view">
+			<field name="name">Stock packaging add</field>
+			<field name="model">stock.packaging.add</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock_tracking_add_product.view_stock_packaging_add_wizard"/>
+			<field name="arch" type="xml">
+				<group name="products" position="after">
+					<group name="prodlots" colspan="4" col="4" attrs="{'invisible':[('type','!=','prodlots')]}">
+						<separator string="Production lots" colspan="4"/>
+						<field name="prodlot_ids" colspan="4" nolabel="1">
+							<tree string="Add production lots" editable="top">
+								<field name="prodlot_id" required="True"/>
+								<field name="quantity" required="True"/>
+							</tree>
+						</field>
+					</group>
+				</group>
+			</field>
+		</record>
+		
+		<!--  ADD PRODLOT VALIDATION  -->
+		<!--<record id="view_prodlot_validation_form" model="ir.ui.view">
+            <field name="name">stock.prodlot.validate.form</field>
+            <field name="model">stock.prodlot.validate</field>
+            <field name="type">form</field>
+			<field name="arch" type="xml">
+                <form string="Production Lot In Pack">
+                	<separator string="Some Production Lot Already In A Pack ! Do you wish to continue ?" colspan="4"/>
+                	<newline/>
+					<button special="cancel" string="No" icon="gtk-cancel"/>
+					<button name="validate" type="object" string="Yes" icon="gtk-ok"/>
+				</form>
+			</field>
+		</record>		
+		
+		<record id="action_prodlot_validation" model="ir.actions.act_window">
+            <field name="name">stock.prodlot.validate</field>
+            <field name="res_model">stock.prodlot.validate</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="view_id" eval="view_prodlot_validation_form"/>
+         </record>-->
+	    
+    </data>
+</openerp>
