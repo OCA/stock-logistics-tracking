@@ -27,7 +27,7 @@
 
 Presentation:
 
-This module allows to define and identify package in parent or child
+This module will add the state field to block
 
 """,
     "website" : "http://www.julius.fr",

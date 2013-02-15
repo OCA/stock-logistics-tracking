@@ -54,7 +54,7 @@ class stock_tracking(osv.osv):
                     res[pack.id].append(serial.id)
         return res
     
-    _columns = { 
+    _columns = {
         'parent_id': fields.many2one('stock.tracking', 'Parent'),
         'child_ids': fields.one2many('stock.tracking', 'parent_id', 'Children', readonly=True),
         'ul_id': fields.many2one('product.ul', 'Logistic unit'),

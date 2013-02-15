@@ -19,18 +19,19 @@
 #
 #################################################################################
 
-from datetime import datetime
-from osv import fields, osv
-from tools.translate import _
-import netsvc
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
 
 class stock_tracking(osv.osv):
 
     _inherit = 'stock.tracking'
     
     _columns = { 
-                'state': fields.selection([('open','Open'),('close','Close')], 'State', readonly=True),        
-            }
+        'state': fields.selection([('open','Open'),('close','Close')], 'State', required=True, readonly=True),
+        'parent_id': fields.many2one('stock.tracking', 'Parent'),
+        'child_ids': fields.one2many('stock.tracking', 'parent_id', 'Children', readonly=True),
+    }
+
     _defaults = {
         'state': 'open',
     }
@@ -64,5 +65,23 @@ class stock_tracking(osv.osv):
             if allowed:
                 self.write(cr, uid, [pack.id], {'state': 'close'}, context=context)
         return True
+
+stock_tracking()
+
+class stock_move(osv.osv):
+    _inherit = 'stock.move'
+    
+    def _check_tracking_state(self, cr, uid, ids, context=None):
+        lines = self.browse(cr, uid, ids, context=context)
+        for l in lines:
+            if l.tracking_id.state == 'close':
+                return False
+        return True
+    
+    _constraints = [
+        (_check_tracking_state, 'You cannot choose this pack because it\'s closed.', ['tracking_id']),
+    ]
+
+stock_move()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

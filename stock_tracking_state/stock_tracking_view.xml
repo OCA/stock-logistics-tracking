@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-                
-		
-       
-		
+
 		<record id="view_tracking_state_tree" model="ir.ui.view">
 			<field name="name">stock.tracking.state.tree</field>
 			<field name="model">stock.tracking</field>
@@ -16,9 +13,7 @@
 				</field>
 			</field>
 		</record>
-        
-		
-        
+
 		<record id="view_tracking_state_form" model="ir.ui.view">
 			<field name="name">stock.tracking.state.form</field>
 			<field name="model">stock.tracking</field>
@@ -28,14 +23,12 @@
 				<group position="before">
 					<header> 
 						<button name="reset_open" states="close" string="Reset Open"  type="object" class="oe_highlight"/>
-						<button name="set_close" states="open" string="Close"  type="object" class="oe_highlight"/>
+						<button name="set_close" states="open" string="Close Pack"  type="object" class="oe_highlight"/>
 						<field name="state" widget="statusbar" statusbar_visible="open,close" />
 					</header>
 				</group>
 			</field>
 		</record>
-		
-
 
     </data>
 </openerp>
