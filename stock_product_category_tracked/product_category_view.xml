@@ -9,7 +9,8 @@
             <field name="inherit_id" ref="product.product_category_form_view"/>
 			<field name="arch" type="xml">
 				<field name="type" position="after">
-	                <field name="tracked"/>
+	                <field name="track_incoming"/>
+	                <field name="track_outgoing"/>
 	                <newline/>
                 </field>
 			</field>
