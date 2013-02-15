@@ -34,7 +34,7 @@ This module adds some info into packs to get a better tracking of products and s
     "depends" : [
         "stock",
     ],
-    "category" : "Stock",
+    "category" : "Warehouse Management",
     "init_xml" : [],
     "demo_xml" : [],
 #    "images" : ['images/Tracking_extended.png'],

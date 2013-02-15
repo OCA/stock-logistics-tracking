@@ -34,7 +34,7 @@ This module adds a field into the product category to define if this should be t
     "depends" : [
         "stock",
     ],
-    "category" : "Stock",
+    "category" : "Warehouse Management",
     "init_xml" : [],
     "demo_xml" : [],
     "update_xml" : [

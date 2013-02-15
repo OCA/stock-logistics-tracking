@@ -36,10 +36,9 @@ This module Change reference of the packaging if it's re-open.
          "stock_tracking_extended",
          "tr_barcode",
      ],
-    "category" : "Customs/Stock",
+    "category" : "Warehouse Management",
     "init_xml" : [],
     "demo_xml" : [],
-    "images" : ['images/Tracking reopen.png'],
     "update_xml" : [
         'stock_view.xml',
     ],

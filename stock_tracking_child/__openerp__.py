@@ -35,7 +35,7 @@ This module allows to define and identify package in parent or child
         "stock",
         "stock_tracking_extended",
     ],
-    "category" : "Stock",
+    "category" : "Warehouse Management",
     "init_xml" : [],
     "demo_xml" : [],
     "update_xml" : [

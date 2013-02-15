@@ -34,7 +34,7 @@ This module allows to define and identify package in parent or child
     "depends" : [
         "stock",
     ],
-    "category" : "Stock",
+    "category" : "Warehouse Management",
     "init_xml" : [],
     "demo_xml" : [],
     "update_xml" : [],

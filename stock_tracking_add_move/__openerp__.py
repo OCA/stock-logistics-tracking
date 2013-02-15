@@ -38,10 +38,10 @@ Adding to the historical movements and parent objects
          "stock_tracking_extended",
          "tr_barcode",
     ],
-    "category" : "Customs/Stock",
+    "category" : "Warehouse Management",
     "init_xml" : [],
     "demo_xml" : [],
-    "images" : ['images/Add move.png'],
+#    "images" : ['images/Add move.png'],
     "update_xml" : [
         'wizard/add_move_view.xml',
         'stock_view.xml',

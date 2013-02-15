@@ -27,7 +27,7 @@
 
 Presentation:
 
-This module will add the state field to block
+This module will add the state field to make changes of closed packed
 
 """,
     "website" : "http://www.julius.fr",
@@ -35,7 +35,7 @@ This module will add the state field to block
         "stock",
         "stock_tracking_extended",
     ],
-    "category" : "Stock",
+    "category" : "Warehouse Management",
     "init_xml" : [],
     "demo_xml" : [],
     "update_xml" : [
