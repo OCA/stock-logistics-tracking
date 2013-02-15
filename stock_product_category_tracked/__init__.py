@@ -19,31 +19,6 @@
 #
 #################################################################################
 
-{
-    "name" : "Stock Product Category",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
-    "description" : """
-
-Presentation:
-
-This module allows to define and identify package in parent or child
-
-""",
-    "website" : "http://www.julius.fr",
-    "depends" : [
-        "stock",
-        
-    ],
-    "category" : "Stock",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "update_xml" : [
-        'stock_tracking_view.xml',
-    ],
-    'test': [],
-    'installable': True,
-    'active': False,
-}
+import product_category
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -19,6 +19,30 @@
 #
 #################################################################################
 
-import stock_tracking
+{
+    "name" : "Stock Product Category Tracked",
+    "version" : "1.0",
+    "author" : "Julius Network Solutions",
+    "description" : """
+
+Presentation:
+
+This module adds a field into the product category to define if this should be tracked or not.
+
+""",
+    "website" : "http://www.julius.fr",
+    "depends" : [
+        "stock",
+    ],
+    "category" : "Stock",
+    "init_xml" : [],
+    "demo_xml" : [],
+    "update_xml" : [
+        'product_category_view.xml',
+    ],
+    'test': [],
+    'installable': False,
+    'active': False,
+}
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
