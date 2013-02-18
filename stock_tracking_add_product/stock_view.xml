@@ -5,13 +5,12 @@
 	    <record id="view_tracking_form_add_product" model="ir.ui.view">
 			<field name="name">stock.tracking.form.inherit</field>
 			<field name="model">stock.tracking</field>
-			<field name="type">form</field>
-			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_form_inherit"/>
+			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_extended_form"/>
 			<field name="arch" type="xml">
-				<button name="get_products" position="after">
-					<button name="%(stock_tracking_add_product.action_stock_packaging_add)d" states="open" string="Add products" colspan="2" type="action" icon="gtk-ok" context="{'type_selection':'product'}"/>
-					<button name="%(stock_tracking_add_product.action_stock_packaging_delete)d" colspan="1" string="Delete product" type="action" icon="gtk-ok" context="{'type_selection':'product'}"/>
-				</button>
+				<div name="product_buttons" position="inside">
+					<button name="%(stock_tracking_add_product.action_stock_packaging_add)d" states="open" string="Add products" colspan="2" type="action"  context="{'type_selection':'product'}"/>
+					<button name="%(stock_tracking_add_product.action_stock_packaging_delete)d" colspan="1" string="Delete product" type="action"  context="{'type_selection':'product'}"/>
+				</div>
 			</field>
 		</record>
 

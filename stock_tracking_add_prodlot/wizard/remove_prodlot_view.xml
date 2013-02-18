@@ -5,7 +5,6 @@
 		 <record id="view_stock_packaging_delete_wizard" model="ir.ui.view">
 			<field name="name">Stock packaging delete</field>
 			<field name="model">stock.packaging.delete</field>
-			<field name="type">form</field>
 			<field name="inherit_id" ref="stock_tracking_add_product.view_stock_packaging_delete_wizard"/>
 			<field name="arch" type="xml">
 				<field name="product_id" position="after">

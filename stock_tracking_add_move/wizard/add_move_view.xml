@@ -5,7 +5,6 @@
 		<record id="view_pack_add_move" model="ir.ui.view">
 			<field name="name">Add object</field>
 			<field name="model">stock.packaging.move</field>
-			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Add Move">
 					<group width="400" height="100">
@@ -37,7 +36,6 @@
 		<record id="view_pack_remove_move" model="ir.ui.view">
 			<field name="name">Remove object</field>
 			<field name="model">stock.packaging.move</field>
-			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Remove Move">
 					<group width="400" height="100">
@@ -68,7 +66,6 @@
 	    <record id="view_tracking_form_inherit" model="ir.ui.view">
 			<field name="name">stock.tracking.form.inherit</field>
 			<field name="model">stock.tracking</field>
-			<field name="type">form</field>
 			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_form_inherit"/>
 			<field name="arch" type="xml">
 				<button name="reset_open" position="after">

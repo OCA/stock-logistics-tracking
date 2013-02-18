@@ -5,7 +5,6 @@
 		<record id="view_stock_packaging_add_wizard" model="ir.ui.view">
 			<field name="name">Stock packaging add</field>
 			<field name="model">stock.packaging.add</field>
-			<field name="type">form</field>
 			<field name="inherit_id" ref="stock_tracking_add_product.view_stock_packaging_add_wizard"/>
 			<field name="arch" type="xml">
 				<group name="products" position="after">

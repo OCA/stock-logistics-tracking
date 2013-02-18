@@ -20,7 +20,7 @@
 #################################################################################
 
 {
-    "name" : "Stock tracking add moves",
+    "name" : "Stock tracking add packs",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
     "description" : """Presentation:
@@ -32,8 +32,8 @@ Adding to the historical movements and parent objects
 """,
     "website" : "http://www.julius.fr",
     "depends" : [
-         "stock",
          "stock_tracking_extended",
+         "stock_tracking_child",
          "stock_tracking_add_product",
     ],
     "category" : "Warehouse Management",
@@ -45,7 +45,7 @@ Adding to the historical movements and parent objects
         'stock_view.xml',
     ],
     'test': [],
-    'installable': False,
+    'installable': True,
     'active': False,
 }
 

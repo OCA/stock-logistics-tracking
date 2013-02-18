@@ -88,34 +88,27 @@ class stock_packaging_add(orm.TransientModel):
                 res = {'value': {'type': type['code']}}
         return res
     
-    def _add_products(self, cr, uid, current, context=None):
+    
+    def add_object(self, cr, uid, ids, context=None):
+        # Initialization #
         if context == None:
             context = {}
         tracking_obj = self.pool.get('stock.tracking')
-        move_obj = self.pool.get('stock.move')
-        pack = current.pack_id
-        for product_line in current.product_ids:
-            move_id = move_obj.create(cr, uid, {
-                  'name': product_line.product_id.name,
-                  'product_id': product_line.product_id.id,
-                  'product_uom': product_line.product_id.uom_id.id,
-                  'product_qty': product_line.quantity,
-                  'location_id': pack.location_id.id,
-                  'location_dest_id': pack.location_id.id,
-                  'tracking_id': pack.id,
-                  'state': 'done',
-            }, context=context)
-        tracking_obj.write(cr, uid, pack.id, {'modified': True}, context=context)
-        tracking_obj.get_products(cr, uid, [pack.id], context=context)
-        return True
-    
-    def add_object(self, cr, uid, ids, context=None):
-        if context == None:
-            context = {}
+        # Process #
         for current in self.browse(cr, uid, ids, context=context):
+            
+            pack_id = current.pack_id.id
             type = current.type_id.code
+            # Creation of an empty list for the product, and empty dictionary for the quantity"
+            quantities = {}
+            product_ids = []
             if type == 'product':
-                self._add_products(cr, uid, current, context=context)
+                for line_data in current.product_ids:
+                    # For each product added, we appends at the product_ids list the quantity added #
+                    product_ids.append(line_data.product_id.id)
+                    quantities[line_data.product_id.id]=line_data.quantity
+                # call functions add product with argument pack_id , products_ids and quantities #
+                tracking_obj.add_products(cr, uid, pack_id, product_ids, quantities, context=context)
         return {'type': 'ir.actions.act_window_close'}
        
 class stock_packaging_add_line(orm.TransientModel):
