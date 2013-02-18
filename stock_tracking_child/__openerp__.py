@@ -36,9 +36,8 @@ This module allows to define and identify package in parent or child
         "stock_tracking_extended",
     ],
     "category" : "Warehouse Management",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "update_xml" : [
+    "demo" : [],
+    "data" : [
         'stock_tracking_view.xml',
     ],
     'test': [],

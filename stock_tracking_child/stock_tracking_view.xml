@@ -33,7 +33,11 @@
 				</field>
 				<page string="Serial Code" position="after">
 					<page string="Child Packs">
-						<field name="child_ids" nolabel="1" colspan="2"/>
+						<div>
+                    		<div name="children_packs">
+								<field name="child_ids" nolabel="1" colspan="4"/>
+							</div>
+						</div>
 					</page>
 				</page>
 			</field>

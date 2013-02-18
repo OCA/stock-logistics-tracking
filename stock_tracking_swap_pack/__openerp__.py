@@ -34,21 +34,18 @@ Adding to the historical movements and parent objects
     "depends" : [
          "stock",
          "stock_tracking_extended",
-         "stock_move_packaging",
+#         "stock_move_packaging",
          "stock_tracking_child",
-#         "stock_tracking_add_product",
-#         "stock_tracking_add_pack",
     ],
     "category" : "Warehouse Management",
-    "init_xml" : [],
-    "demo_xml" : [],
     "images" : [],
-    "update_xml" : [
+    "demo" : [],
+    "data" : [
         "wizard/swap_view.xml",
         'stock_view.xml',
     ],
     'test': [],
-    'installable': False,
+    'installable': True,
     'active': False,
 }
 

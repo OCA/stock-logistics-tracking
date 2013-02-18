@@ -19,7 +19,7 @@
 #
 #################################################################################
 
-from openerp.osv import fields, osv
+from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 
 class one2many_special(fields.one2many):
@@ -49,7 +49,7 @@ class one2many_special(fields.one2many):
                 res[r[self._fields_id]].append(r['id'])
         return res
 
-class stock_tracking(osv.osv):
+class stock_tracking(orm.Model):
     _inherit = 'stock.tracking'
 
     _columns = {
@@ -105,9 +105,7 @@ class stock_tracking(osv.osv):
         pack_ids = self.browse(cr, uid, ids, context)
         return self.get_serial(cr, uid, pack_ids, context=context)
 
-stock_tracking()
-
-class product_stock_tracking(osv.osv):
+class product_stock_tracking(orm.Model):
 
     _name = 'product.stock.tracking'
     _description = 'Products in Packs'
@@ -118,9 +116,7 @@ class product_stock_tracking(osv.osv):
         'tracking_id': fields.many2one('stock.tracking', 'Tracking'),
     }
 
-product_stock_tracking()
-
-class serial_stock_tracking(osv.osv):
+class serial_stock_tracking(orm.Model):
 
     _name = 'serial.stock.tracking'
     _description = 'Serials in Packs'
@@ -134,9 +130,7 @@ class serial_stock_tracking(osv.osv):
         'tracking_id': fields.many2one('stock.tracking', 'Tracking'),
     }
 
-serial_stock_tracking()
-
-class stock_tracking_history(osv.osv):
+class stock_tracking_history(orm.Model):
 
     _name = "stock.tracking.history"
     _description = 'Packs history'
@@ -152,14 +146,10 @@ class stock_tracking_history(osv.osv):
 
     _rec_name = "tracking_id"
 
-stock_tracking_history()
-
-class stock_move(osv.osv):
+class stock_move(orm.Model):
     _inherit = 'stock.move'
     _columns = {
         'pack_history_id': fields.many2one('stock.tracking.history', 'Pack history'),
     }
-
-stock_move()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

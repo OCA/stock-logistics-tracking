@@ -39,10 +39,9 @@ Adding to the historical movements and parent objects
          "tr_barcode",
     ],
     "category" : "Warehouse Management",
-    "init_xml" : [],
-    "demo_xml" : [],
 #    "images" : ['images/Add move.png'],
-    "update_xml" : [
+    "demo" : [],
+    "data" : [
         'wizard/add_move_view.xml',
         'stock_view.xml',
         "security/ir.model.access.csv",

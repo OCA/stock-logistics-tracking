@@ -37,9 +37,8 @@ This module Change reference of the packaging if it's re-open.
          "tr_barcode",
      ],
     "category" : "Warehouse Management",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "update_xml" : [
+    "demo" : [],
+    "data" : [
         'stock_view.xml',
     ],
     'test': [],

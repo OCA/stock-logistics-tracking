@@ -37,10 +37,9 @@ and adds fields for source location and destination location in History.
         "stock_tracking_extended",
     ],
     "category" : "Warehouse Management",
-    "init_xml" : [],
-    "demo_xml" : [],
 #    "images" : ['images/Move packaging.png'],
-    "update_xml" : [
+    "demo" : [],
+    "data" : [
         'stock_view.xml',
         'wizard/move_pack_view.xml',
     ],

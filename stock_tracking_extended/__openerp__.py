@@ -21,7 +21,7 @@
 
 {
     "name" : "Stock Tracking extended",
-    "version" : "1.0",
+    "version" : "1.1",
     "author" : "Julius Network Solutions",
     "description" : """
 
@@ -35,10 +35,9 @@ This module adds some info into packs to get a better tracking of products and s
         "stock",
     ],
     "category" : "Warehouse Management",
-    "init_xml" : [],
-    "demo_xml" : [],
 #    "images" : ['images/Tracking_extended.png'],
-    "update_xml" : [
+    "demo" : [],
+    "data" : [
         'stock_tracking_view.xml',
         "security/ir.model.access.csv",
     ],

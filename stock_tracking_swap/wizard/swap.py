@@ -45,7 +45,10 @@ class stock_tracking_swap(osv.osv_memory):
         })
         return res
     
-    def onchange_location(self, cr , uid, ids, location_id, parent_pack_id):
+    def onchange_location(self, cr , uid, ids, location_id, parent_pack_id, context=None):
+        if context == None:
+            context = {}
+        swap_type = context.get('swap_type') or False
         tracking_obj = self.pool.get('stock.tracking')            
         prodlot_ids = []
         product_ids = []
@@ -54,14 +57,19 @@ class stock_tracking_swap(osv.osv_memory):
         if parent_pack_id:
             move_ids = tracking_obj.browse(cr, uid, parent_pack_id).current_move_ids
             for move_id in move_ids:
-                if move_id.prodlot_id.id not in prodlot_ids:
-                    prodlot_ids.append(move_id.prodlot_id.id)
-                if (move_id.product_id.id not in product_ids) and not move_id.prodlot_id:
-                    product_ids.append(move_id.product_id.id)
-        var = ('id','in', tuple(prodlot_ids))
-        domain_prodlot_id.append(var)
-        var = ('id','in', tuple(product_ids))
-        domain_product_id.append(var)
+                if swap_type and swap_type == 'prodlot' or not swap_type:
+                    if move_id.prodlot_id.id not in prodlot_ids:
+                        prodlot_ids.append(move_id.prodlot_id.id)
+                if swap_type and swap_type == 'product' or not swap_type:
+                    if (move_id.product_id.id not in product_ids) and not move_id.prodlot_id:
+                        product_ids.append(move_id.product_id.id)
+        
+        if swap_type and swap_type == 'prodlot' or not swap_type:
+            var = ('id','in', tuple(prodlot_ids))
+            domain_prodlot_id.append(var)
+        if swap_type and swap_type == 'product' or not swap_type:
+            var = ('id','in', tuple(product_ids))
+            domain_product_id.append(var)
         return {
             'domain': {
                 'previous_prodlot_id': str(domain_prodlot_id),

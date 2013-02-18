@@ -46,10 +46,9 @@ This module adds a submenu for acquisition setting with a field Barcode and Acti
          "stock_tracking_add_move",
     ],
     "category" : "Warehouse Management",
-    "init_xml" : [],
-    "demo_xml" : [],
     "images" : ['images/Acquisition.png'],
-    "update_xml" : [
+    "demo" : [],
+    "data" : [
         'wizard/reference_view.xml',
         'acquisition_view.xml',
         'stock_view.xml',

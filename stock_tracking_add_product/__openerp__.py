@@ -36,10 +36,9 @@ Adding to the historical movements and parent objects
          "stock_tracking_extended",
     ],
     "category" : "Warehouse Management",
-    "init_xml" : [],
-    "demo_xml" : [],
     "images" : [],
-    "update_xml" : [
+    "demo" : [],
+    "data" : [
         "security/ir.model.access.csv",
         "wizard/add_product_view.xml",
         "wizard/delete_product_view.xml",

@@ -37,10 +37,9 @@ Adding to the historical movements and parent objects
 #         "stock_move_packaging",
     ],
     "category" : "Warehouse Management",
-    "init_xml" : [],
-    "demo_xml" : [],
     "images" : [],
-    "update_xml" : [
+    "demo" : [],
+    "data" : [
         "wizard/swap_view.xml",
         'stock_view.xml',
     ],

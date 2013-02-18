@@ -37,10 +37,9 @@ Adding to the historical movements and parent objects
          "stock_tracking_add_product",
     ],
     "category" : "Warehouse Management",
-    "init_xml" : [],
-    "demo_xml" : [],
     "images" : [],
-    "update_xml" : [
+    "demo" : [],
+    "data" : [
         "wizard/add_prodlot_view.xml",
         "wizard/remove_prodlot_view.xml",
         "data/type.xml",
