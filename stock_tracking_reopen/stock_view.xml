@@ -5,7 +5,6 @@
 		<record id="view_tracking_history_tree" model="ir.ui.view">
 			<field name="name">stock.tracking.history.tree.reopen</field>
 			<field name="model">stock.tracking.history</field>
-			<field name="type">tree</field>
 			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_history_tree"/>
 			<field name="arch" type="xml">
 				<field name="type" position="after">
@@ -17,7 +16,6 @@
 		<record id="view_tracking_history_form" model="ir.ui.view">
 			<field name="name">stock.tracking.history.form.reopen</field>
 			<field name="model">stock.tracking.history</field>
-			<field name="type">form</field>
 			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_history_form"/>
 			<field name="arch" type="xml">
 				<field name="type" position="after">

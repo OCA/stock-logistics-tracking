@@ -7,10 +7,8 @@
 			<field name="model">stock.tracking</field>
 			<field name="inherit_id" ref="stock_tracking_child.view_tracking_child_form"/>
 			<field name="arch" type="xml">
-				<div name="children_packs" position="inside">
-            		<div name="child_buttons">
-						<button name="%(stock_tracking_swap_pack.action_stock_packaging_swap)d" string="Swap packs" colspan="1" type="action"/>
-					</div>
+				<div name="child_buttons" position="inside">
+					<button name="%(stock_tracking_swap_pack.action_stock_packaging_swap)d" string="Swap packs" colspan="1" type="action"/>
 				</div>
 			</field>
 		</record>

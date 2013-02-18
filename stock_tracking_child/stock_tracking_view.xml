@@ -35,6 +35,7 @@
                     		<div>
 								<field name="child_ids" nolabel="1" colspan="4"/>
 							</div>
+                    		<div name="child_buttons"></div>
 						</div>
 					</page>
 				</page>

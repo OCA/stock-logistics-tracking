@@ -19,29 +19,6 @@
 #
 #################################################################################
 
-{
-    "name" : "Stock Inventory",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
-    "description" : """
-
-Presentation:
-
-This module allows to define and identify package in parent or child
-
-""",
-    "website" : "http://www.julius.fr",
-    "depends" : [
-        "stock",
-    ],
-    "category" : "Warehouse Management",
-    "demo" : [],
-    "data" : [
-        'inventory_sequence.xml',
-    ],
-    'test': [],
-    'installable': True,
-    'active': False,
-}
+import inventory
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

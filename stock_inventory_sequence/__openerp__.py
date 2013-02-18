@@ -19,6 +19,29 @@
 #
 #################################################################################
 
-import stock_tracking
+{
+    "name" : "Stock Inventory Sequence",
+    "version" : "1.0",
+    "author" : "Julius Network Solutions",
+    "description" : """
+
+Presentation:
+
+This module adds a sequence for generating automatically inventories name
+
+""",
+    "website" : "http://www.julius.fr",
+    "depends" : [
+        "stock",
+    ],
+    "category" : "Warehouse Management",
+    "demo" : [],
+    "data" : [
+        'inventory_sequence.xml',
+    ],
+    'test': [],
+    'installable': True,
+    'active': False,
+}
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

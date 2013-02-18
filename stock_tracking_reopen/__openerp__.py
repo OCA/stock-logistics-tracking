@@ -34,8 +34,8 @@ This module Change reference of the packaging if it's re-open.
     "depends" : [
          "stock",
          "stock_tracking_extended",
-         "tr_barcode",
-     ],
+         "stock_tracking_state",
+    ],
     "category" : "Warehouse Management",
     "demo" : [],
     "data" : [

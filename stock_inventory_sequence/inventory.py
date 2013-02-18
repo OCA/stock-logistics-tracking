@@ -25,7 +25,7 @@ from openerp.tools.translate import _
 class stock_inventory(orm.Model):
     _inherit = 'stock.inventory'
     _defaults = {
-        'name': lambda x, y, z, c: x.pool.get('ir.sequence').get(y, z, 'stock.inventory') or '/'
+        'name': lambda x, y, z, c: x.pool.get('ir.sequence').next_by_code(y, z, 'stock.inventory') or '/'
     }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
