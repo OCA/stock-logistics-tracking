@@ -19,10 +19,10 @@
 #
 #################################################################################
 
-from osv import osv,fields
-from tools.translate import _
+from openerp.osv import osv, fields, orm
+from openerp.tools.translate import _
 
-class stock_picking(osv.osv):
+class stock_picking(orm.Model):
     _inherit = "stock.picking"
 
     def start_acquisition(self, cr, uid, ids, context=None):
@@ -51,10 +51,8 @@ class stock_picking(osv.osv):
         }
         return action
 
-stock_picking()
-
 #######################################stock_barcode_reader##############################################
-#class stock_move(osv.osv):
+#class stock_move(orm.Model):
 #    _inherit = 'stock.move'
 #    _columns = {
 #         'move_ori_id': fields.many2one('stock.move', 'Origin Move', select=True),
@@ -85,6 +83,5 @@ stock_picking()
 #
 #        return super(stock_move,self).create(cr, uid, vals, context=context)
 #
-#stock_move()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

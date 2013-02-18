@@ -19,11 +19,11 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
-from tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 
-class stock_packaging_add(osv.osv_memory):
+class stock_packaging_add(orm.TransientModel):
 
     _inherit = "stock.packaging.add"
     
@@ -86,10 +86,8 @@ class stock_packaging_add(osv.osv_memory):
             if type == 'prodlots':
                 self._add_prodlots(cr, uid, current, context=context)
         return res
-       
-stock_packaging_add()
 
-class stock_packaging_add_line(osv.osv_memory):
+class stock_packaging_add_line(orm.TransientModel):
 
     _inherit = "stock.packaging.add.line"
     
@@ -97,9 +95,7 @@ class stock_packaging_add_line(osv.osv_memory):
         'prodlot_id': fields.many2one('stock.production.lot', 'Production lot', domain="[('tracking_id','=',False)]"),
     }
 
-stock_packaging_add_line()
-
-#class stock_prodlot_validate(osv.osv_memory):
+#class stock_prodlot_validate(orm.TransientModel):
 #    _name = "stock.prodlot.validate"
 #    
 #    def validate(self, cr, uid, ids, context=None):
@@ -122,7 +118,5 @@ stock_packaging_add_line()
 #        tracking_obj.get_products(cr, uid, [current.pack_id.id], context=context)
 #        tracking_obj.get_serials(cr, uid, [current.pack_id.id], context=context)
 #        return {'type': 'ir.actions.act_window_close'}
-#    
-#stock_prodlot_validate()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

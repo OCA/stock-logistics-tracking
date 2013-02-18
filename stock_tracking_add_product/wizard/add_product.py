@@ -19,20 +19,18 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 
-class stock_packaging_add_type(osv.osv):
+class stock_packaging_add_type(orm.Model):
     _name = 'stock.packaging.add.type'
     
     _columns = {
         'code': fields.char('Code', size=64),
         'name': fields.char('Name', size=64),
     }
-    
-stock_packaging_add_type()
 
-class stock_packaging_add(osv.osv_memory):
+class stock_packaging_add(orm.TransientModel):
 
     _name = "stock.packaging.add"
     _description = "Add objects to a pack"
@@ -120,9 +118,7 @@ class stock_packaging_add(osv.osv_memory):
                 self._add_products(cr, uid, current, context=context)
         return {'type': 'ir.actions.act_window_close'}
        
-stock_packaging_add()
-
-class stock_packaging_add_line(osv.osv_memory):
+class stock_packaging_add_line(orm.TransientModel):
 
     _name = "stock.packaging.add.line"
     _description = "Add object to a pack"
@@ -137,7 +133,5 @@ class stock_packaging_add_line(osv.osv_memory):
     _defaults = {
         'quantity': 1.0,
     }
-            
-stock_packaging_add_line()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

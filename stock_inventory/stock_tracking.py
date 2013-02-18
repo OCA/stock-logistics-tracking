@@ -19,17 +19,13 @@
 #
 #################################################################################
 
-from datetime import datetime
-from osv import fields, osv
-from tools.translate import _
-import netsvc
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 
-class stock_inventory(osv.osv):
+class stock_inventory(orm.Model):
     _inherit = 'stock.inventory'
     _defaults = {
         'name': lambda x, y, z, c: x.pool.get('ir.sequence').get(y, z, 'stock.inventory') or '/'
     }
-stock_inventory()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-

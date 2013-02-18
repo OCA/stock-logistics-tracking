@@ -19,10 +19,10 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 
-class stock_packaging_add(osv.osv_memory):
+class stock_packaging_add(orm.TransientModel):
 
     _inherit = "stock.packaging.add"
 
@@ -67,7 +67,5 @@ class stock_packaging_add(osv.osv_memory):
             if type == 'pack':
                 self._add_pack(cr, uid, current, context=context)
         return res
-       
-stock_packaging_add()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

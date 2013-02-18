@@ -19,11 +19,11 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 import time
 
-class stock_move_packaging(osv.osv_memory):
+class stock_move_packaging(orm.TransientModel):
 
     _name = "stock.move.packaging"
     
@@ -99,7 +99,5 @@ class stock_move_packaging(osv.osv_memory):
                     move_obj.write(cr, uid, [move.id], {'pack_history_id': hist_id, 'move_dest_id': new_id})
                 tracking_obj.write(cr, uid, [child_pack.id], {'location_id': obj.location_dest_id.id})
         return {'type': 'ir.actions.act_window_close'}
-    
-stock_move_packaging()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

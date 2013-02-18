@@ -19,12 +19,12 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 import time
-from tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 
-class stock_packaging_delete(osv.osv_memory):
+class stock_packaging_delete(orm.TransientModel):
     _inherit = "stock.packaging.delete"
     
     _columns = {
@@ -109,6 +109,4 @@ class stock_packaging_delete(osv.osv_memory):
                 self._remove_prodlot(cr, uid, current, context=context)
         return res
        
-stock_packaging_delete()
-
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

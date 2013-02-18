@@ -19,14 +19,14 @@
 #
 #################################################################################
 
-from osv import osv,fields
-from tools.translate import _
-from report import report_sxw
-from report_aeroo import report_aeroo
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
+from openerp.report import report_sxw
+from openerp.addons.report_aeroo import report_aeroo
 import datetime
 from tools import misc
 
-class stock_fill_inventory(osv.osv_memory):
+class stock_fill_inventory(orm.TransientModel):
     _inherit = "stock.fill.inventory"
     def fill_inventory(self, cr, uid, ids, context=None):
         res = super(stock_fill_inventory, self).fill_inventory(cr, uid, ids, context=context)
@@ -35,9 +35,8 @@ class stock_fill_inventory(osv.osv_memory):
         if stock_inventory_obj.browse(cr, uid, context.get('active_id', False), context).location_id:
             stock_inventory_obj.write(cr, uid, context.get('active_id', False), {'location_id': fill_inventory.location_id.id})
         return res
-stock_fill_inventory()
 
-class acquisition_acquisition(osv.osv):
+class acquisition_acquisition(orm.Model):
 
     _name = "acquisition.acquisition"
     _order = 'id desc'
@@ -627,9 +626,7 @@ class acquisition_acquisition(osv.osv):
                                  
         return res
     
-acquisition_acquisition()
-
-class acquisition_list(osv.osv):    
+class acquisition_list(orm.Model):    
     
     _name = "acquisition.list"
     _columns = {
@@ -671,9 +668,7 @@ class acquisition_list(osv.osv):
         ['name']),
     ]
 
-acquisition_list()
-
-class acquisition_setting(osv.osv):
+class acquisition_setting(orm.Model):
 
     _name = "acquisition.setting"
     _columns = {
@@ -797,9 +792,5 @@ class acquisition_setting(osv.osv):
 #                            'product_uom': product_data.uom_id.id,
 #                            'product_qty': 1}
 #                    inventory_line_obj.create(cr, uid, vals)
-
-
-
-acquisition_setting()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

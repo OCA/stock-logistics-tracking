@@ -19,13 +19,11 @@
 #
 #################################################################################
 
-from datetime import datetime
-from osv import fields, osv
-from tools.translate import _
-import netsvc
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 
 '''Add a field in order to store the current pack in a production lot'''
-class stock_production_lot(osv.osv):
+class stock_production_lot(orm.Model):
     _inherit = 'stock.production.lot'
     _columns = {
         'tracking_id': fields.many2one('stock.tracking', 'pack'),
@@ -40,7 +38,5 @@ class stock_production_lot(osv.osv):
             'move_ids': [],
         })
         return super(stock_production_lot, self).copy(cr, uid, id, default, context=context)
-    
-stock_production_lot()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -19,15 +19,14 @@
 #
 #################################################################################
 
-from openerp.osv import fields, osv
+from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 
-class product_category(osv.osv):
+class product_category(orm.Model):
     _inherit = 'product.category'
     _columns = {
         'track_incoming': fields.boolean('Track Incoming Lots', help="Forces to specify a Serial Number for all moves containing this product and coming from a Supplier Location"),
         'track_outgoing': fields.boolean('Track Outgoing Lots', help="Forces to specify a Serial Number for all moves containing this product and going to a Customer Location"),
     }
-product_category()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

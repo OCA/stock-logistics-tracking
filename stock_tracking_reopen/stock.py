@@ -19,11 +19,11 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 import time
 
-class stock_tracking(osv.osv):
+class stock_tracking(orm.Model):
     
     _inherit = 'stock.tracking'
 
@@ -109,9 +109,7 @@ class stock_tracking(osv.osv):
                     self.write(cr, uid, [pack.id], {'state': 'close'})
         return res
 
-stock_tracking()
-
-class stock_tracking_history(osv.osv):
+class stock_tracking_history(orm.Model):
     
     _inherit = "stock.tracking.history"
     
@@ -127,7 +125,5 @@ class stock_tracking_history(osv.osv):
         'previous_ref': fields.char('Previous reference', size=128),        
 #        'previous_id': fields.many2one('stock.tracking', 'Previous pack'),
     }
-    
-stock_tracking_history()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
