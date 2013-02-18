@@ -19,10 +19,10 @@
 #
 #################################################################################
 
-from openerp.osv import fields, osv
+from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 
-class stock_tracking(osv.osv):
+class stock_tracking(orm.Model):
 
     _inherit = 'stock.tracking'
     
@@ -66,9 +66,7 @@ class stock_tracking(osv.osv):
                 self.write(cr, uid, [pack.id], {'state': 'close'}, context=context)
         return True
 
-stock_tracking()
-
-class stock_move(osv.osv):
+class stock_move(orm.Model):
     _inherit = 'stock.move'
     
     def _check_tracking_state(self, cr, uid, ids, context=None):
@@ -81,7 +79,5 @@ class stock_move(osv.osv):
     _constraints = [
         (_check_tracking_state, 'You cannot choose this pack because it\'s closed.', ['tracking_id']),
     ]
-
-stock_move()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

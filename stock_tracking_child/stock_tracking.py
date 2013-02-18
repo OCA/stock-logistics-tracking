@@ -19,10 +19,10 @@
 #
 #################################################################################
 
-from openerp.osv import fields, osv
+from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 
-class stock_tracking(osv.osv):
+class stock_tracking(orm.Model):
 
     _inherit = 'stock.tracking'
     
@@ -116,9 +116,7 @@ class stock_tracking(osv.osv):
         'location_id': lambda x, y, z, c: c and c.get('location_id') or False,
     }
     
-stock_tracking()
-    
-class product_ul(osv.osv):
+class product_ul(orm.Model):
     _inherit = "product.ul"
     
     _columns = {
@@ -126,7 +124,5 @@ class product_ul(osv.osv):
     }
     
     _order = 'capacity_index'
-
-product_ul()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

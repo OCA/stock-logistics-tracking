@@ -25,6 +25,14 @@
 						<field name="state" widget="statusbar" statusbar_visible="open,close" />
 					</header>
 				</group>
+			</field>
+		</record>
+
+		<record id="view_tracking_state_extended_form" model="ir.ui.view">
+			<field name="name">stock.tracking.state.extended.form</field>
+			<field name="model">stock.tracking</field>
+			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_extended_form"/>
+			<field name="arch" type="xml">
         		<div name="product_buttons" position="attributes">
 					<attribute name="attrs">{'invisible':[('state', '=', 'close')]}</attribute>
 				</div>

@@ -5,7 +5,6 @@
 		<record id="view_stock_packaging_swap_wizard" model="ir.ui.view">
 			<field name="name">Stock packaging swap</field>
 			<field name="model">stock.packaging.swap</field>
-			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Swap object" version="7.0">
 					<field name="parent_pack_id" invisible="1"/>

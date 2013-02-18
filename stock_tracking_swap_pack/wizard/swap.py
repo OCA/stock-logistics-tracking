@@ -19,12 +19,12 @@
 #
 #################################################################################
 
-from openerp.osv import fields, osv
+from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 import time
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 
-class stock_packaging_swap(osv.osv_memory):
+class stock_packaging_swap(orm.TransientModel):
     _name = "stock.packaging.swap"
 
     _columns = {
@@ -113,7 +113,5 @@ class stock_packaging_swap(osv.osv_memory):
                     move_obj.write(cr, uid, [move.id], {'pack_history_id': hist_id}, context=context)
             
         return {'type': 'ir.actions.act_window_close'}
-       
-stock_packaging_swap()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

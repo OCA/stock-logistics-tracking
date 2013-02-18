@@ -19,12 +19,12 @@
 #
 #################################################################################
 
-from openerp.osv import fields, osv
+from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 import time
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 
-class stock_tracking_swap(osv.osv_memory):
+class stock_tracking_swap(orm.TransientModel):
     _name = "stock.tracking.swap"
 
     _columns = {
@@ -174,6 +174,4 @@ class stock_tracking_swap(osv.osv_memory):
         tracking_obj.get_products(cr, uid, [parent_pack.id], context=context)
         return {'type': 'ir.actions.act_window_close'}
        
-stock_tracking_swap()
-
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -5,7 +5,6 @@
 		<record id="view_tracking_child_tree" model="ir.ui.view">
 			<field name="name">stock.tracking.child.tree</field>
 			<field name="model">stock.tracking</field>
-			<field name="type">tree</field>
 			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_extended_tree"/>
 			<field name="arch" type="xml">
 				<field name="serial" position="after">
@@ -18,7 +17,6 @@
 		<record id="view_tracking_child_form" model="ir.ui.view">
 			<field name="name">stock.tracking.child.form</field>
 			<field name="model">stock.tracking</field>
-			<field name="type">form</field>
 			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_extended_form"/>
 			<field name="arch" type="xml">
 				<field name="serial" position="after">
@@ -33,8 +31,8 @@
 				</field>
 				<page string="Serial Code" position="after">
 					<page string="Child Packs">
-						<div>
-                    		<div name="children_packs">
+						<div name="children_packs">
+                    		<div>
 								<field name="child_ids" nolabel="1" colspan="4"/>
 							</div>
 						</div>
@@ -61,7 +59,6 @@
             <field name="name">product.ul.tree.inherit</field>
             <field name="model">product.ul</field>
             <field name="inherit_id" ref="product.product_ul_tree"/>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <field name="type" position="after">
                     <field name="capacity_index"/>
@@ -73,7 +70,6 @@
             <field name="name">product.ul.form.inherit</field>
             <field name="model">product.ul</field>
             <field name="inherit_id" ref="product.product_ul_form_view"/>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <field name="type" position="after">
                     <field name="capacity_index"/>

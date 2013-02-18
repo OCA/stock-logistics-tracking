@@ -1,4 +1,4 @@
- # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #################################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -19,12 +19,10 @@
 #
 #################################################################################
 
-from datetime import datetime
-from osv import fields, osv
-from tools.translate import _
-import netsvc
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 
-class split_in_production_lot(osv.osv_memory):
+class split_in_production_lot(orm.TransientModel):
     _inherit = "stock.move.split"
     _columns = {
         'use_exist' : fields.boolean('Existing Lots', invisible=True),
@@ -36,7 +34,5 @@ class split_in_production_lot(osv.osv_memory):
         res = super(split_in_production_lot, self).default_get(cr, uid, fields, context=context)
         res.update({'use_exist': True})
         return res
-
-split_in_production_lot()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
