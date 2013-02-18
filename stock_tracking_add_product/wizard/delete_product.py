@@ -94,65 +94,20 @@ class stock_packaging_delete(osv.osv_memory):
             }
         })
         return res
-        
-    def _delete_products(self, cr, uid, current, context=None):
-        move_obj = self.pool.get('stock.move')
-        tracking_obj = self.pool.get('stock.tracking')
-        history_obj = self.pool.get('stock.tracking.history')
-        date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-        if context == None:
-            context = {}
-
-        hist_id = history_obj.create(cr, uid, {
-           'tracking_id': current.pack_id.id,
-           'type': 'move',
-           'location_id': current.pack_id.location_id.id,
-           'location_dest_id': current.pack_id.location_id.id,
-        }, context=context)
-        move_ids = [x.id for x in current.pack_id.current_move_ids]
-        move_ids = move_obj.search(cr, uid, [
-                    ('id','in',move_ids),
-                    ('product_id','=',current.product_id.id),
-                    ('prodlot_id','=',False)
-                ], limit=1, context=context)
-        if not move_ids:
-            raise osv.except_osv(_('Warning!'),_('Product Not Found !'))
-        move_data = move_obj.browse(cr, uid, move_ids[0], context=context)
-        move_qty = move_data.product_qty
-        if move_qty != 1.0:
-            defaults = {
-                'location_id': current.pack_id.location_id.id,
-                'location_dest_id': current.pack_id.location_id.id,
-                'date': date,
-                'date_expected': date,
-                'tracking_id': current.pack_id.id,
-                'product_id': current.product_id.id,
-                'product_qty': move_qty - 1.0,
-                'state': 'done',
-            }
-            new_id = move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
-        defaults = {
-            'location_id': current.pack_id.location_id.id,
-            'location_dest_id': current.pack_id.location_id.id,
-            'date': date,
-            'date_expected': date,
-            'tracking_id': False,
-            'product_qty': 1.0,
-            'state': 'done',
-        }
-        move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
-        move_obj.write(cr, uid, [move_data.id], {'pack_history_id': hist_id}, context=context)
-        tracking_obj.get_products(cr, uid, [current.pack_id.id], context=context)
-        return True
     
     def delete_object(self, cr, uid, ids, context=None):
         if context == None:
             context = {}
+        tracking_obj = self.pool.get('stock.tracking')    
         for current in self.browse(cr, uid, ids, context=context):
             type = current.type_id.code
+            pack_id = current.pack_id.id
+            product_id = current.product_id.id
             if type == 'product':
-                self._delete_products(cr, uid, current, context=context)
+                tracking_obj.delete_products(cr, uid, pack_id, product_id, context=context)
         return {'type': 'ir.actions.act_window_close'}
+        
+
     
 stock_packaging_delete()
 

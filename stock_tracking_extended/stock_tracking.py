@@ -37,8 +37,9 @@ class one2many_special(fields.one2many):
         for id in ids:
             res[id] = []
             location_id = obj.read(cr, user, id, ['location_id'])['location_id']
-            if location_id and location_id[0] and location_id[0] not in location_ids:
-                location_ids.append(location_id[0])
+#            if location_id and location_id[0] and (location_id[0] not in location_ids):
+            if location_id and (location_id not in location_ids):
+                location_ids.append(location_id)
         domain = self._domain(obj) if callable(self._domain) else self._domain
         domain2 = [(self._fields_id, 'in', ids)]
         if location_ids:
@@ -51,9 +52,28 @@ class one2many_special(fields.one2many):
 
 class stock_tracking(orm.Model):
     _inherit = 'stock.tracking'
+    
+    def _get_location(self, cr, uid, ids, name, arg, context=None):
+        
+        # Initialization #
+        if context==None:
+            context={}
+        result = {}
+        location_id = False
+        warehouse_obj = self.pool.get('stock.warehouse')
+        user_obj = self.pool.get('res.users')
+        # Process #
+        user_data = user_obj.browse(cr, uid, uid, context=context)
+        warehouse_ids = warehouse_obj.search(cr, uid, [('company_id','=',user_data.company_id.id)], limit=1)
+        if warehouse_ids:
+            location_id = warehouse_obj.browse(cr, uid,warehouse_ids[0], context=context).lot_stock_id.id
+        # Loop on each pack #
+        for stock_tracking_id in ids:
+            result[stock_tracking_id] = location_id    
+        return result 
 
     _columns = {
-        'location_id': fields.many2one('stock.location', 'Location', readonly=True),
+        'location_id': fields.function(_get_location,type='many2one',obj='stock.location',string='Location', readonly=True, store=True, method=True),
         'product_ids': fields.one2many('product.stock.tracking', 'tracking_id', 'Products', readonly=True),
         'history_ids': fields.one2many('stock.tracking.history', 'tracking_id', 'History'),
         'current_move_ids': one2many_special('stock.move', 'tracking_id', 'Current moves', domain=[('pack_history_id', '=', False)], readonly=True),
@@ -61,7 +81,14 @@ class stock_tracking(orm.Model):
         'date': fields.datetime('Creation Date', required=True, readonly=True),
         'serial_ids': fields.one2many('serial.stock.tracking', 'tracking_id', 'Products', readonly=True),
     }
+    
 
+    
+#    _defaults = {
+#        'location_id': lambda self, cr, uid, context: self._get_location(cr, uid, context),
+#    }
+    
+    
     def get_products_process(self, cr, uid, pack_ids, context=None):
         stock_track = self.pool.get('product.stock.tracking')
         for pack in pack_ids:
@@ -145,6 +172,8 @@ class stock_tracking_history(orm.Model):
     }
 
     _rec_name = "tracking_id"
+
+stock_tracking_history()
 
 class stock_move(orm.Model):
     _inherit = 'stock.move'

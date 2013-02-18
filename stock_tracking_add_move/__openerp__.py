@@ -47,7 +47,7 @@ Adding to the historical movements and parent objects
         "security/ir.model.access.csv",
     ],
     'test': [],
-    'installable': False,
+    'installable': True,
     'active': False,
 }
 

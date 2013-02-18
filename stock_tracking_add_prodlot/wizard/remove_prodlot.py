@@ -105,7 +105,7 @@ class stock_packaging_delete(osv.osv_memory):
         res = super(stock_packaging_delete, self).delete_object(cr, uid, ids, context=context)
         for current in self.browse(cr, uid, ids, context=context):
             type = current.type_id.code
-            if type == 'prodlots':
+            if type == 'prodlot':
                 self._remove_prodlot(cr, uid, current, context=context)
         return res
        

@@ -6,10 +6,11 @@
 			<field name="name">stock.tracking.form.inherit</field>
 			<field name="model">stock.tracking</field>
 			<field name="type">form</field>
-			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_form_inherit"/>
+			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_extended_form"/>
 			<field name="arch" type="xml">
 				<button name="get_serials" position="after">
-					<button name="%(stock_tracking_add_product.action_stock_packaging_add)d" states="open" string="Add production lot" colspan="2" type="action" icon="gtk-ok" context="{'type_selection':'prodlots'}"/>
+					<button name="%(stock_tracking_add_product.action_stock_packaging_add)d" states="open" string="Add production lot" colspan="2" type="action" context="{'type_selection':'prodlots'}"/>
+					<button name="%(stock_tracking_add_product.action_stock_packaging_delete)d" colspan="1" string="Delete production lot" type="action" context="{'type_selection':'prodlots'}"/>
 				</button>
 			</field>
 		</record>
