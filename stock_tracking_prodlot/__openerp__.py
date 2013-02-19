@@ -27,7 +27,7 @@
 
 Presentation:
 
-This module allows to define and identify package in parent or child
+This module adds the packaging into the production lot
 
 """,
     "website" : "http://www.julius.fr",

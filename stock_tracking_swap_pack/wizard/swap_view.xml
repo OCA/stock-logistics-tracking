@@ -13,8 +13,8 @@
 							<separator string="Packs" colspan="4"/>
 							<field name="location_id" colspan="2" required="1"/>
 							<newline/>
-							<field name="previous_pack_id" colspan="2" domain="[('parent_id','=',parent_pack_id),('state','=','close')]" attrs="{'invisible': [('location_id', '=', False)]}"/>
-							<field name="new_pack_id" colspan="2" domain="[('location_id','=',location_id),('parent_id', '=', False),('state','=','close')]" attrs="{'invisible': [('location_id', '=', False)]}"/>
+							<field name="previous_pack_id" colspan="2" domain="[('parent_id','=',parent_pack_id)]" attrs="{'invisible': [('location_id', '=', False)]}"/>
+							<field name="new_pack_id" colspan="2" domain="[('location_id','=',location_id),('parent_id', '=', False)]" attrs="{'invisible': [('location_id', '=', False)]}"/>
 						</group>
 					</group>
 					<footer>

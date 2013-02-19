@@ -62,7 +62,7 @@ class stock_packaging_swap(orm.TransientModel):
                 'auto_picking': True,
                 'name': sequence_obj.next_by_code(cr, uid, 'stock.picking.internal'),
                 'company_id': self.pool.get('res.company')._company_default_get(cr, uid, 'stock.company', context=context),
-                'address_id': current.location_id.address_id and current.location_id.address_id.id or False,
+                'address_id': current.location_id.partner_id and current.location_id.partner_id.id or False,
                 'invoice_state': 'none',
                 'date': date,
                 'state': 'done',

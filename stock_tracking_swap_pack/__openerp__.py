@@ -45,7 +45,7 @@ Adding to the historical movements and parent objects
         'stock_view.xml',
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
 

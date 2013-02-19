@@ -32,10 +32,10 @@ class stock_production_lot(orm.Model):
         if default is None:
             default = {}
         default.update({
-            'state': 'draft',
-            'shipped': False,
+#            'state': 'draft',
+#            'shipped': False,
             'tracking_id': False,
-            'move_ids': [],
+#            'move_ids': [],
         })
         return super(stock_production_lot, self).copy(cr, uid, id, default, context=context)
 

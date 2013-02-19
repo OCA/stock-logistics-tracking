@@ -62,8 +62,22 @@ class stock_tracking(orm.Model):
         'child_serial_ids': fields.function(_get_child_serials, method=True, type='one2many', obj='serial.stock.tracking', string='Child Serials'),
     }
     
+    def _create_data_product(self, cr, uid, child, product_list, context=None):
+        if context == None:
+            context = {}
+        stock_track = self.pool.get('product.stock.tracking')
+        for product in product_list.keys():
+            stock_track.create(cr, uid, {
+                    'product_id': product,
+                    'quantity': product_list[product],
+                    'tracking_id': child.id
+                }, context=context)
+        return True
+    
     def get_products(self, cr, uid, ids, context=None):
-        pack_ids = self.browse(cr, uid, ids, context)
+        if context == None:
+            context = {}
+        pack_ids = self.browse(cr, uid, ids, context=context)
         stock_track = self.pool.get('product.stock.tracking')
         for pack in pack_ids:
             childs = self.hierarchy_ids(pack)
@@ -77,14 +91,29 @@ class stock_tracking(orm.Model):
                             product_list.update({x.product_id.id:x.product_qty})
                         else:
                             product_list[x.product_id.id] += x.product_qty
-                for product in product_list.keys():
-                    stock_track.create(cr, uid, {'product_id': product, 'quantity': product_list[product], 'tracking_id': child.id})
+                self._create_data_product(cr, uid, child, product_list, context=context)
+        return True
+    
+    def _create_data_prodlot(self, cr, uid, child, serial_list, context=None):
+        if context == None:
+            context = {}
+        serial_track = self.pool.get('serial.stock.tracking')
+#        serial_obj = self.pool.get('stock.production.lot')
+        for serial in serial_list.keys():
+            if serial:
+                serial_track.create(cr, uid, {
+                        'serial_id': serial,
+                        'quantity': serial_list[serial],
+                        'tracking_id': child.id
+                    }, context=context)
+#                serial_obj.write(cr, uid, [serial], {'tracking_id': child.id}, context=context)
         return True
 
     def get_serials(self, cr, uid, ids, context=None):
-        pack_ids = self.browse(cr, uid, ids, context)
+        if context == None:
+            context = {}
+        pack_ids = self.browse(cr, uid, ids, context=context)
         serial_track = self.pool.get('serial.stock.tracking')
-        serial_obj = self.pool.get('stock.production.lot')
         for pack in pack_ids:
             childs = self.hierarchy_ids(pack)
             for child in childs:
@@ -97,20 +126,18 @@ class stock_tracking(orm.Model):
                             serial_list.update({x.prodlot_id.id:x.product_qty})
                         else:
                             serial_list[x.prodlot_id.id] += x.product_qty
-                for serial in serial_list.keys():
-                    if serial:
-                        serial_track.create(cr, uid, {'serial_id': serial, 'quantity': serial_list[serial], 'tracking_id': child.id}, context=context)
-                        serial_obj.write(cr, uid, [serial], {'tracking_id': child.id}, context=context)
+                self._create_data_prodlot(cr, uid, child, serial_list, context=context)
         return True
     
     def _check_parent_id(self, cr, uid, ids, context=None):
-        lines = self.browse(cr, uid, ids, context=context)
-        if lines[0].parent_id:
-            if lines[0].ul_id.capacity_index > lines[0].parent_id.ul_id.capacity_index:
+        trackings = self.browse(cr, uid, ids, context=context)
+        for track in trackings:
+            if track.parent_id and track.parent_id.ul_id and track.ul_id and \
+                track.ul_id.capacity_index > track.parent_id.ul_id.capacity_index:
                 return False
         return True
 
-    _constraints = [(_check_parent_id, 'Bad parent type selection. Please try again.',['parent_id'] ),]
+    _constraints = [(_check_parent_id, 'Bad parent type selection. The UL is not well set.', ['parent_id']),]
 
     _defaults = {
 #        'location_id': lambda x, y, z, c: c and c.get('location_id') or False,
