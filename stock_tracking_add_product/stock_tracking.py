@@ -27,6 +27,23 @@ from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FO
 class stock_tracking(orm.Model):
     _inherit = 'stock.tracking'
     
+    
+    def _get_move_product_vals(self, cr, uid, pack_id, product, qty=False, move_data=False, context=None):
+        if context == None:
+            context = {}
+        pack = self.browse(cr, uid, pack_id, context = context)
+        vals = {
+                  'name':  product.name,
+                  'product_id': product.id,
+                  'product_uom': product.uom_id.id,
+                  'product_qty': qty,
+                  'location_id': pack.location_id.id,
+                  'location_dest_id': pack.location_id.id,
+                  'tracking_id': pack.id,
+                  'state': 'done',
+        }
+        return vals
+    
     def add_products(self, cr, uid, pack_id, product_ids, quantities=False, context=None):
         # Initialization #
         if context == None:
@@ -41,17 +58,13 @@ class stock_tracking(orm.Model):
             qty = 1.0
             if quantities and quantities[product.id]:
                 qty = quantities[product.id]
-            move_id = move_obj.create(cr, uid, {
-                  'name': product.name,
-                  'product_id': product.id,
-                  'product_uom': product.uom_id.id,
-                  'product_qty': qty,
-                  'location_id': pack.location_id.id,
-                  'location_dest_id': pack.location_id.id,
-                  'tracking_id': pack.id,
-                  'state': 'done',
-            }, context=context)
-        self.write(cr, uid, pack.id, {'modified': True}, context=context)
+            vals = {}
+            vals = self._get_move_product_vals(cr, uid, pack_id, product, qty, move_data=False, context=context)
+            if vals:
+                new_move_id = move_obj.create(cr, uid, vals, context=context)
+                modified = True
+        if modified:
+            self.write(cr, uid, pack.id, {'modified': True}, context=context)
         self.get_products(cr, uid, [pack.id], context=context)
         return True
 
