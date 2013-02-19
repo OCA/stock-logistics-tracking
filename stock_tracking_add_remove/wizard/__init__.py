@@ -19,6 +19,7 @@
 #
 #################################################################################
 
-import add_pack
+import add_object
+import remove_object
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

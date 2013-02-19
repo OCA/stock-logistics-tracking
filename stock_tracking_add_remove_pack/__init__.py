@@ -19,35 +19,7 @@
 #
 #################################################################################
 
-{
-    "name" : "Stock tracking add prodlots",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
-    "description" : """Presentation:
-
-This module add a wizard to fill in packaging.
-This wizard is used to add or remove a prodlot object from a package.
-Adding to the historical movements and parent objects
-
-""",
-    "website" : "http://www.julius.fr",
-    "depends" : [
-         "stock",
-         "stock_tracking_extended",
-         "stock_tracking_add_product",
-    ],
-    "category" : "Warehouse Management",
-    "images" : [],
-    "demo" : [],
-    "data" : [
-        "wizard/add_prodlot_view.xml",
-        "wizard/remove_prodlot_view.xml",
-        "data/type.xml",
-        'stock_view.xml',
-    ],
-    'test': [],
-    'installable': False,
-    'active': False,
-}
+import wizard
+import stock_tracking
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -21,31 +21,28 @@
 
 from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
-import time
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
+import time
 
 class stock_tracking(orm.Model):
     _inherit = 'stock.tracking'
     
-    def add_pack(self, cr, uid, pack_id, child_ids, context=None):
+    def _add_pack(self, cr, uid, pack_id, child_ids, context=None):
         if context == None:
             context = {}
         self.write(cr, uid, child_ids, {'parent_id': pack_id}, context=context)
+        """ TODO create the history """
         self.get_products(cr, uid, [pack_id], context=context)
         self.get_serials(cr, uid, [pack_id], context=context)
         return True
-
     
-#    def _add_pack(self, cr, uid, current, context=None):
-#        if context == None:
-#            context = {}
-#        tracking_obj = self.pool.get('stock.tracking')
-#        child_ids = [x.id for x in current.pack_ids]
-#        tracking_obj.write(cr, uid, child_ids, {'parent_id': current.pack_id.id}, context=context)
-#        tracking_obj.get_products(cr, uid, [current.pack_id.id], context=context)
-#        tracking_obj.get_serials(cr, uid, [current.pack_id.id], context=context)
-#        return True
-#
-
+    def _remove_pack(self, cr, uid, pack_id, child_ids, context=None):
+        if context == None:
+            context = {}
+        self.write(cr, uid, child_ids, {'parent_id': False}, context=context)
+        """ TODO create the history """
+        self.get_products(cr, uid, [pack_id], context=context)
+        self.get_serials(cr, uid, [pack_id], context=context)
+        return True
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

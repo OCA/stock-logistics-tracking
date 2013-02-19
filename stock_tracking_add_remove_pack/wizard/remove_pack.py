@@ -19,36 +19,28 @@
 #
 #################################################################################
 
-{
-    "name" : "Stock tracking add product",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
-    "description" : """Presentation:
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 
-This module add a wizard to fill in packaging.
-This wizard is used to add or remove an object from a package.
-Adding to the historical movements and parent objects
+class stock_packaging_remove(orm.TransientModel):
 
-""",
-    "website" : "http://www.julius.fr",
-    "depends" : [
-         "stock",
-         "stock_tracking_extended",
-         "stock_tracking_state",
-    ],
-    "category" : "Warehouse Management",
-    "images" : [],
-    "demo" : [],
-    "data" : [
-        "security/ir.model.access.csv",
-        "wizard/add_product_view.xml",
-        "wizard/delete_product_view.xml",
-        "data/type.xml",
-        'stock_view.xml',
-    ],
-    'test': [],
-    'installable': False,
-    'active': False,
-}
+    _inherit = "stock.packaging.remove"
+
+    _columns = {
+        'pack_ids': fields.many2many('stock.tracking', 'remove_pack_child_rel', 'wizard_id', 'pack_id', 'Packs', domain="[('parent_id', '=', pack_id)]"),
+    }
+
+    def remove_object(self, cr, uid, ids, context=None):
+        if context == None:
+            context = {}
+        tracking_obj = self.pool.get('stock.tracking')
+        res = super(stock_packaging_remove, self).remove_object(cr, uid, ids, context=context)
+        for current in self.browse(cr, uid, ids, context=context):
+            code_type = current.type_id.code
+            pack_id = current.pack_id.id
+            child_ids = [x.id for x in current.pack_ids]
+            if code_type == 'pack':
+                tracking_obj._remove_pack(cr, uid, pack_id, child_ids, context=context)
+        return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

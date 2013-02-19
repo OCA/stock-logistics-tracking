@@ -26,7 +26,6 @@ class stock_packaging_add(orm.TransientModel):
 
     _inherit = "stock.packaging.add"
 
-
     _columns = {
         'location_id': fields.many2one('stock.location', 'Location'),
         'pack_ids': fields.many2many('stock.tracking', 'add_pack_child_rel', 'wizard_id', 'pack_id', 'Packs', domain=[('parent_id', '=', False),('state', '=', 'close')]),
@@ -55,11 +54,11 @@ class stock_packaging_add(orm.TransientModel):
         tracking_obj = self.pool.get('stock.tracking')
         res = super(stock_packaging_add, self).add_object(cr, uid, ids, context=context)
         for current in self.browse(cr, uid, ids, context=context):
-            type = current.type_id.code
+            code_type = current.type_id.code
             pack_id = current.pack_id.id
             child_ids = [x.id for x in current.pack_ids]
-            if type == 'pack':
-                tracking_obj.add_pack(cr, uid, pack_id, child_ids, context=context)
+            if code_type == 'pack':
+                tracking_obj._add_pack(cr, uid, pack_id, child_ids, context=context)
         return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

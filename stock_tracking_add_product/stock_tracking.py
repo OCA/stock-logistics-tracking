@@ -21,12 +21,11 @@
 
 from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
-import time
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
+import time
 
 class stock_tracking(orm.Model):
     _inherit = 'stock.tracking'
-    
     
     def _get_move_product_vals(self, cr, uid, pack_id, product, qty=False, move_data=False, context=None):
         if context == None:

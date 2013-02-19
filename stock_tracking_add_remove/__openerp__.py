@@ -20,13 +20,13 @@
 #################################################################################
 
 {
-    "name" : "Stock tracking add prodlots",
+    "name" : "Stock tracking add or remove object",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
     "description" : """Presentation:
 
 This module add a wizard to fill in packaging.
-This wizard is used to add or remove a prodlot object from a package.
+This wizard is used to add or remove an object from a package.
 Adding to the historical movements and parent objects
 
 """,
@@ -34,19 +34,20 @@ Adding to the historical movements and parent objects
     "depends" : [
          "stock",
          "stock_tracking_extended",
-         "stock_tracking_add_product",
+#         "stock_tracking_state",
     ],
     "category" : "Warehouse Management",
     "images" : [],
     "demo" : [],
     "data" : [
-        "wizard/add_prodlot_view.xml",
-        "wizard/remove_prodlot_view.xml",
+        "security/ir.model.access.csv",
+        "wizard/add_object_view.xml",
+        "wizard/remove_object_view.xml",
         "data/type.xml",
         'stock_view.xml',
     ],
     'test': [],
-    'installable': False,
+    'installable': True,
     'active': False,
 }
 

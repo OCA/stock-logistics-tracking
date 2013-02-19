@@ -62,7 +62,7 @@ msgstr "Non autorisé !"
 #. module: stock_tracking_state
 #: selection:stock.tracking,state:0
 msgid "Close"
-msgstr "Fermer"
+msgstr "Fermé"
 
 #. module: stock_tracking_state
 #: selection:stock.tracking,state:0
