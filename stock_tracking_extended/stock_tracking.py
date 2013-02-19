@@ -38,8 +38,8 @@ class one2many_special(fields.one2many):
             res[id] = []
             location_id = obj.read(cr, user, id, ['location_id'], context=context)['location_id']
 #            if location_id and location_id[0] and (location_id[0] not in location_ids):
-            if location_id and (location_id[0] not in location_ids):
-                location_ids.append(location_id[0])
+            if location_id and (location_id not in location_ids):
+                location_ids.append(location_id)
         domain = self._domain(obj) if callable(self._domain) else self._domain
         domain2 = [(self._fields_id, 'in', ids)]
         if location_ids:
