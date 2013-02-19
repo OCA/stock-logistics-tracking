@@ -82,6 +82,7 @@ class stock_tracking_swap(orm.TransientModel):
         picking_obj = self.pool.get('stock.picking')
         tracking_obj = self.pool.get('stock.tracking')
         history_obj = self.pool.get('stock.tracking.history')
+        sequence_obj = self.pool.get('ir.sequence')
         if context == None:
             context = {}
         swap_type = context.get('swap_type') or 'product'
@@ -94,18 +95,13 @@ class stock_tracking_swap(orm.TransientModel):
             date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
             pick_id = picking_obj.create(cr, uid, {
                 'type': 'internal',
-                'auto_picking': 'draft',
+                'auto_picking': True,
+                'name': sequence_obj.next_by_code(cr, uid, 'stock.picking.internal'),
                 'company_id': self.pool.get('res.company')._company_default_get(cr, uid, 'stock.company', context=context),
-                'address_id': current.location_id.address_id and current.location_id.address_id.id or False,
+                'partner_id': current.location_id.partner_id and current.location_id.partner_id.id or False,
                 'invoice_state': 'none',
                 'date': date,
                 'state': 'done',
-            }, context=context)
-            hist_id = history_obj.create(cr, uid, {
-               'tracking_id': parent_pack.id,
-               'type': 'move',
-               'location_id': destination_id,
-               'location_dest_id': origin_id,
             }, context=context)
             # Previous prodlot or product
             move_ids = [x.id for x in parent_pack.current_move_ids]
@@ -160,8 +156,18 @@ class stock_tracking_swap(orm.TransientModel):
                 'product_qty': 1.0,
                 'state': 'done',
             }
+            history_vals = {
+                'tracking_id': parent_pack.id,
+                'type': 'swap',
+                'location_id': destination_id,
+                'location_dest_id': origin_id,
+            }
             if swap_type == 'product':
                 defaults.update({
+                    'product_id': current.new_product_id.id,
+                })
+                history_vals.update({
+                    'swap_product_id': current.previous_product_id.id,
                     'product_id': current.new_product_id.id,
                 })
             elif swap_type == 'prodlot':
@@ -169,6 +175,11 @@ class stock_tracking_swap(orm.TransientModel):
                     'prodlot_id': current.new_prodlot_id.id,
                     'product_id': current.new_prodlot_id.product_id.id,
                 })
+                history_vals.update({
+                    'swap_prodlot_id': current.previous_product_id.id,
+                    'prodlot_id': current.new_prodlot_id.id,
+                })
+            hist_id = history_obj.create(cr, uid, history_vals, context=context)
             new_id = move_obj.copy(cr, uid, move_id, default=defaults, context=context)
             move_obj.write(cr, uid, [move_id], {'pack_history_id': hist_id}, context=context)
         tracking_obj.get_products(cr, uid, [parent_pack.id], context=context)

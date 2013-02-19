@@ -186,7 +186,7 @@ class stock_tracking_history(orm.Model):
         res = super(stock_tracking_history, self)._get_types(cr, uid, context)
         if not res:
             res = []
-        res = res + [('pack_in','Add parent'),('pack_out','Unlink parent')]
+        res = res + [('pack_in',_('Add parent')),('pack_out',_('Unlink parent'))]
         return res
 
     _columns = {

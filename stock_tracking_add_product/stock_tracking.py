@@ -22,7 +22,7 @@
 from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 import time
-from tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 
 class stock_tracking(orm.Model):
     _inherit = 'stock.tracking'
@@ -121,7 +121,7 @@ class stock_tracking_history(osv.osv):
         res = super(stock_tracking_history, self)._get_types(cr, uid, context)
         if not res:
             res = []
-        res = res + [('move','Move')]
+        res = res + [('move',_('Move'))]
         return res
     
     _columns = {

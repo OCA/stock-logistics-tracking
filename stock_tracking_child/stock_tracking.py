@@ -113,7 +113,7 @@ class stock_tracking(orm.Model):
     _constraints = [(_check_parent_id, 'Bad parent type selection. Please try again.',['parent_id'] ),]
 
     _defaults = {
-        'location_id': lambda x, y, z, c: c and c.get('location_id') or False,
+#        'location_id': lambda x, y, z, c: c and c.get('location_id') or False,
     }
     
 class product_ul(orm.Model):

@@ -126,7 +126,7 @@ class stock_tracking_history(orm.Model):
         res = super(stock_tracking_history, self)._get_types(cr, uid, context=context)
         if not res:
             res = []
-        res = res + [('reopen','Re Open')]
+        res = res + [('reopen',_('Re Open'))]
         return res
     
     _columns = {

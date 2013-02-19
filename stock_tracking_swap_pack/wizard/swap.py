@@ -46,6 +46,7 @@ class stock_packaging_swap(orm.TransientModel):
         picking_obj = self.pool.get('stock.picking')
         tracking_obj = self.pool.get('stock.tracking')
         history_obj = self.pool.get('stock.tracking.history')
+        sequence_obj = self.pool.get('ir.sequence')
         if context == None:
             context = {}
         for current in self.browse(cr, uid, ids, context=context):
@@ -57,7 +58,8 @@ class stock_packaging_swap(orm.TransientModel):
             date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
             pick_id = picking_obj.create(cr, uid, {
                 'type': 'internal',
-                'auto_picking': 'draft',
+                'auto_picking': True,
+                'name': sequence_obj.next_by_code(cr, uid, 'stock.picking.internal'),
                 'company_id': self.pool.get('res.company')._company_default_get(cr, uid, 'stock.company', context=context),
                 'address_id': current.location_id.address_id and current.location_id.address_id.id or False,
                 'invoice_state': 'none',
@@ -70,9 +72,11 @@ class stock_packaging_swap(orm.TransientModel):
             for child_data in child_packs:
                 hist_id = history_obj.create(cr, uid, {
                    'tracking_id': child_data.id,
-                   'type': 'move',
+                   'type': 'swap',
                    'location_id': origin_id,
                    'location_dest_id': destination_id,
+                   'swap_child_pack_id': current.previous_pack_id.id,
+                   'child_pack_id': current.new_pack_id.id,
                }, context=context)
                 tracking_obj.write(cr, uid, child_data.id, {'location_id': destination_id}, context=context)
                 move_ids = child_data.current_move_ids
@@ -94,9 +98,11 @@ class stock_packaging_swap(orm.TransientModel):
             for child_data in child_packs:
                 hist_id = history_obj.create(cr, uid, {
                    'tracking_id': child_data.id,
-                   'type': 'move',
+                   'type': 'swap',
                    'location_id': destination_id,
                    'location_dest_id': origin_id,
+                   'swap_child_pack_id': current.new_pack_id.id,
+                   'child_pack_id': current.previous_pack_id.id,
                }, context=context)
                 tracking_obj.write(cr, uid, child_data.id, {'location_id': origin_id}, context=context)
                 move_ids = child_data.current_move_ids
