@@ -27,10 +27,10 @@ from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FO
 class stock_tracking(orm.Model):
     _inherit = 'stock.tracking'
     
-    def get_move_prodlot_vals(self, cr, uid, pack_id, prodlot_data, qty=False, move_data=False, context=None):
+    def _get_move_prodlot_vals(self, cr, uid, pack_id, prodlot_data, qty=False, move_data=False, context=None):
         if context == None:
             context = {}
-        pack = self.browse(cr, uid, pack_id, context = context)
+        pack = self.browse(cr, uid, pack_id, context=context)
         vals = {
             'name': move_data and move_data.name or prodlot_data.name,
             'state': 'done',
@@ -61,9 +61,9 @@ class stock_tracking(orm.Model):
             vals = {}
             if move_ids:
                 move_data = move_obj.browse(cr, uid, move_ids[0], context=context)
-                vals = self.get_move_prodlot_vals(cr, uid, pack_id, prodlot_data, qty, move_data=move_data, context=context)
+                vals = self._get_move_prodlot_vals(cr, uid, pack_id, prodlot_data, qty, move_data=move_data, context=context)
             else:
-                vals = self.get_move_prodlot_vals(cr, uid, pack_id, prodlot_data, qty, move_data=False, context=context)
+                vals = self._get_move_prodlot_vals(cr, uid, pack_id, prodlot_data, qty, move_data=False, context=context)
             if vals:
                 new_move_id = move_obj.create(cr, uid, vals, context=context)
                 modified = True
@@ -72,7 +72,6 @@ class stock_tracking(orm.Model):
         self.get_products(cr, uid, [pack], context=context)
         self.get_serials(cr, uid, [pack], context=context)
         return True
-    
     
     def remove_prodlot(self, cr, uid, pack_id, prodlot_id, context=None):
         
@@ -88,8 +87,6 @@ class stock_tracking(orm.Model):
             
         pack = self.browse(cr, uid, pack_id, context=context)
         prodlot = prodlot_obj.browse(cr, uid, prodlot_id, context=context)
-        
-        
         
         # Process #
         
@@ -132,7 +129,6 @@ class stock_tracking(orm.Model):
         move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
         move_obj.write(cr, uid, [move_data.id], {'pack_history_id': hist_id}, context=context)
         prodlot_obj.write(cr, uid, prodlot.id, {'tracking_id': False}, context=context)
-        
         self.get_serials(cr, uid, [pack.id], context=context)
         self.get_products(cr, uid, [pack.id], context=context)
         return True

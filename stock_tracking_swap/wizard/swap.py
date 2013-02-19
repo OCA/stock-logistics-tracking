@@ -26,6 +26,7 @@ from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FO
 
 class stock_tracking_swap(orm.TransientModel):
     _name = "stock.tracking.swap"
+    _description = "Swap object"
 
     _columns = {
         'location_id': fields.many2one('stock.location', 'Location'),

@@ -31,7 +31,6 @@ class stock_packaging_add(orm.TransientModel):
         'prodlot_ids': fields.one2many('stock.packaging.add.line', 'parent_id', 'Lines'),
     }
     
-    
     def add_object(self, cr, uid, ids, context=None):
         if context == None:
             context = {}
@@ -48,7 +47,7 @@ class stock_packaging_add(orm.TransientModel):
                 for line_data in current.prodlot_ids:
                     # For each product added, we appends at the product_ids list the quantity added #
                     prodlot_ids.append(line_data.prodlot_id.id)
-                    quantities[line_data.prodlot_id.id]=line_data.quantity
+                    quantities[line_data.prodlot_id.id] = line_data.quantity
                 tracking_obj.add_prodlots(cr, uid, pack_id, prodlot_ids, quantities, context=context)
         return res
 
@@ -59,29 +58,5 @@ class stock_packaging_add_line(orm.TransientModel):
     _columns = {
         'prodlot_id': fields.many2one('stock.production.lot', 'Production lot', domain="[('tracking_id','=',False)]"),
     }
-
-#class stock_prodlot_validate(orm.TransientModel):
-#    _name = "stock.prodlot.validate"
-#    
-#    def validate(self, cr, uid, ids, context=None):
-#        move_obj = self.pool.get('stock.move')
-#        tracking_obj = self.pool.get('stock.tracking')
-#        add_obj = self.pool.get('stock.packaging.add')
-#        line_obj = self.pool.get('stock.packaging.add.line')
-#        if context is None:
-#            context = {}
-#            
-#        current = add_obj.browse(cr, uid, context.get('current_id'), context=context)
-#        move_data = move_obj.browse(cr, uid, context.get('move_id'), context=context)
-#        prodlot_line = line_obj.browse(cr, uid, context.get('prodlot_line_id'), context=context)
-#        vals = add_obj._get_move_prodlot_vals(cr, uid, current=current, prodlot_line=prodlot_line, move_data=move_data, context=context)
-#        
-#        move_obj.write(cr, uid, move_data.id, {'tracking_id':False}, context=context)
-#        new_move_id = move_obj.create(cr, uid, vals, context=context)
-#        
-#        tracking_obj.write(cr, uid, current.pack_id.id, {'modified': True}, context=context)
-#        tracking_obj.get_products(cr, uid, [current.pack_id.id], context=context)
-#        tracking_obj.get_serials(cr, uid, [current.pack_id.id], context=context)
-#        return {'type': 'ir.actions.act_window_close'}
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
