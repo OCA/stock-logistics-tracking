@@ -8,7 +8,7 @@
 			<field name="inherit_id" ref="stock_tracking_add_product.view_stock_packaging_add_wizard"/>
 			<field name="arch" type="xml">
 				<group name="products" position="after">
-					<group name="prodlots" colspan="4" col="4" attrs="{'invisible':[('type','!=','prodlots')]}">
+					<group name="prodlots" colspan="4" col="4" attrs="{'invisible':[('type','!=','prodlot')]}">
 						<separator string="Production lots" colspan="4"/>
 						<field name="prodlot_ids" colspan="4" nolabel="1">
 							<tree string="Add production lots" editable="top">

@@ -3,7 +3,7 @@
 	<data>
 
 		<record id="add_type_prodlots" model="stock.packaging.add.type">
-			<field name="code">prodlots</field>
+			<field name="code">prodlot</field>
 			<field name="name">Production lots</field>
 		</record>
 

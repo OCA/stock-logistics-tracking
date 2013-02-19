@@ -8,8 +8,8 @@
 			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_extended_form"/>
 			<field name="arch" type="xml">
 				<div name="prodlot_buttons" position="inside">
-					<button name="%(stock_tracking_add_product.action_stock_packaging_add)d" states="open" string="Add production lot" colspan="2" type="action" context="{'type_selection':'prodlots'}"/>
-					<button name="%(stock_tracking_add_product.action_stock_packaging_delete)d" colspan="1" string="Delete production lot" type="action" context="{'type_selection':'prodlots'}"/>
+					<button name="%(stock_tracking_add_product.action_stock_packaging_add)d" states="open" string="Add production lot" colspan="2" type="action" context="{'type_selection':'prodlot'}"/>
+					<button name="%(stock_tracking_add_product.action_stock_packaging_delete)d" colspan="1" string="Delete production lot" type="action" context="{'type_selection':'prodlot'}"/>
 				</div>
 			</field>
 		</record>
