@@ -30,6 +30,14 @@ class stock_tracking(orm.Model):
     def _add_pack(self, cr, uid, pack_id, child_ids, context=None):
         if context == None:
             context = {}
+        history_obj = self.pool.get('stock.tracking.history')
+        pack = self.browse(cr, uid, pack_id, context=context)
+        hist_id = history_obj.create(cr, uid, {
+           'tracking_id': pack.id,
+           'type': 'add_pack',
+           'location_id': pack.location_id.id,
+           'location_dest_id': pack.location_id.id,
+        }, context=context)
         self.write(cr, uid, child_ids, {'parent_id': pack_id}, context=context)
         """ TODO create the history """
         self.get_products(cr, uid, [pack_id], context=context)
@@ -39,10 +47,35 @@ class stock_tracking(orm.Model):
     def _remove_pack(self, cr, uid, pack_id, child_ids, context=None):
         if context == None:
             context = {}
+        history_obj = self.pool.get('stock.tracking.history')  
+        pack = self.browse(cr, uid, pack_id, context=context)
+        hist_id = history_obj.create(cr, uid, {
+           'tracking_id': pack.id,
+           'type': 'remove_pack',
+           'location_id': pack.location_id.id,
+           'location_dest_id': pack.location_id.id,
+        }, context=context)
         self.write(cr, uid, child_ids, {'parent_id': False}, context=context)
         """ TODO create the history """
         self.get_products(cr, uid, [pack_id], context=context)
         self.get_serials(cr, uid, [pack_id], context=context)
         return True
+    
+class stock_tracking_history(osv.osv):
+    
+    _inherit = "stock.tracking.history"
+    
+    def _get_types(self, cr, uid, context={}):
+        res = super(stock_tracking_history, self)._get_types(cr, uid, context)
+        if not res:
+            res = []
+        res = res + [('add_pack',_('Add pack')),('remove_pack',_('Remove pack'))]
+        return res
+    
+    _columns = {
+        'type': fields.selection(_get_types, 'Type'),
+        
+        
+    }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

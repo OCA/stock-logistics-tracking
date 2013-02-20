@@ -267,6 +267,7 @@ class stock_tracking_history(osv.osv):
         'product_id': fields.many2one('product.product', 'Product'),
         'prodlot_id': fields.many2one('stock.production.lot', 'Production lot'),
         'qty': fields.float('Quantity'),
+        
     }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
