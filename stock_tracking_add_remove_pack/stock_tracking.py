@@ -30,16 +30,18 @@ class stock_tracking(orm.Model):
     def _add_pack(self, cr, uid, pack_id, child_ids, context=None):
         if context == None:
             context = {}
+        date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         history_obj = self.pool.get('stock.tracking.history')
         pack = self.browse(cr, uid, pack_id, context=context)
         child = self.browse(cr, uid, child_ids, context=context)[0]
         hist_id = history_obj.create(cr, uid, {
            'tracking_id': pack.id,
-           'type': 'add_object',
+           'type': 'add_pack',
            'location_id': pack.location_id.id,
            'location_dest_id': pack.location_id.id,
            'child_pack_id': child.id,
            'qty': 1.0,
+           'date' : date,
         }, context=context)
         self.write(cr, uid, child_ids, {'parent_id': pack_id}, context=context)
         self.get_products(cr, uid, [pack_id], context=context)
@@ -54,18 +56,18 @@ class stock_tracking(orm.Model):
         child = self.browse(cr, uid, child_ids, context=context)[0]
         hist_id = history_obj.create(cr, uid, {
            'tracking_id': pack.id,
-           'type': 'remove_object',
+           'type': 'remove_pack',
            'location_id': pack.location_id.id,
            'location_dest_id': pack.location_id.id,
            'child_pack_id': child.id,
            'qty': 1.0,
+           'date' : date,
         }, context=context)
         self.write(cr, uid, child_ids, {'parent_id': False}, context=context)
         self.get_products(cr, uid, [pack_id], context=context)
         self.get_serials(cr, uid, [pack_id], context=context)
         return True
-<<<<<<< TREE
-    
+
 class stock_tracking_history(osv.osv):
     
     _inherit = "stock.tracking.history"
@@ -80,10 +82,6 @@ class stock_tracking_history(osv.osv):
     _columns = {
         'type': fields.selection(_get_types, 'Type'),
         'child_pack_id': fields.many2one('stock.tracking', 'Pack'),
-        
-        
     }
-=======
->>>>>>> MERGE-SOURCE
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

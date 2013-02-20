@@ -175,6 +175,7 @@ class stock_tracking_history(orm.Model):
     _columns = {
         'tracking_id': fields.many2one('stock.tracking', 'Pack', required=True),
         'type': fields.selection(_get_types, 'Type'),
+        'date': fields.datetime('Creation Date', readonly=True),
     }
 
     _rec_name = "tracking_id"

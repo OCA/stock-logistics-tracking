@@ -30,12 +30,7 @@ class stock_tracking_history(orm.Model):
         res = super(stock_tracking_history, self)._get_types(cr, uid, context)
         if not res:
             res = []
-        add = True
-        for key,value in res:
-            if key == 'swap':
-                add = False
-        if add:
-            res += [('swap',_('Swap'))]
+        res = res + [('swap_pack',_('Swap pack'))]
         return res
     
     _columns = {
