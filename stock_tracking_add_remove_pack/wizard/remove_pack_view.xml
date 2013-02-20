@@ -9,7 +9,6 @@
 			<field name="arch" type="xml">
 				<group name="products" position="after">
 					<group name="packs" colspan="4" col="4" attrs="{'invisible':[('type','!=','pack')]}">
-						<separator string="Add Packs" colspan="4"/>
 						<field name="pack_ids" colspan="4" nolabel="1"/>
 					</group>
 				</group>

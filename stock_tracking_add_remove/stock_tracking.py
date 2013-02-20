@@ -134,7 +134,7 @@ class stock_tracking(orm.Model):
         return True
 
     """ Method to remove products from a pack """
-    def _remove_products(self, cr, uid, pack_id, product_id, context=None):
+    def _remove_products(self, cr, uid, pack_id, products, context=None):
         # Initialization #
         move_obj = self.pool.get('stock.move')
         history_obj = self.pool.get('stock.tracking.history')
@@ -144,55 +144,56 @@ class stock_tracking(orm.Model):
             context = {}
 
         pack = self.browse(cr, uid, pack_id, context=context)
-        product = prod_obj.browse(cr, uid, product_id, context=context)
-        
-        # Process #
-        hist_id = history_obj.create(cr, uid, {
-               'tracking_id': pack.id,
-               'type': 'remove_object',
-               'location_id': pack.location_id.id,
-               'location_dest_id': pack.location_id.id,
-               'product_id': product_id,
-               'qty': 1.0,
-            }, context=context)
-        move_ids = [x.id for x in pack.current_move_ids]
-        move_ids = move_obj.search(cr, uid, [
-                    ('id', 'in', move_ids),
-                    ('product_id', '=', product.id),
-                    ('prodlot_id', '=', False),
-                ], limit=1, context=context)
-        if not move_ids:
-            raise osv.except_osv(_('Warning!'),_('Product Not Found !'))
-        move_data = move_obj.browse(cr, uid, move_ids[0], context=context)
-        move_qty = move_data.product_qty
-        if move_qty != 1.0:
+        for product in products:
+            if not product.move_id:
+                continue
+            move_data = product.move_id
+            move_qty = move_data.product_qty
+            remove_qty = product.quantity
+            if not remove_qty:
+                continue
+            
+            """ if the quantity to remove is bigger than the move quantity we only remove the move value """
+            if move_qty < remove_qty:
+                remove_qty = move_qty
+
+            # Process #
+            hist_id = history_obj.create(cr, uid, {
+                   'tracking_id': pack.id,
+                   'type': 'remove_object',
+                   'location_id': pack.location_id.id,
+                   'location_dest_id': pack.location_id.id,
+                   'product_id': product.product_id.id,
+                   'qty': remove_qty,
+                }, context=context)
+            if remove_qty != move_qty:
+                defaults = {
+                    'location_id': pack.location_id.id,
+                    'location_dest_id': pack.location_id.id,
+                    'date': date,
+                    'date_expected': date,
+                    'tracking_id': pack.id,
+                    'product_id': product.product_id.id,
+                    'product_qty': move_qty - remove_qty,
+                    'state': 'done',
+                }
+                new_id = move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
             defaults = {
                 'location_id': pack.location_id.id,
                 'location_dest_id': pack.location_id.id,
                 'date': date,
                 'date_expected': date,
-                'tracking_id': pack.id,
-                'product_id': product.id,
-                'product_qty': move_qty - 1.0,
+                'tracking_id': False,
+                'product_qty': remove_qty,
                 'state': 'done',
             }
-            new_id = move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
-        defaults = {
-            'location_id': pack.location_id.id,
-            'location_dest_id': pack.location_id.id,
-            'date': date,
-            'date_expected': date,
-            'tracking_id': False,
-            'product_qty': 1.0,
-            'state': 'done',
-        }
-        move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
-        move_obj.write(cr, uid, [move_data.id], {'pack_history_id': hist_id}, context=context)
+            move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
+            move_obj.write(cr, uid, [move_data.id], {'pack_history_id': hist_id}, context=context)
         self.get_products(cr, uid, [pack.id], context=context)
         return True
 
     """ Method to remove prodlots from a pack """
-    def _remove_prodlot(self, cr, uid, pack_id, prodlot_id, context=None):
+    def _remove_prodlot(self, cr, uid, pack_id, prodlots, context=None):
         
         # Initialization #
         move_obj = self.pool.get('stock.move')
@@ -204,49 +205,52 @@ class stock_tracking(orm.Model):
             context = {}
             
         pack = self.browse(cr, uid, pack_id, context=context)
-        prodlot = prodlot_obj.browse(cr, uid, prodlot_id, context=context)
+        for prodlot in prodlots:
+            if not prodlot.move_id:
+                continue
+            move_data = prodlot.move_id
+            move_qty = move_data.product_qty
+            remove_qty = prodlot.quantity
+            if not remove_qty:
+                continue
+            
+            """ if the quantity to remove is bigger than the move quantity we only remove the move value """
+            if move_qty < remove_qty:
+                remove_qty = move_qty
         
-        # Process #
-        hist_id = history_obj.create(cr, uid, {
-           'tracking_id': pack.id,
-           'type': 'remove_object',
-           'location_id': pack.location_id.id,
-           'location_dest_id': pack.location_id.id,
-           'prodlot_id': prodlot_id,
-        }, context=context)
-        move_ids = [x.id for x in pack.current_move_ids]
-        move_ids = move_obj.search(cr, uid, [
-                        ('id','in',move_ids),
-                        ('prodlot_id','=',prodlot.id)
-                ], limit=1, context=context)
-        if not move_ids:
-            raise osv.except_osv(_('Warning!'),_('Prodlot Not Found !'))
-        move_data = move_obj.browse(cr, uid, move_ids[0], context=context)
-        move_qty = move_data.product_qty
-        if move_qty != 1.0:
+            # Process #
+            hist_id = history_obj.create(cr, uid, {
+               'tracking_id': pack.id,
+               'type': 'remove_object',
+               'location_id': pack.location_id.id,
+               'location_dest_id': pack.location_id.id,
+               'prodlot_id': prodlot.prodlot_id.id,
+               'qty': remove_qty,
+            }, context=context)
+            if remove_qty != move_qty:
+                defaults = {
+                    'location_id': pack.location_id.id,
+                    'location_dest_id': pack.location_id.id,
+                    'date': date,
+                    'date_expected': date,
+                    'tracking_id': pack.id,
+                    'product_id': prodlot.prodlot_id.product_id.id,
+                    'product_qty': move_qty - remove_qty,
+                    'state': 'done',
+                }
+                new_id = move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
             defaults = {
                 'location_id': pack.location_id.id,
                 'location_dest_id': pack.location_id.id,
                 'date': date,
                 'date_expected': date,
-                'tracking_id': pack.id,
-                'product_id': prodlot.product_id.id,
-                'product_qty': move_qty - 1.0,
+                'tracking_id': False,
+                'product_qty': remove_qty,
                 'state': 'done',
             }
-            new_id = move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
-        defaults = {
-            'location_id': pack.location_id.id,
-            'location_dest_id': pack.location_id.id,
-            'date': date,
-            'date_expected': date,
-            'tracking_id': False,
-            'product_qty': 1.0,
-            'state': 'done',
-        }
-        move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
-        move_obj.write(cr, uid, [move_data.id], {'pack_history_id': hist_id}, context=context)
-#        prodlot_obj.write(cr, uid, prodlot.id, {'tracking_id': False}, context=context)
+            move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
+            move_obj.write(cr, uid, [move_data.id], {'pack_history_id': hist_id}, context=context)
+    #        prodlot_obj.write(cr, uid, prodlot.id, {'tracking_id': False}, context=context)
         self.get_serials(cr, uid, [pack.id], context=context)
         self.get_products(cr, uid, [pack.id], context=context)
         return True
@@ -267,6 +271,7 @@ class stock_tracking_history(osv.osv):
         'product_id': fields.many2one('product.product', 'Product'),
         'prodlot_id': fields.many2one('stock.production.lot', 'Production lot'),
         'qty': fields.float('Quantity'),
+        
     }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

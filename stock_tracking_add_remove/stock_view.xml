@@ -18,5 +18,35 @@
 			</field>
 		</record>
 
+
+		<record id="view_tracking_history_tree_inherit" model="ir.ui.view">
+			<field name="name">stock.tracking.history.tree</field>
+			<field name="model">stock.tracking.history</field>
+			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_history_tree"/>
+			<field name="arch" type="xml">
+				<tree string="History">
+					<field name="product_id"/>
+					<field name="prodlot_id"/>
+					<field name="qty"/>
+				</tree>
+			</field>
+		</record>
+
+
+		<record id="view_tracking_history_form_inherit" model="ir.ui.view">
+			<field name="name">stock.tracking.history.form</field>
+			<field name="model">stock.tracking.history</field>
+			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_history_form"/>
+			<field name="arch" type="xml">
+				<form string="History">
+					<field name="product_id"/>
+					<field name="prodlot_id"/>
+					<field name="qty"/>
+				</form>
+			</field>
+		</record>
+		
+		
+		
     </data>
 </openerp>

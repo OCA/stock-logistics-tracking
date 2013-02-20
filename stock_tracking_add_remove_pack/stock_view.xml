@@ -14,5 +14,25 @@
 			</field>
 		</record>
 
+		<record id="view_tracking_history_form_inherit" model="ir.ui.view">
+			<field name="name">stock.tracking.history.form</field>
+			<field name="model">stock.tracking.history</field>
+			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_history_form"/>
+			<field name="arch" type="xml">
+				<form string="History">
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_tracking_history_tree_inherit" model="ir.ui.view">
+			<field name="name">stock.tracking.history.tree</field>
+			<field name="model">stock.tracking.history</field>
+			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_history_tree"/>
+			<field name="arch" type="xml">
+				<tree string="History">
+				</tree>
+			</field>
+		</record>
+		
     </data>
 </openerp>
