@@ -25,7 +25,7 @@
     "author" : "Julius Network Solutions",
     "description" : """Presentation:
 
-This module add a wizard to fill in packaging.
+This module add a wizard to fill in packaging. It will also add a wizard to remove pieces from a pack
 This wizard is used to add or remove an object from a package.
 Adding to the historical movements and parent objects
 
