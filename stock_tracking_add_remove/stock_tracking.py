@@ -52,6 +52,7 @@ class stock_tracking(orm.Model):
         pack_obj = self.pool.get('stock.tracking')
         history_obj = self.pool.get('stock.tracking.history')
         pack = pack_obj.browse(cr, uid, pack_id, context=context)
+        date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         # Process #
         for product in prod_obj.browse(cr, uid, product_ids, context=context):
             # If quantity is not define , 1 by default #
@@ -64,11 +65,12 @@ class stock_tracking(orm.Model):
                 new_move_id = move_obj.create(cr, uid, vals, context=context)
                 hist_id = history_obj.create(cr, uid, {
                        'tracking_id': pack.id,
-                       'type': 'add_object',
+                       'type': 'add_product',
                        'location_id': pack.location_id.id,
                        'location_dest_id': pack.location_id.id,
                        'product_id': product.id,
                        'qty': qty,
+                       'date' : date,
                     }, context=context)
 #                modified = True
 #        if modified:
@@ -102,6 +104,7 @@ class stock_tracking(orm.Model):
         pack_obj = self.pool.get('stock.tracking')
         history_obj = self.pool.get('stock.tracking.history')
         pack = pack_obj.browse(cr, uid, pack_id, context=context)
+        date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         modified = False
         for prodlot_data in prodlot_obj.browse(cr, uid, prodlot_ids, context=context):
             if quantities and quantities[prodlot_data.id]:
@@ -120,11 +123,12 @@ class stock_tracking(orm.Model):
                 new_move_id = move_obj.create(cr, uid, vals, context=context)
                 hist_id = history_obj.create(cr, uid, {
                        'tracking_id': pack.id,
-                       'type': 'add_object',
+                       'type': 'add_prodlot',
                        'location_id': pack.location_id.id,
                        'location_dest_id': pack.location_id.id,
                        'prodlot_id': prodlot_data.id,
                        'qty': qty,
+                       'date' : date,
                     }, context=context)
 #                modified = True
 #        if modified:
@@ -160,11 +164,12 @@ class stock_tracking(orm.Model):
             # Process #
             hist_id = history_obj.create(cr, uid, {
                    'tracking_id': pack.id,
-                   'type': 'remove_object',
+                   'type': 'remove_product',
                    'location_id': pack.location_id.id,
                    'location_dest_id': pack.location_id.id,
                    'product_id': product.product_id.id,
                    'qty': remove_qty,
+                   'date' : date,
                 }, context=context)
             if remove_qty != move_qty:
                 defaults = {
@@ -221,11 +226,12 @@ class stock_tracking(orm.Model):
             # Process #
             hist_id = history_obj.create(cr, uid, {
                'tracking_id': pack.id,
-               'type': 'remove_object',
+               'type': 'remove_prodlot',
                'location_id': pack.location_id.id,
                'location_dest_id': pack.location_id.id,
                'prodlot_id': prodlot.prodlot_id.id,
                'qty': remove_qty,
+               'date' : date,
             }, context=context)
             if remove_qty != move_qty:
                 defaults = {
@@ -263,7 +269,8 @@ class stock_tracking_history(osv.osv):
         res = super(stock_tracking_history, self)._get_types(cr, uid, context)
         if not res:
             res = []
-        res = res + [('add_object',_('Add object')),('remove_object',_('Remove object'))]
+        res = res + [('add_product',_('Add product')),('remove_product',_('Remove product')),
+                     ('add_prodlot',_('Add prodlot')),('remove_prodlot',_('Remove prodlot'))]
         return res
     
     _columns = {

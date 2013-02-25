@@ -99,11 +99,12 @@ class stock_packaging_swap(orm.TransientModel):
             for child_data in child_packs:
                 hist_id = history_obj.create(cr, uid, {
                    'tracking_id': child_data.id,
-                   'type': 'swap',
+                   'type': 'swap_pack',
                    'location_id': destination_id,
                    'location_dest_id': origin_id,
                    'swap_child_pack_id': current.new_pack_id.id,
                    'child_pack_id': current.previous_pack_id.id,
+                   'qty' : 1,
                }, context=context)
                 tracking_obj.write(cr, uid, child_data.id, {'location_id': origin_id}, context=context)
                 move_ids = child_data.current_move_ids

@@ -87,6 +87,7 @@
 			<field name="model">stock.tracking.history</field>
 			<field name="arch" type="xml">
 				<tree string="History">
+					<field name="date"/>
 					<field name="type"/>
 				</tree>
 			</field>
@@ -97,6 +98,7 @@
 			<field name="model">stock.tracking.history</field>
 			<field name="arch" type="xml">
 				<form string="History">
+					<field name="date"/>
 					<field name="type"/>
 				</form>
 			</field>

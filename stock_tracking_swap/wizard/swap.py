@@ -84,6 +84,7 @@ class stock_tracking_swap(orm.TransientModel):
         tracking_obj = self.pool.get('stock.tracking')
         history_obj = self.pool.get('stock.tracking.history')
         sequence_obj = self.pool.get('ir.sequence')
+        date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         if context == None:
             context = {}
         swap_type = context.get('swap_type') or 'product'
@@ -159,9 +160,10 @@ class stock_tracking_swap(orm.TransientModel):
             }
             history_vals = {
                 'tracking_id': parent_pack.id,
-                'type': 'swap',
                 'location_id': destination_id,
                 'location_dest_id': origin_id,
+                'date' : date,
+                'qty' : 1,
             }
             if swap_type == 'product':
                 defaults.update({
@@ -169,7 +171,8 @@ class stock_tracking_swap(orm.TransientModel):
                 })
                 history_vals.update({
                     'swap_product_id': current.previous_product_id.id,
-                    'product_id': current.new_product_id.id,
+                    'new_product_id': current.new_product_id.id,
+                    'type': 'swap_product',
                 })
             elif swap_type == 'prodlot':
                 defaults.update({
@@ -178,7 +181,8 @@ class stock_tracking_swap(orm.TransientModel):
                 })
                 history_vals.update({
                     'swap_prodlot_id': current.previous_product_id.id,
-                    'prodlot_id': current.new_prodlot_id.id,
+                    'new_prodlot_id': current.new_prodlot_id.id,
+                    'type': 'swap_prodlot',
                 })
             hist_id = history_obj.create(cr, uid, history_vals, context=context)
             new_id = move_obj.copy(cr, uid, move_id, default=defaults, context=context)

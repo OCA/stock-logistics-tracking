@@ -12,6 +12,18 @@
 				</div>
 			</field>
 		</record>
+		
+				<record id="view_tracking_history_form_inherit" model="ir.ui.view">
+			<field name="name">stock.tracking.history.form</field>
+			<field name="model">stock.tracking.history</field>
+			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_history_form"/>
+			<field name="arch" type="xml">
+				<form string="History">
+					<field name="'swap_child_pack_id'" attrs="{'invisible': [('type','!=','swap_pack')]}"/>
+					<field name="child_pack_id" attrs="{'invisible': [('type','!=','swap_pack')]}"/>
+				</form>
+			</field>
+		</record>
 
     </data>
 </openerp>

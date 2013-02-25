@@ -30,12 +30,7 @@ class stock_tracking_history(orm.Model):
         res = super(stock_tracking_history, self)._get_types(cr, uid, context)
         if not res:
             res = []
-        add = True
-        for key,value in res:
-            if key == 'swap':
-                add = False
-        if add:
-            res += [('swap',_('Swap'))]
+        res = res + [('swap_product',_('Swap product')),('swap_prodlot',_('Swap prodlot'))]
         return res
     
     _columns = {
@@ -43,9 +38,9 @@ class stock_tracking_history(orm.Model):
         'location_id': fields.many2one('stock.location', 'Source Location'),
         'location_dest_id': fields.many2one('stock.location', 'Destination Location'),
         'swap_product_id': fields.many2one('product.product', 'Swap Product'),
-        'product_id': fields.many2one('product.product', 'New Product'),
+        'new_product_id': fields.many2one('product.product', 'New Product'),
         'swap_prodlot_id': fields.many2one('stock.production.lot', 'Swap Production lot'),
-        'prodlot_id': fields.many2one('stock.production.lot', 'New Production lot'),
+        'new_prodlot_id': fields.many2one('stock.production.lot', 'New Production lot'),
     }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
