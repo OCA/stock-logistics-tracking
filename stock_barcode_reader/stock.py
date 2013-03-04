@@ -51,37 +51,4 @@ class stock_picking(orm.Model):
         }
         return action
 
-#######################################stock_barcode_reader##############################################
-#class stock_move(orm.Model):
-#    _inherit = 'stock.move'
-#    _columns = {
-#         'move_ori_id': fields.many2one('stock.move', 'Origin Move', select=True),
-#    }
-#
-#    def write(self, cr, uid, ids, vals, context=None):
-#        result = super(stock_move,self).write(cr, uid, ids, vals, context=context)
-#        if not isinstance(ids, list):
-#            ids = [ids]
-#        for id in ids:
-#            state = self.browse(cr, uid, id, context=context).state
-#            move_ori_id = self.browse(cr, uid, id, context=context).move_ori_id
-#            if state == 'done' and move_ori_id:
-#                self.write(cr, uid, [move_ori_id.id], {'state':'done'}, context=context)
-#        return result
-#
-#    def create(self, cr, uid, vals, context=None):
-#        production_lot_obj = self.pool.get('stock.production.lot')
-#        stock_tracking_obj = self.pool.get('stock.tracking')
-#        if vals.get('prodlot_id',False):
-#            production_lot_data = production_lot_obj.browse(cr, uid, vals['prodlot_id'], context=context)
-#            last_production_lot_move_id = self.search(cr, uid, [('prodlot_id', '=', production_lot_data.id)], limit=1, order='date', context=context)
-#            if last_production_lot_move_id:
-#                last_production_lot_move = self.browse(cr,uid,last_production_lot_move_id[0])
-#                if last_production_lot_move.tracking_id:
-#                    ids = [last_production_lot_move.tracking_id.id]
-#                    stock_tracking_obj.reset_open(cr, uid, ids, context=context)
-#
-#        return super(stock_move,self).create(cr, uid, vals, context=context)
-#
-
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

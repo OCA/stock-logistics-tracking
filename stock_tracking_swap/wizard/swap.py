@@ -42,12 +42,12 @@ class stock_tracking_swap(orm.TransientModel):
         if context is None:
             context = {}                                                                      
         res.update({
-            'parent_pack_id': context.get('active_id') or False,
+            'parent_pack_id': context.get('active_id', False),
         })
         return res
     
     def onchange_location(self, cr , uid, ids, location_id, parent_pack_id, context=None):
-        if context == None:
+        if context is None:
             context = {}
         swap_type = context.get('swap_type') or False
         tracking_obj = self.pool.get('stock.tracking')            
@@ -85,13 +85,14 @@ class stock_tracking_swap(orm.TransientModel):
         history_obj = self.pool.get('stock.tracking.history')
         sequence_obj = self.pool.get('ir.sequence')
         date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-        if context == None:
+        if context is None:
             context = {}
         swap_type = context.get('swap_type') or 'product'
         for current in self.browse(cr, uid, ids, context=context):
-            if not context.get('active_id'):
+            active_id = context.get('active_id')
+            if not active_id:
                 raise osv.except_osv(_('Warning!'),_('Should Not Happen !'))
-            parent_pack = tracking_obj.browse(cr, uid, context.get('active_id'), context=context)
+            parent_pack = tracking_obj.browse(cr, uid, active_id, context=context)
             origin_id = parent_pack.location_id.id
             destination_id = current.location_id.id
             date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)

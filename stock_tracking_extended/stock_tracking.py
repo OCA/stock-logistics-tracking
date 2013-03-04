@@ -54,10 +54,10 @@ class one2many_special(fields.one2many):
 class stock_tracking(orm.Model):
     _inherit = 'stock.tracking'
     
-    """ By default we get the location defined on the main warehouse of the user's company """
     def _get_default_location(self, cr, uid, context=None):
+        """ By default we get the location defined on the main warehouse of the user's company """
         # Initialization #
-        if context == None:
+        if context is None:
             context = {}
         if context.get('location_id'):
             return context.get('location_id')

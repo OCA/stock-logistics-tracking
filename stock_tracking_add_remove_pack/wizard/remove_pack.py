@@ -31,7 +31,7 @@ class stock_packaging_remove(orm.TransientModel):
     }
 
     def remove_object(self, cr, uid, ids, context=None):
-        if context == None:
+        if context is None:
             context = {}
         tracking_obj = self.pool.get('stock.tracking')
         res = super(stock_packaging_remove, self).remove_object(cr, uid, ids, context=context)

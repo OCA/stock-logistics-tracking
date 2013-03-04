@@ -34,7 +34,6 @@ Adding to the historical movements and parent objects
     "depends" : [
          "stock",
          "stock_tracking_extended",
-#         "stock_tracking_state",
     ],
     "category" : "Warehouse Management",
     "images" : [],

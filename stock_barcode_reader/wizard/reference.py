@@ -30,7 +30,7 @@ class stock_reference(orm.TransientModel):
 #    _rec_name = 'reference'
 
     def _get_track_id(self, cr, uid, context=None):
-        if context == None:
+        if context is None:
             context = {}
         return context.get('active_id',False)
 

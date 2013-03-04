@@ -34,10 +34,8 @@ class stock_packaging_add(orm.TransientModel):
     def _get_location_id(self, cr, uid, context):
         if context==None:
             context={}
-        active_id = False
         location_id = False
-        if context.get('active_id'):
-            active_id = context.get('active_id')
+        active_id = context.get('active_id')
         if active_id:
             tracking_obj = self.pool.get('stock.tracking')
             tracking = tracking_obj.browse(cr, uid, active_id, context=context)
@@ -49,7 +47,7 @@ class stock_packaging_add(orm.TransientModel):
     }
     
     def add_object(self, cr, uid, ids, context=None):
-        if context == None:
+        if context is None:
             context = {}
         tracking_obj = self.pool.get('stock.tracking')
         res = super(stock_packaging_add, self).add_object(cr, uid, ids, context=context)

@@ -63,7 +63,7 @@ class stock_tracking(orm.Model):
     }
     
     def _create_data_product(self, cr, uid, child, product_list, context=None):
-        if context == None:
+        if context is None:
             context = {}
         stock_track = self.pool.get('product.stock.tracking')
         for product in product_list.keys():
@@ -75,7 +75,7 @@ class stock_tracking(orm.Model):
         return True
     
     def get_products(self, cr, uid, ids, context=None):
-        if context == None:
+        if context is None:
             context = {}
         pack_ids = self.browse(cr, uid, ids, context=context)
         stock_track = self.pool.get('product.stock.tracking')
@@ -95,7 +95,7 @@ class stock_tracking(orm.Model):
         return True
     
     def _create_data_prodlot(self, cr, uid, child, serial_list, context=None):
-        if context == None:
+        if context is None:
             context = {}
         serial_track = self.pool.get('serial.stock.tracking')
 #        serial_obj = self.pool.get('stock.production.lot')
@@ -110,7 +110,7 @@ class stock_tracking(orm.Model):
         return True
 
     def get_serials(self, cr, uid, ids, context=None):
-        if context == None:
+        if context is None:
             context = {}
         pack_ids = self.browse(cr, uid, ids, context=context)
         serial_track = self.pool.get('serial.stock.tracking')

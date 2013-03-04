@@ -46,10 +46,7 @@ class stock_packaging_add(orm.TransientModel):
     def _get_type_id(self, cr, uid, context):
         if context==None:
             context={}
-        if context.get('type_selection'):
-            type = context.get('type_selection')
-        else:
-            type = 'product'
+        type = context.get('type_selection', 'product')
         type_obj = self.pool.get('stock.packaging.add.type')
         default_type = type_obj.search(cr, uid, [('code', '=', type)], limit=1, context=context)
         if not default_type:
@@ -59,10 +56,7 @@ class stock_packaging_add(orm.TransientModel):
     def _get_type(self, cr, uid, context):
         if context==None:
             context={}
-        if context.get('type_selection'):
-            type = context.get('type_selection')
-        else:
-            type = 'product'
+        type = context.get('type_selection', 'product')
         res_type = ''
         type_obj = self.pool.get('stock.packaging.add.type')
         default_type = type_obj.search(cr, uid, [('code', '=', type)], limit=1, context=context)
@@ -75,7 +69,7 @@ class stock_packaging_add(orm.TransientModel):
         return res_type or ''
 
     _defaults = {
-        'pack_id': lambda self, cr, uid, context: context.get('active_id') or False,
+        'pack_id': lambda self, cr, uid, context: context.get('active_id', False),
         'type_id': lambda self, cr, uid, context: self._get_type_id(cr, uid, context),
         'type': lambda self, cr, uid, context: self._get_type(cr, uid, context),
     }
@@ -91,7 +85,7 @@ class stock_packaging_add(orm.TransientModel):
     
     def add_object(self, cr, uid, ids, context=None):
         # Initialization #
-        if context == None:
+        if context is None:
             context = {}
         tracking_obj = self.pool.get('stock.tracking')
         # Process #

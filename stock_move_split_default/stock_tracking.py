@@ -28,7 +28,7 @@ class split_in_production_lot(orm.TransientModel):
         'use_exist' : fields.boolean('Existing Lots', invisible=True),
      }
     _defaults = {
-        'use_exist': lambda *a: True,
+        'use_exist': True,
     }
     def default_get(self, cr, uid, fields, context=None):
         res = super(split_in_production_lot, self).default_get(cr, uid, fields, context=context)

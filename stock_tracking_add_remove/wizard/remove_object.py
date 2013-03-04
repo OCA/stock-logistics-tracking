@@ -36,12 +36,9 @@ class stock_packaging_remove(orm.TransientModel):
     }
     
     def _get_type_id(self, cr, uid, context):
-        if context == None:
+        if context is None:
             context = {}
-        if context.get('type_selection'):
-            type = context.get('type_selection')
-        else:
-            type = 'product'
+        type = context.get('type_selection', 'product')
         type_obj = self.pool.get('stock.packaging.add.type')
         default_type = type_obj.search(cr, uid, [('code', '=', type)], limit=1, context=context)
         if not default_type:
@@ -49,12 +46,9 @@ class stock_packaging_remove(orm.TransientModel):
         return default_type and default_type[0] or False
     
     def _get_type(self, cr, uid, context=None):
-        if context == None:
+        if context is None:
             context = {}
-        if context.get('type_selection'):
-            type = context.get('type_selection')
-        else:
-            type = 'product'
+        type = context.get('type_selection', 'product')
         res_type = ''
         type_obj = self.pool.get('stock.packaging.add.type')
         default_type = type_obj.search(cr, uid, [('code', '=', type)], limit=1, context=context)
@@ -67,7 +61,7 @@ class stock_packaging_remove(orm.TransientModel):
         return res_type or ''
     
     _defaults = {
-        'pack_id': lambda self, cr, uid, context: context.get('active_id') or False,
+        'pack_id': lambda self, cr, uid, context: context.get('active_id', False),
         'type_id': lambda self, cr, uid, context: self._get_type_id(cr, uid, context),
         'type': lambda self, cr, uid, context: self._get_type(cr, uid, context),
     }
@@ -88,7 +82,7 @@ class stock_packaging_remove(orm.TransientModel):
         return res
     
     def remove_object(self, cr, uid, ids, context=None):
-        if context == None:
+        if context is None:
             context = {}
         tracking_obj = self.pool.get('stock.tracking')    
         for current in self.browse(cr, uid, ids, context=context):
@@ -147,14 +141,14 @@ class stock_packaging_remove_line(orm.TransientModel):
     _columns = {
         'parent_id': fields.many2one('stock.packaging.remove', 'Parent'),
         'pack_id': fields.many2one('stock.tracking', 'Pack'),
-        'product_id': fields.many2one('product.product', 'Product'), #, domain="[('id', 'in', tuple([x.product_id.id for x in parent_id.product_ids]))]"),
-        'prodlot_id': fields.many2one('stock.production.lot', 'Production Lot'), # domain="[('id', 'in', tuple([x.serial_id.id for x in parent_id.serial_ids]))]"),
+        'product_id': fields.many2one('product.product', 'Product'),
+        'prodlot_id': fields.many2one('stock.production.lot', 'Production Lot'),
         'move_id': fields.many2one('stock.move', 'Move'),
         'quantity': fields.float('Quantity'),
     }
     
     def onchange_pack_id(self, cr, uid, ids, pack_id, context=None):
-        if context == None:
+        if context is None:
             context = {}
         res = {}
         product_ids = []
@@ -189,7 +183,7 @@ class stock_packaging_remove_line(orm.TransientModel):
         return res
     
     def onchange_product_id(self, cr, uid, ids, product_id, pack_id, context=None):
-        if context == None:
+        if context is None:
             context = {}
         value = {}
         if pack_id and product_id:
@@ -208,7 +202,7 @@ class stock_packaging_remove_line(orm.TransientModel):
         return {'value': value}
     
     def onchange_prodlot_id(self, cr, uid, ids, prodlot_id, pack_id, context=None):
-        if context == None:
+        if context is None:
             context = {}
         value = {}
         if pack_id and prodlot_id:
@@ -227,7 +221,7 @@ class stock_packaging_remove_line(orm.TransientModel):
     
     _defaults = {
         'quantity': 1.0,
-        'pack_id': lambda self, cr, uid, context: context.get('active_id') or False,
+        'pack_id': lambda self, cr, uid, context: context.get('active_id', False),
     }
     
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

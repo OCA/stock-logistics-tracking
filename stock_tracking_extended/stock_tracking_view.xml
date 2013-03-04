@@ -2,107 +2,107 @@
 <openerp>
     <data>
 
-		<record id="view_tracking_extended_tree" model="ir.ui.view">
-			<field name="name">stock.tracking.extended.tree</field>
-			<field name="model">stock.tracking</field>
-			<field name="inherit_id" ref="stock.view_tracking_tree"/>
-			<field name="arch" type="xml">
-				<field name="serial" position="after">
-					<field name="location_id"/>
-				</field>
-			</field>
-		</record>
-        
-		<record id="view_tracking_extended_form" model="ir.ui.view">
-			<field name="name">stock.tracking.extended.form</field>
-			<field name="model">stock.tracking</field>
-			<field name="inherit_id" ref="stock.view_tracking_form"/>
-			<field name="arch" type="xml">
-				<field name="move_ids" position="replace">
-					<notebook>
-						<page string="Products">
-							<group name="products">
-								<div>
-                            		<div>
-										<field name="product_ids" nolabel="1" colspan="4"/>
-									</div>
-                            		<div name="product_buttons">
-										<button name="get_products" string="Update product list" colspan="2" type="object"/>
-									</div>
-								</div>
-							</group>
-						</page>
-						<page string="Serial Code">
-							<group name="serials">
-								<div>
-                            		<div>
-										<field name="serial_ids" nolabel="1" colspan="4"/>
-									</div>
-                            		<div name="prodlot_buttons">
-										<button name="get_serials" string="Update Serial list" colspan="2" type="object"/>
-									</div>
-								</div>
-							</group>
-						</page>
-						<page string="History">
-							<field name="history_ids" nolabel="1" colspan="4"/>
-						</page>
-						<page string="Move">
-							<field name="move_ids" nolabel="1" colspan="4"/>
-						</page>
-					</notebook>
-				</field>
-				<field name="serial" position="after">
-					<field name="location_id"/>
-				</field>
-			</field>
-		</record>
+        <record id="view_tracking_extended_tree" model="ir.ui.view">
+            <field name="name">stock.tracking.extended.tree</field>
+            <field name="model">stock.tracking</field>
+            <field name="inherit_id" ref="stock.view_tracking_tree"/>
+            <field name="arch" type="xml">
+                <field name="serial" position="after">
+                    <field name="location_id"/>
+                </field>
+            </field>
+        </record>
 
-		<record id="view_product_stock_tracking_tree_inherit" model="ir.ui.view">
-			<field name="name">product.stock.tracking.tree</field>
-			<field name="model">product.stock.tracking</field>
-			<field name="arch" type="xml">
-				<tree string="Products">
-					<field name="product_id"/>
-					<field name="quantity"/>
-				</tree>
-			</field>
-		</record>
-		
-		<record id="view_serial_stock_tracking_tree_inherit" model="ir.ui.view">
-			<field name="name">serial.stock.tracking.tree</field>
-			<field name="model">serial.stock.tracking</field>
-			<field name="arch" type="xml">
-				<tree string="Products">
-					<field name="tracking_id"/>
-					<field name="serial_id"/>
-					<field name="product_id"/>
-					<field name="quantity"/>
-				</tree>
-			</field>
-		</record>
-		
-		<record id="view_tracking_history_tree" model="ir.ui.view">
-			<field name="name">stock.tracking.history.tree</field>
-			<field name="model">stock.tracking.history</field>
-			<field name="arch" type="xml">
-				<tree string="History">
-					<field name="date"/>
-					<field name="type"/>
-				</tree>
-			</field>
-		</record>
-		
-		<record id="view_tracking_history_form" model="ir.ui.view">
-			<field name="name">stock.tracking.history.form</field>
-			<field name="model">stock.tracking.history</field>
-			<field name="arch" type="xml">
-				<form string="History">
-					<field name="date"/>
-					<field name="type"/>
-				</form>
-			</field>
-		</record>
+        <record id="view_tracking_extended_form" model="ir.ui.view">
+            <field name="name">stock.tracking.extended.form</field>
+            <field name="model">stock.tracking</field>
+            <field name="inherit_id" ref="stock.view_tracking_form"/>
+            <field name="arch" type="xml">
+                <field name="move_ids" position="replace">
+                    <notebook>
+                        <page string="Products">
+                            <group name="products">
+                                <div>
+                                    <div>
+                                        <field name="product_ids" nolabel="1" colspan="4"/>
+                                    </div>
+                                    <div name="product_buttons">
+                                        <button name="get_products" string="Update product list" colspan="2" type="object"/>
+                                    </div>
+                                </div>
+                            </group>
+                        </page>
+                        <page string="Serial Code">
+                            <group name="serials">
+                                <div>
+                                    <div>
+                                        <field name="serial_ids" nolabel="1" colspan="4"/>
+                                    </div>
+                                    <div name="prodlot_buttons">
+                                        <button name="get_serials" string="Update Serial list" colspan="2" type="object"/>
+                                    </div>
+                                </div>
+                            </group>
+                        </page>
+                        <page string="History">
+                            <field name="history_ids" nolabel="1" colspan="4"/>
+                        </page>
+                        <page string="Move">
+                            <field name="move_ids" nolabel="1" colspan="4"/>
+                        </page>
+                    </notebook>
+                </field>
+                <field name="serial" position="after">
+                    <field name="location_id"/>
+                </field>
+                </field>
+        </record>
+
+        <record id="view_product_stock_tracking_tree_inherit" model="ir.ui.view">
+            <field name="name">product.stock.tracking.tree</field>
+            <field name="model">product.stock.tracking</field>
+            <field name="arch" type="xml">
+                <tree string="Products">
+                    <field name="product_id"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_serial_stock_tracking_tree_inherit" model="ir.ui.view">
+            <field name="name">serial.stock.tracking.tree</field>
+            <field name="model">serial.stock.tracking</field>
+            <field name="arch" type="xml">
+                <tree string="Products">
+                    <field name="tracking_id"/>
+                    <field name="serial_id"/>
+                    <field name="product_id"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tracking_history_tree" model="ir.ui.view">
+            <field name="name">stock.tracking.history.tree</field>
+            <field name="model">stock.tracking.history</field>
+            <field name="arch" type="xml">
+                <tree string="History">
+                    <field name="date"/>
+                    <field name="type"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tracking_history_form" model="ir.ui.view">
+            <field name="name">stock.tracking.history.form</field>
+            <field name="model">stock.tracking.history</field>
+            <field name="arch" type="xml">
+                <form string="History">
+                    <field name="date"/>
+                    <field name="type"/>
+                </form>
+            </field>
+        </record>
 
     </data>
 </openerp>

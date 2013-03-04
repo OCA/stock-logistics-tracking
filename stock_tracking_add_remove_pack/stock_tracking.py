@@ -28,7 +28,7 @@ class stock_tracking(orm.Model):
     _inherit = 'stock.tracking'
     
     def _add_pack(self, cr, uid, pack_id, child_ids, context=None):
-        if context == None:
+        if context is None:
             context = {}
         date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         history_obj = self.pool.get('stock.tracking.history')
@@ -49,7 +49,7 @@ class stock_tracking(orm.Model):
         return True
     
     def _remove_pack(self, cr, uid, pack_id, child_ids, context=None):
-        if context == None:
+        if context is None:
             context = {}
         history_obj = self.pool.get('stock.tracking.history')  
         pack = self.browse(cr, uid, pack_id, context=context)
