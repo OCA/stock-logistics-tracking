@@ -95,11 +95,9 @@ class stock_tracking(orm.Model):
             product_list = {}
             for x in pack.current_move_ids:
                 if x.location_dest_id.id == pack.location_id.id:
-                    if x.product_id.id not in product_list.keys():
-                        product_list.update({x.product_id.id:x.product_qty})
-                    else:
-                        product_list[x.product_id.id] += x.product_qty
-            for product in product_list.keys():
+                    product_list.setdefault(x.product_id.id, 0)
+                    product_list[x.product_id.id] += x.product_qty
+            for product in product_list.iterkeys():
                 stock_track.create(cr, uid, {
                         'product_id': product,
                         'quantity': product_list[product],
@@ -116,10 +114,8 @@ class stock_tracking(orm.Model):
             serial_list = {}
             for x in child.current_move_ids:
                 if x.location_dest_id.id == pack.location_id.id:
-                    if x.prodlot_id.id not in serial_list.keys():
-                        serial_list.update({x.prodlot_id.id:x.product_qty})
-                    else:
-                        serial_list[x.prodlot_id.id] += x.product_qty
+                    serial_list.setdefault(x.prodlot_id.id, 0)
+                    serial_list[x.prodlot_id.id] += x.product_qty
             for serial in serial_list.keys():
                 if serial:
                     serial_track.create(cr, uid, {

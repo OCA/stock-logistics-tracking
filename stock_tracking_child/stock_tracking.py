@@ -66,7 +66,7 @@ class stock_tracking(orm.Model):
         if context is None:
             context = {}
         stock_track = self.pool.get('product.stock.tracking')
-        for product in product_list.keys():
+        for product in product_list.iterkeys():
             stock_track.create(cr, uid, {
                     'product_id': product,
                     'quantity': product_list[product],
@@ -87,10 +87,8 @@ class stock_tracking(orm.Model):
                 product_list = {}
                 for x in child.current_move_ids:
                     if x.location_dest_id.id == child.location_id.id:
-                        if x.product_id.id not in product_list.keys():
-                            product_list.update({x.product_id.id:x.product_qty})
-                        else:
-                            product_list[x.product_id.id] += x.product_qty
+                        product_list.setdefault(x.product_id.id, 0)
+                        product_list[x.product_id.id] += x.product_qty
                 self._create_data_product(cr, uid, child, product_list, context=context)
         return True
     
@@ -99,7 +97,7 @@ class stock_tracking(orm.Model):
             context = {}
         serial_track = self.pool.get('serial.stock.tracking')
 #        serial_obj = self.pool.get('stock.production.lot')
-        for serial in serial_list.keys():
+        for serial in serial_list.iterkeys():
             if serial:
                 serial_track.create(cr, uid, {
                         'serial_id': serial,
@@ -122,10 +120,8 @@ class stock_tracking(orm.Model):
                 serial_list = {}
                 for x in child.current_move_ids:
                     if x.location_dest_id.id == child.location_id.id:
-                        if x.prodlot_id.id not in serial_list.keys():
-                            serial_list.update({x.prodlot_id.id:x.product_qty})
-                        else:
-                            serial_list[x.prodlot_id.id] += x.product_qty
+                        serial_list.setdefault(x.prodlot_id.id, 0)
+                        serial_list[x.prodlot_id.id] += x.product_qty
                 self._create_data_prodlot(cr, uid, child, serial_list, context=context)
         return True
     
