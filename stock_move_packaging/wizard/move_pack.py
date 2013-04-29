@@ -19,11 +19,12 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 import time
 
-class stock_move_packaging(osv.osv_memory):
+class stock_move_packaging(orm.TransientModel):
 
     _name = "stock.move.packaging"
     
@@ -33,7 +34,7 @@ class stock_move_packaging(osv.osv_memory):
     }
     
     _defaults = {
-        'pack_id': lambda s,cr,uid,c: c.get('active_id',False),
+        'pack_id': lambda s,cr,uid,c: c.get('active_id') or False,
     }
     
     def move_pack(self, cr, uid, ids, context=None):
@@ -47,13 +48,21 @@ class stock_move_packaging(osv.osv_memory):
             context = {}
             
         context.update({'from_pack':True})
-        for obj in self.browse(cr, uid, ids):
+        for obj in self.browse(cr, uid, ids, context=context):
             pack = obj.pack_id
             if not pack or not obj.location_dest_id:
                 continue
+            """
+            This is related to the module stock_tracking_child
+            TODO: remove this from this method to be able to install it without stock_tracking_child
+            """
             if pack.parent_id:
                 raise osv.except_osv(_('Warning!'),_('You cannot move this pack because it\'s inside of an other pack: %s.') % (pack.parent_id.name))
             for child in pack.child_ids:
+                """
+                This is related to the module stock_tracking_state
+                TODO: remove this from this method to be able to install it without stock_tracking_state
+                """
                 if child.state != 'close':
                     raise osv.except_osv(_('Warning!'),_('You cannot move this pack because there is a none closed pack inside of it: %s.') % (child.name))
             current_type = pack.location_id.usage
@@ -66,7 +75,7 @@ class stock_move_packaging(osv.osv_memory):
                 pick_type = 'in'
             elif type == 'customer':
                 pick_type = 'out'
-            date = time.strftime('%Y-%m-%d %H:%M:%S'),
+            date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT),
             pick_id = picking_obj.create(cr, uid, {
                     'type': pick_type,
                     'auto_picking': 'draft',
@@ -75,7 +84,7 @@ class stock_move_packaging(osv.osv_memory):
                     'invoice_state': 'none',
                     'date': date,
                     'state': 'done',
-                })
+                }, context=context)
                         
             child_packs = tracking_obj.hierarchy_ids(pack)
             for child_pack in child_packs:
@@ -84,7 +93,7 @@ class stock_move_packaging(osv.osv_memory):
                        'type': 'move',
                        'location_id': child_pack.location_id.id,
                        'location_dest_id': obj.location_dest_id.id,
-                   })
+                   }, context=context)
                 
                 for move in child_pack.current_move_ids:
                     defaults = {
@@ -96,10 +105,8 @@ class stock_move_packaging(osv.osv_memory):
                         'date_expected': date,
                     }
                     new_id = move_obj.copy(cr, uid, move.id, default=defaults, context=context)
-                    move_obj.write(cr, uid, [move.id], {'pack_history_id': hist_id, 'move_dest_id': new_id})
-                tracking_obj.write(cr, uid, [child_pack.id], {'location_id': obj.location_dest_id.id})
+                    move_obj.write(cr, uid, [move.id], {'pack_history_id': hist_id, 'move_dest_id': new_id}, context=context)
+                tracking_obj.write(cr, uid, [child_pack.id], {'location_id': obj.location_dest_id.id}, context=context)
         return {'type': 'ir.actions.act_window_close'}
-    
-stock_move_packaging()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

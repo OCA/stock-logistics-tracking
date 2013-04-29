@@ -19,10 +19,10 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 
-class stock_tracking(osv.osv):
+class stock_tracking(orm.Model):
 
     _inherit = 'stock.tracking'
 
@@ -165,9 +165,7 @@ class stock_tracking(osv.osv):
             raise osv.except_osv(_('Warning!'),_('Barcode Not found!'))
         return {}
 
-stock_tracking()
-
-class stock_scan_to_validate(osv.osv):
+class stock_scan_to_validate(orm.Model):
 
     _name = 'stock.scan.to.validate'
     _columns = {
@@ -180,9 +178,7 @@ class stock_scan_to_validate(osv.osv):
         ('tracking_barcode_unique', 'unique (tracking_id,barcode_id)', 'This barcode is already in the list to add or to remove !')
     ]
 
-stock_scan_to_validate()
-
-class stock_tracking_history(osv.osv):
+class stock_tracking_history(orm.Model):
 
     _inherit = "stock.tracking.history"
 
@@ -190,14 +186,12 @@ class stock_tracking_history(osv.osv):
         res = super(stock_tracking_history, self)._get_types(cr, uid, context)
         if not res:
             res = []
-        res = res + [('pack_in','Add parent'),('pack_out','Unlink parent')]
+        res = res + [('pack_in',_('Add parent')),('pack_out',_('Unlink parent'))]
         return res
 
     _columns = {
         'type': fields.selection(_get_types, 'Type'),
         'parent_id': fields.many2one('stock.tracking', 'Parent pack'),
     }
-
-stock_tracking_history()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

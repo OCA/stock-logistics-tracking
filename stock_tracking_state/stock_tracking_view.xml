@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_tracking_state_tree" model="ir.ui.view">
+            <field name="name">stock.tracking.state.tree</field>
+            <field name="model">stock.tracking</field>
+            <field name="inherit_id" ref="stock_tracking_extended.view_tracking_extended_tree"/>
+            <field name="arch" type="xml">
+                <field name="location_id" position="after">
+                    <field name="state"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_tracking_state_form" model="ir.ui.view">
+            <field name="name">stock.tracking.state.form</field>
+            <field name="model">stock.tracking</field>
+            <field name="inherit_id" ref="stock.view_tracking_form"/>
+            <field name="arch" type="xml">
+                <group position="before">
+                    <header> 
+                        <button name="reset_open" states="close" string="Reset Open"  type="object" class="oe_highlight"/>
+                        <button name="set_close" states="open" string="Close Pack"  type="object" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="open,close" />
+                    </header>
+                </group>
+            </field>
+        </record>
+
+        <record id="view_tracking_state_extended_form" model="ir.ui.view">
+            <field name="name">stock.tracking.state.extended.form</field>
+            <field name="model">stock.tracking</field>
+            <field name="inherit_id" ref="stock_tracking_extended.view_tracking_extended_form"/>
+            <field name="arch" type="xml">
+                <div name="product_buttons" position="attributes">
+                    <attribute name="attrs">{'invisible':[('state', '=', 'close')]}</attribute>
+                </div>
+                <div name="prodlot_buttons" position="attributes">
+                    <attribute name="attrs">{'invisible':[('state', '=', 'close')]}</attribute>
+                </div>
+            </field>
+        </record>
+
+    </data>
+</openerp>

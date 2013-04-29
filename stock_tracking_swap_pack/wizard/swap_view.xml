@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_stock_packaging_swap_wizard" model="ir.ui.view">
+            <field name="name">Stock packaging swap</field>
+            <field name="model">stock.packaging.swap</field>
+            <field name="arch" type="xml">
+                <form string="Swap object" version="7.0">
+                    <field name="parent_pack_id" invisible="1"/>
+                    <group colspan="4" col="4">
+                        <group name="packs" colspan="4" col="4">
+                            <separator string="Packs" colspan="4"/>
+                            <field name="location_id" colspan="2" required="1"/>
+                            <newline/>
+                            <field name="previous_pack_id" colspan="2" domain="[('parent_id','=',parent_pack_id)]" attrs="{'invisible': [('location_id', '=', False)]}"/>
+                            <field name="new_pack_id" colspan="2" domain="[('location_id','=',location_id),('parent_id', '=', False)]" attrs="{'invisible': [('location_id', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="swap_object" string="Swap the pack" type="object" class="oe_highlight"/>
+                         or
+                        <button string="Cancel" special="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_stock_packaging_swap" model="ir.actions.act_window">
+            <field name="name">Stock packaging swap</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.packaging.swap</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

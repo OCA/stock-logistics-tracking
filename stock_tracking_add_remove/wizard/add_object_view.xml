@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Add Product -->
+
+        <record id="view_stock_packaging_add_wizard" model="ir.ui.view">
+            <field name="name">Stock packaging add</field>
+            <field name="model">stock.packaging.add</field>
+            <field name="arch" type="xml">
+                <form string="Add object" version="7.0">
+                    <group colspan="4" col="4">
+                        <field name="pack_id" invisible="True"/>
+                        <field name="type_id" colspan="4" on_change="onchange_type_id(type_id)" widget="selection" invisible="True"/>
+                        <field name="type" invisible="True"/>
+                        <newline/>
+                        <group name="products" colspan="4" col="4" attrs="{'invisible':[('type','!=','product')]}">
+                            <separator string="Products" colspan="4"/>
+                            <field name="product_ids" colspan="4" nolabel="1">
+                                <tree string="Add products" editable="top">
+                                    <field name="product_id" required="True"/>
+                                    <field name="location_id"/>
+                                    <field name="quantity" required="True"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group name="prodlots" colspan="4" col="4" attrs="{'invisible':[('type','!=','prodlot')]}">
+                            <separator string="Production lots" colspan="4"/>
+                            <field name="prodlot_ids" colspan="4" nolabel="1">
+                                <tree string="Add production lots" editable="top">
+                                    <field name="prodlot_id" required="True"/>
+                                    <field name="quantity" required="True"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="add_object" string="Add to the pack" type="object" class="oe_highlight"/>
+                         or
+                        <button string="Cancel" special="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_stock_packaging_add" model="ir.actions.act_window">
+            <field name="name">Stock packaging add</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.packaging.add</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="view_stock_packaging_add_line_wizard" model="ir.ui.view">
+            <field name="name">Stock packaging add line</field>
+            <field name="model">stock.packaging.add.line</field>
+            <field name="arch" type="xml">
+                <form string="Add line">
+                    <field name="parent_id" invisible="True"/>
+                    <field name="product_id"/>
+                    <field name="prodlot_id"/>
+                    <field name="location_id"/>
+                    <field name="quantity" required="True"/>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

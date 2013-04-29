@@ -1,0 +1,104 @@
+########################################## Stock-Logistic-Tracking ######################################################
+
+-=- stock_tracking_extended -=-
+
+Depends : stock
+Presentation : 
+This module add some info into packs to get a better tracking of products and serial lots inside of these packs
+
+-=- stock_inventory_sequence -=-
+
+Depends : stock
+Presentation :
+This module adds a sequence for generating automatically inventories name
+
+<!> <!> <!> -=- stock_move_split_default -=- <!> <!> <!>
+
+Depends : stock
+Presentation :
+This module allows to define and identify package in parent or child
+
+-=- stock_product_category_tracked -=-
+
+Depends : stock
+Presentation : 
+This module adds a field into the product category to define if this should be tracked or not
+
+<!> <!> <!> -=- stock_tracking_prodlot -=- <!> <!> <!>
+
+Depends : stock
+Presentation : 
+This module allows to define and identify package in parent or child
+
+-=- stock_tracking_add_remove -=-
+
+Depends : stock, stock_tracking_extended
+Presentation :
+This module add a wizard to fill in packaging 
+This wizard is used to add or remove a product object from a package 
+Adding to the historical movements and parents objects
+
+-=- stock_tracking_child -=- 
+
+Depends : stock, stock_tracking_extended
+Presentation :
+This module allows to define and identify package in parent or child	
+
+-=- stock_move_packaging -=-
+
+Depends : stock, stock_tracking_extended
+Presentation : 
+This module allows to move packing with a wizard and adds fields for source location and destination location in history
+
+-=- stock_tracking_state -=-
+
+Depends : stock, stock_tracking_extended
+Presentation :
+This module will ad the state field to make changes of closed packed 
+
+-=- stock_tracking_swap -=-
+
+Depends : stock, stock_tracking_extended
+Presentation :
+This module add a wizard to swap products or prodlots in packaging
+This wizard is used to replace an object from a package
+Adding to the historical movements and parent objects
+
+-=- stock_tracking_add_move -=-
+
+Depends : stock, stock_tracking_extended, tr_barcode 
+Presentation :
+This module add a wizard to fill in packaging 
+This wizard is used to add or remove an object from a package
+Adding to the historical movements and parents objects
+                                                          
+-=- stock_tracking_add_remove_pack -=-
+
+Depends : stock_tracking_extended, stock_tracking_child, stock_tracking_add_product 
+Presentation :
+This module add a wizard to fill in packaging 
+This wizard is used to add or remove a pack object from a package 
+Adding to the historical movements and parents objects
+
+-=- stock_barcode_reader -=-
+
+Depends : stock, stock_tracking_extended, stock_tracking_add_move 
+Presentation : 
+This module is an ergonomic wizard to fill in package 
+Add menu for acquisition of package
+Add button in Stock picking for start acquisition 
+
+-=- stock_tracking_reopen -=-
+
+Depends : stock, stock_tracking_extended, stock_tracking_state
+Presentation : 
+This module change reference of the packaging if it's re-open
+
+-=- stock_tracking_swap_pack -=-
+
+Depends : stock, stock_tracking_extended, stock_tracking_child
+Presentation :
+This module add a wizard to swap packs in packaging
+This wizard is used to replace an object from a package
+Adding to the historical movements and parent objects
+

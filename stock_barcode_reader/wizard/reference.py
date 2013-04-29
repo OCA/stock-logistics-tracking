@@ -19,10 +19,10 @@
 #
 #################################################################################
 
-from osv import osv,fields
-from tools.translate import _
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 
-class stock_reference(osv.osv_memory):
+class stock_reference(orm.TransientModel):
 
     _name = "stock.reference"
     _description = 'Products Acquisition'
@@ -30,7 +30,7 @@ class stock_reference(osv.osv_memory):
 #    _rec_name = 'reference'
 
     def _get_track_id(self, cr, uid, context=None):
-        if context == None:
+        if context is None:
             context = {}
         return context.get('active_id',False)
 
@@ -94,7 +94,5 @@ class stock_reference(osv.osv_memory):
 
 
         return {'value': {'reference' : False, 'text' : text}}
-
-stock_reference()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

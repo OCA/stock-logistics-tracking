@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_stock_product_swap" model="ir.ui.view">
+            <field name="model">stock.tracking.swap</field>
+            <field name="arch" type="xml">
+                <form string="Swap object" version="7.0">
+                    <field name="parent_pack_id" invisible="1"/>
+                    <group colspan="4" col="4">
+                        <group name="packs" colspan="4" col="4">
+                            <separator string="Product" colspan="4"/>
+                            <field name="location_id" colspan="2" required="1" on_change="onchange_location(location_id, parent_pack_id, context)"/>
+                            <newline/>
+                            <field name="previous_product_id" colspan="2" attrs="{'invisible': [('location_id', '=', False)]}"/>
+                            <field name="new_product_id" colspan="2" attrs="{'invisible': [('location_id', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="swap_object" string="Swap the product" type="object" class="oe_highlight"/>
+                         or
+                        <button string="Cancel" special="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_stock_product_swap" model="ir.actions.act_window">
+            <field name="name">Product swap</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.tracking.swap</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_stock_product_swap"/>
+            <field name="context">{'swap_type':'product'}</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="view_stock_prodlot_swap" model="ir.ui.view">
+            <field name="model">stock.tracking.swap</field>
+            <field name="arch" type="xml">
+                <form string="Swap object" version="7.0">
+                    <field name="parent_pack_id" invisible="1"/>
+                    <group colspan="4" col="4">
+                        <group name="packs" colspan="4" col="4">
+                            <separator string="Product" colspan="4"/>
+                            <field name="location_id" colspan="2" required="1" on_change="onchange_location(location_id, parent_pack_id)"/>
+                            <newline/>
+                            <field name="previous_prodlot_id" colspan="2" attrs="{'invisible': [('location_id', '=', False)]}"/>
+                            <field name="new_prodlot_id" colspan="2" attrs="{'invisible': [('location_id', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="swap_object" string="Swap the prodlot" type="object" class="oe_highlight"/>
+                         or 
+                        <button string="Cancel" special="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_stock_prodlot_swap" model="ir.actions.act_window">
+            <field name="name">Prodlot swap</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.tracking.swap</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_stock_product_swap"/>
+            <field name="context">{'swap_type':'prodlot'}</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

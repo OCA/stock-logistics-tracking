@@ -19,11 +19,11 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 import time
 
-class stock_tracking(osv.osv):
+class stock_tracking(orm.Model):
     
     _inherit = 'stock.tracking'
 
@@ -32,94 +32,101 @@ class stock_tracking(osv.osv):
         'modified': fields.boolean('Modified'),
     }
     
-    _default = {
-            'modified': False,
+    _defaults = {
+        'modified': False,
     }   
     '''Function for pack creation'''    
-    def create_pack(self, cr, uid, ids, context=None):        
+    def _create_pack(self, cr, uid, pack_id, context=None):        
         '''Init'''
         if context == None:
             context = {}            
         '''Location determination'''
-        stock_tracking_data = self.browse(cr, uid, ids[0])
+        stock_tracking_data = self.browse(cr, uid, pack_id, context=context)
         '''Pack Creation'''
-        tracking_id = self.create(cr, uid, {'ul_id': stock_tracking_data.ul_id.id, 'location_id': stock_tracking_data.location_id.id})        
+        tracking_id = self.create(cr, uid, {
+            'ul_id': stock_tracking_data.ul_id.id,
+            'location_id': stock_tracking_data.location_id.id
+        }, context=context)        
         '''Pack name is returned'''
         return tracking_id
     
     def reset_open(self, cr, uid, ids, context=None):
-        res = super(stock_tracking, self).reset_open(cr, uid, ids, context)
-        pack_ids = self.browse(cr, uid, ids, context)
+        res = super(stock_tracking, self).reset_open(cr, uid, ids, context=context)
+        history_obj = self.pool.get('stock.tracking.history')
+        pack_ids = self.browse(cr, uid, ids, context=context)
         for pack in pack_ids:                        
             if pack.state == 'open':
-                self.pool.get('stock.tracking.history').create(cr, uid, {
-                                'type': 'reopen',
-                                'previous_ref': pack.name,
-                                'tracking_id': pack.id
-                                }, context)
+                history_obj.create(cr, uid, {
+                        'type': 'reopen',
+                        'previous_ref': pack.name,
+                        'tracking_id': pack.id
+                    }, context=context)
         return True
 
+    #TODO: check this method !!
     def set_close(self, cr, uid, ids, context=None):
         
-        barcode_obj = self.pool.get('tr.barcode')
         stock_move_obj = self.pool.get('stock.move')
         history_obj = self.pool.get('stock.tracking.history')
-        res = super(stock_tracking, self).set_close(cr, uid, ids, context)
+        res = super(stock_tracking, self).set_close(cr, uid, ids, context=context)
         if res:
-            pack_ids = self.browse(cr, uid, ids, context)
+            pack_ids = self.browse(cr, uid, ids, context=context)
             for pack in pack_ids:
                 if pack.state == 'open':                
-                    if self.pool.get('stock.tracking.history').search(cr,uid,[('type','=','reopen'),('tracking_id','=',pack.id)]) and pack.modified == True:           
-                        new_pack_id = self.create_pack(cr, uid, ids, context)
-                        new_pack_data = self.browse(cr, uid, new_pack_id, context)
+                    if history_obj.search(cr, uid, [
+                            ('type', '=', 'reopen'),
+                            ('tracking_id', '=', pack.id)
+                        ], context=context) and pack.modified == True:           
+                        new_pack_id = self._create_pack(cr, uid, pack.id, context=context)
+                        new_pack_data = self.browse(cr, uid, new_pack_id, context=context)
                         '''loop on each move form the old pack to the new pack'''
                         for pack_move in pack.current_move_ids:
                             '''stock move creation'''
-                            barcode_name = pack_move.prodlot_id.name
-                            barcode_data = barcode_obj.search(cr, uid,[('code', '=', barcode_name)], limit=1)
                             move_id = stock_move_obj.create(cr, uid, {
-                                                                      'name': pack_move.name,
-                                                                      'state': pack_move.state,
-                                                                      'product_id': pack_move.product_id.id,
-                                                                      'product_uom': pack_move.product_uom.id,
-                                                                      'prodlot_id': pack_move.prodlot_id.id,
-                                                                      'location_id': pack.location_id.id,
-                                                                      'location_dest_id': new_pack_data.location_id.id,
-                                                                      'tracking_id': new_pack_data.id,
-                                                                    })                            
+                                      'name': pack_move.name,
+                                      'state': pack_move.state,
+                                      'product_id': pack_move.product_id.id,
+                                      'product_uom': pack_move.product_uom.id,
+                                      'prodlot_id': pack_move.prodlot_id.id,
+                                      'location_id': pack.location_id.id,
+                                      'location_dest_id': new_pack_data.location_id.id,
+                                      'tracking_id': new_pack_data.id,
+                                  }, context=context)                            
                         '''end of loop''' 
                         if pack.child_ids:
                             for child_pack_data in pack.child_ids:
                                 if child_pack_data.state == 'close':   
-                                    self.write(cr, uid, child_pack_data.id, {'active': False})                                                          
-                                    self.write(cr, uid, [new_child_pack_id], {'parent_id': new_pack_data.id,})
-                                    history_obj.create(cr, uid, {'type': 'pack_in',
-                                                                 'tracking_id': child_pack_data.id,
-                                                                 'parent_id': new_pack_data.id,
-                                                                })
-                                    self.write(cr, uid, new_pack_data.id, {'location_id': child_pack_data.location_id and child_pack_data.location_id.id or False,})
+                                    self.write(cr, uid, child_pack_data.id, {'active': False}, context=context)                                                          
+                                    self.write(cr, uid, [new_child_pack_id], {'parent_id': new_pack_data.id,}, context=context)
+                                    history_obj.create(cr, uid, {
+                                            'type': 'pack_in',
+                                            'tracking_id': child_pack_data.id,
+                                            'parent_id': new_pack_data.id,
+                                        }, context=context)
+                                    self.write(cr, uid, new_pack_data.id, {
+                                            'location_id': child_pack_data.location_id and child_pack_data.location_id.id or False,
+                                        }, context=context)
                         
-                        self.write(cr, uid, [pack.id], {'state': 'close',
-                                                        'active': False,
-                                                        'modified': False})
+                        self.write(cr, uid, [pack.id], {
+                                'state': 'close',
+                                'active': False,
+                                'modified': False,
+                            }, context=context)
                         '''Call for a function who will display serial code list and product list in the pack layout'''                                                
-                        self.get_products(cr, uid, [new_pack_data.id], context=None)
-                        self.get_serials(cr, uid, [new_pack_data.id], context=None)
-                        
-                    self.write(cr, uid, [pack.id], {'state': 'close'})
+                        self.get_products(cr, uid, [new_pack_data.id], context=context)
+                        self.get_serials(cr, uid, [new_pack_data.id], context=context)
+                    self.write(cr, uid, [pack.id], {'state': 'close'}, context=context)
         return res
 
-stock_tracking()
-
-class stock_tracking_history(osv.osv):
+class stock_tracking_history(orm.Model):
     
     _inherit = "stock.tracking.history"
     
     def _get_types(self, cr, uid, context={}):
-        res = super(stock_tracking_history, self)._get_types(cr, uid, context)
+        res = super(stock_tracking_history, self)._get_types(cr, uid, context=context)
         if not res:
             res = []
-        res = res + [('reopen','Re Open')]
+        res = res + [('reopen',_('Re Open'))]
         return res
     
     _columns = {
@@ -127,7 +134,5 @@ class stock_tracking_history(osv.osv):
         'previous_ref': fields.char('Previous reference', size=128),        
 #        'previous_id': fields.many2one('stock.tracking', 'Previous pack'),
     }
-    
-stock_tracking_history()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_tracking_form_swap_prodlots" model="ir.ui.view">
+            <field name="name">stock.tracking.form.swap</field>
+            <field name="model">stock.tracking</field>
+            <field name="inherit_id" ref="stock_tracking_extended.view_tracking_extended_form"/>
+            <field name="arch" type="xml">
+                <div name="product_buttons" position="inside">
+                    <button name="%(stock_tracking_swap.action_stock_product_swap)d" string="Swap product" type="action"/>
+                </div>
+                <div name="prodlot_buttons" position="inside">
+                    <button name="%(stock_tracking_swap.action_stock_prodlot_swap)d" string="Swap prodlot" type="action"/>
+                </div>
+            </field>
+        </record>
+
+        <record id="view_tracking_history_form_inherit" model="ir.ui.view">
+            <field name="name">stock.tracking.history.form</field>
+            <field name="model">stock.tracking.history</field>
+            <field name="inherit_id" ref="stock_tracking_extended.view_tracking_history_form"/>
+            <field name="arch" type="xml">
+                <form string="History">
+                    <field name="swap_product_id" attrs="{'invisible': [('type','!=','swap_product')]}"/>
+                    <field name="swap_prodlot_id" attrs="{'invisible': [('type','!=','swap_prodlot')]}"/>
+                    <field name="new_product_id" attrs="{'invisible': [('type','!=','swap_product')]}"/>
+                    <field name="new_prodlot_id" attrs="{'invisible': [('type','!=','swap_prodlot')]}"/>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

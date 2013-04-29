@@ -33,18 +33,20 @@ and adds fields for source location and destination location in History.
 """,
     "website" : "http://www.julius.fr",
     "depends" : [
-                 "stock",
-                 "stock_tracking_extended",
-                 ],
-    "category" : "Customs/Stock",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "images" : ['images/Move packaging.png'],
-    "update_xml" : [
-                    'stock_view.xml',
-                    'wizard/move_pack_view.xml',
+        "stock",
+        "stock_tracking_extended",
+    ],
+    "category" : "Warehouse Management",
+#    "images" : ['images/Move packaging.png'],
+    "demo" : [],
+    "data" : [
+        'stock_view.xml',
+        'wizard/move_pack_view.xml',
     ],
     'test': [],
     'installable': False,
     'active': False,
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

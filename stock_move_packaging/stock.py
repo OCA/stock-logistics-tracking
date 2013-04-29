@@ -19,10 +19,10 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 
-class stock_tracking_history(osv.osv):
+class stock_tracking_history(orm.Model):
     
     _inherit = "stock.tracking.history"
     
@@ -30,7 +30,7 @@ class stock_tracking_history(osv.osv):
         res = super(stock_tracking_history, self)._get_types(cr, uid, context)
         if not res:
             res = []
-        res = res + [('move','Move')]
+        res = res + [('move',_('Move'))]
         return res
     
     _columns = {
@@ -39,7 +39,5 @@ class stock_tracking_history(osv.osv):
         'location_dest_id': fields.many2one('stock.location', 'Destination Location'),
 #        'move_ids': fields.one2many('stock.move', 'pack_history_id', 'Associated moves'),
     }
-    
-stock_tracking_history()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

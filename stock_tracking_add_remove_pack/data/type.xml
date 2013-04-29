@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="add_type_pack" model="stock.packaging.add.type">
+			<field name="code">pack</field>
+			<field name="name">Packs</field>
+		</record>
+
+	</data>
+</openerp>

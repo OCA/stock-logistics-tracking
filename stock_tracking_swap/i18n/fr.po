@@ -1,0 +1,161 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_tracking_swap
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-19 11:58+0000\n"
+"PO-Revision-Date: 2013-02-19 11:58+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking:0
+msgid "Swap product"
+msgstr "Echange de produit"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking.swap:0
+msgid "Swap the product"
+msgstr "Echanger le produit"
+
+#. module: stock_tracking_swap
+#: model:ir.actions.act_window,name:stock_tracking_swap.action_stock_product_swap
+msgid "Product swap"
+msgstr "Echange de produit"
+
+#. module: stock_tracking_swap
+#: field:stock.tracking.swap,parent_pack_id:0
+msgid "Parent Pack"
+msgstr "Colis parent"
+
+#. module: stock_tracking_swap
+#: field:stock.tracking.swap,location_id:0
+msgid "Location"
+msgstr "Emplacement"
+
+#. module: stock_tracking_swap
+#: field:stock.tracking.swap,new_prodlot_id:0
+msgid "New Production Lot"
+msgstr "Nouveau Numéro de série"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking.swap:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: stock_tracking_swap
+#: field:stock.tracking.history,swap_product_id:0
+msgid "Swap Product"
+msgstr "Produit échangé"
+
+#. module: stock_tracking_swap
+#: code:addons/stock_tracking_swap/wizard/swap.py:118
+#, python-format
+msgid "Production Lot Not Found !"
+msgstr "Numéro de série non trouvé !"
+
+#. module: stock_tracking_swap
+#: model:ir.model,name:stock_tracking_swap.model_stock_tracking_swap
+#: view:stock.tracking.swap:0
+msgid "Swap object"
+msgstr "Echange d'objet"
+
+#. module: stock_tracking_swap
+#: field:stock.tracking.history,prodlot_id:0
+msgid "New Production lot"
+msgstr "Nouveau Numéro de série"
+
+#. module: stock_tracking_swap
+#: model:ir.model,name:stock_tracking_swap.model_stock_tracking_history
+msgid "Packs history"
+msgstr "Historique du Colis"
+
+#. module: stock_tracking_swap
+#: field:stock.tracking.swap,previous_prodlot_id:0
+msgid "Previous Production Lot"
+msgstr "Ancien numéro de série"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking.swap:0
+msgid "Swap the prodlot"
+msgstr "Echange de numéro de série"
+
+#. module: stock_tracking_swap
+#: field:stock.tracking.swap,previous_product_id:0
+msgid "Previous Product"
+msgstr "Produit échangé"
+
+#. module: stock_tracking_swap
+#: code:addons/stock_tracking_swap/wizard/swap.py:91
+#, python-format
+msgid "Should Not Happen !"
+msgstr "Cela ne devrait pas se produire !"
+
+#. module: stock_tracking_swap
+#: model:ir.actions.act_window,name:stock_tracking_swap.action_stock_prodlot_swap
+msgid "Prodlot swap"
+msgstr "Echange de numéro de série"
+
+#. module: stock_tracking_swap
+#: field:stock.tracking.history,swap_prodlot_id:0
+msgid "Swap Production lot"
+msgstr "Numéro de série échangé"
+
+#. module: stock_tracking_swap
+#: code:addons/stock_tracking_swap/wizard/swap.py:116
+#, python-format
+msgid "Product Not Found !"
+msgstr "Produit non trouvé !"
+
+#. module: stock_tracking_swap
+#: field:stock.tracking.history,location_id:0
+msgid "Source Location"
+msgstr "Emplacement source"
+
+#. module: stock_tracking_swap
+#: field:stock.tracking.history,product_id:0
+#: field:stock.tracking.swap,new_product_id:0
+msgid "New Product"
+msgstr "Nouveau Produit"
+
+#. module: stock_tracking_swap
+#: field:stock.tracking.history,location_dest_id:0
+msgid "Destination Location"
+msgstr "Emplacement de destination"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking:0
+msgid "Swap prodlot"
+msgstr "Echange de numéro de série"
+
+#. module: stock_tracking_swap
+#: code:addons/stock_tracking_swap/wizard/swap.py:91
+#: code:addons/stock_tracking_swap/wizard/swap.py:116
+#: code:addons/stock_tracking_swap/wizard/swap.py:118
+#, python-format
+msgid "Warning!"
+msgstr "Attention !"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking.swap:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking.swap:0
+msgid "or"
+msgstr "ou"
+
+#. module: stock_tracking_swap
+#: code:addons/stock_tracking_swap/stock.py:38
+#, python-format
+msgid "Swap"
+msgstr "Echange"
+

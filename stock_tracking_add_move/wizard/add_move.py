@@ -19,10 +19,10 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 
-class stock_packaging_move(osv.osv_memory):
+class stock_packaging_move(orm.TransientModel):
 
     _name = "stock.packaging.move"
     
@@ -73,7 +73,5 @@ class stock_packaging_move(osv.osv_memory):
             ''' Call for the removal function '''
             tracking_obj.remove_validation(cr, uid, [parent_id], barcode_ids, context=None) 
         return {'type': 'ir.actions.act_window_close'}    
-       
-stock_packaging_move()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

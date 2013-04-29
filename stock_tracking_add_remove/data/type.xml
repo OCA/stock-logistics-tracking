@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="add_type_product" model="stock.packaging.add.type">
+			<field name="code">product</field>
+			<field name="name">Product not tracked</field>
+		</record>
+
+		<record id="add_type_prodlots" model="stock.packaging.add.type">
+			<field name="code">prodlot</field>
+			<field name="name">Production lots</field>
+		</record>
+
+	</data>
+</openerp>

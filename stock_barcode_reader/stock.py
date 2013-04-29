@@ -19,10 +19,10 @@
 #
 #################################################################################
 
-from osv import osv,fields
-from tools.translate import _
+from openerp.osv import osv, fields, orm
+from openerp.tools.translate import _
 
-class stock_picking(osv.osv):
+class stock_picking(orm.Model):
     _inherit = "stock.picking"
 
     def start_acquisition(self, cr, uid, ids, context=None):
@@ -50,7 +50,5 @@ class stock_picking(osv.osv):
             'context': action_context
         }
         return action
-
-stock_picking()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

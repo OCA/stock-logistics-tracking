@@ -21,29 +21,29 @@
 
 {
     "name" : "Stock Tracking extended",
-    "version" : "1.0",
+    "version" : "1.1",
     "author" : "Julius Network Solutions",
     "description" : """
 
 Presentation:
 
-This module allows to define and identify package in parent or child
+This module adds some info into packs to get a better tracking of products and serial lots inside of these packs
 
 """,
     "website" : "http://www.julius.fr",
     "depends" : [
         "stock",
     ],
-    "category" : "Stock",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "images" : ['images/Tracking extended.png'],
-    "update_xml" : [
+    "category" : "Warehouse Management",
+#    "images" : ['images/Tracking_extended.png'],
+    "demo" : [],
+    "data" : [
         'stock_tracking_view.xml',
-        'inventory_sequence.xml',
         "security/ir.model.access.csv",
     ],
     'test': [],
-    'installable': False,
+    'installable': True,
     'active': False,
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

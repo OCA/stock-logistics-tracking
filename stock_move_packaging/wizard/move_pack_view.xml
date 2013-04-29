@@ -5,7 +5,6 @@
 		<record id="view_move_pack" model="ir.ui.view">
 			<field name="name">Move Pack</field>
 			<field name="model">stock.move.packaging</field>
-			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Move Pack">
 					<group width="660" height="275">
@@ -34,7 +33,6 @@
 	    <record id="view_tracking_form_move_inherit" model="ir.ui.view">
 			<field name="name">stock.tracking.form.inherit</field>
 			<field name="model">stock.tracking</field>
-			<field name="type">form</field>
 			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_form_inherit"/>
 			<field name="arch" type="xml">
 				<button name="set_close" position="after">

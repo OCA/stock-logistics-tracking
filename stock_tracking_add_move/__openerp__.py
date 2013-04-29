@@ -38,11 +38,10 @@ Adding to the historical movements and parent objects
          "stock_tracking_extended",
          "tr_barcode",
     ],
-    "category" : "Customs/Stock",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "images" : ['images/Add move.png'],
-    "update_xml" : [
+    "category" : "Warehouse Management",
+#    "images" : ['images/Add move.png'],
+    "demo" : [],
+    "data" : [
         'wizard/add_move_view.xml',
         'stock_view.xml',
         "security/ir.model.access.csv",
@@ -51,3 +50,5 @@ Adding to the historical movements and parent objects
     'installable': False,
     'active': False,
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

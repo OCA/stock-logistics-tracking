@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_tracking_form_add_pack" model="ir.ui.view">
+            <field name="name">stock.tracking.form.add.pack</field>
+            <field name="model">stock.tracking</field>
+            <field name="inherit_id" ref="stock_tracking_child.view_tracking_child_form"/>
+            <field name="arch" type="xml">
+                <div name="child_buttons" position="inside">
+                    <button name="%(stock_tracking_add_remove.action_stock_packaging_add)d" string="Add packs" colspan="1" type="action" context="{'type_selection':'pack'}"/>
+                    <button name="%(stock_tracking_add_remove.action_stock_packaging_remove)d" string="Remove packs" colspan="1" type="action" context="{'type_selection':'pack'}"/>
+                </div>
+            </field>
+        </record>
+
+        <record id="view_tracking_history_form_inherit" model="ir.ui.view">
+            <field name="name">stock.tracking.history.form</field>
+            <field name="model">stock.tracking.history</field>
+            <field name="inherit_id" ref="stock_tracking_extended.view_tracking_history_form"/>
+            <field name="arch" type="xml">
+                <form string="History">
+                    <field name="child_pack_id" attrs="{'invisible': [('type','!=','add_pack'),('type','!=','remove_pack')]}"/>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Remove Object -->
+        <record id="view_stock_packaging_remove_wizard" model="ir.ui.view">
+            <field name="name">Stock packaging remove</field>
+            <field name="model">stock.packaging.remove</field>
+            <field name="arch" type="xml">
+                <form string="Remove object" version="7.0">
+                    <group colspan="4" col="4">
+                        <field name="type_id" colspan="1" on_change="onchange_type_id(type_id, pack_id)" widget="selection" invisible="1"/>
+                        <field name="pack_id" invisible="1"/>
+                        <field name="type" invisible="1"/>
+                    </group>
+                    <group colspan="4" col="4">
+                        <group name="products" colspan="4" col="4">
+                            <field name="product_ids" colspan="4" nolabel="1" attrs="{'invisible': [('type','!=','product')]}" context="{'active_id':pack_id, 'code_type': type}">
+                                <tree editable="top">
+                                    <field name="pack_id" invisible="1" on_change="onchange_pack_id(pack_id, context)"/>
+                                    <field name="product_id" on_change="onchange_product_id(product_id, pack_id, context)" required="1"/>
+                                    <field name="quantity"/>
+                                    <field name="move_id" invisible="1"/>
+                                </tree>
+                            </field>
+                            <field name="prodlot_ids" colspan="4" nolabel="1" attrs="{'invisible': [('type','!=','prodlot')]}" context="{'active_id':pack_id, 'code_type': type}">
+                                <tree editable="top">
+                                    <field name="pack_id" invisible="1" on_change="onchange_pack_id(pack_id, context)"/>
+                                    <field name="prodlot_id" on_change="onchange_prodlot_id(prodlot_id, pack_id, context)" required="1"/>
+                                    <field name="quantity"/>
+                                    <field name="move_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="remove_object" string="Remove Object" type="object" class="oe_highlight"/>
+                         or
+                        <button string="Cancel" special="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_stock_packaging_remove" model="ir.actions.act_window">
+            <field name="name">Stock packaging remove</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.packaging.remove</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

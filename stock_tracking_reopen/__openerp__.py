@@ -34,16 +34,16 @@ This module Change reference of the packaging if it's re-open.
     "depends" : [
          "stock",
          "stock_tracking_extended",
-         "tr_barcode",
-     ],
-    "category" : "Customs/Stock",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "images" : ['images/Tracking reopen.png'],
-    "update_xml" : [
+         "stock_tracking_state",
+    ],
+    "category" : "Warehouse Management",
+    "demo" : [],
+    "data" : [
         'stock_view.xml',
     ],
     'test': [],
     'installable': False,
     'active': False,
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

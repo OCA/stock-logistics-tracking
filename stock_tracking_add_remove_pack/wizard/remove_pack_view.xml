@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_stock_packaging_remove_wizard" model="ir.ui.view">
+            <field name="name">Stock packaging remove</field>
+            <field name="model">stock.packaging.remove</field>
+            <field name="inherit_id" ref="stock_tracking_add_remove.view_stock_packaging_remove_wizard"/>
+            <field name="arch" type="xml">
+                <group name="products" position="after">
+                    <group name="packs" colspan="4" col="4" attrs="{'invisible':[('type','!=','pack')]}">
+                        <field name="pack_ids" colspan="4" nolabel="1"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+    </data>
+</openerp>

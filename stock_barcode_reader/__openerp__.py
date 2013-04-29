@@ -45,11 +45,10 @@ This module adds a submenu for acquisition setting with a field Barcode and Acti
          "stock_tracking_extended",
          "stock_tracking_add_move",
     ],
-    "category" : "Customs/Stock",
-    "init_xml" : [],
-    "demo_xml" : [],
+    "category" : "Warehouse Management",
     "images" : ['images/Acquisition.png'],
-    "update_xml" : [
+    "demo" : [],
+    "data" : [
         'wizard/reference_view.xml',
         'acquisition_view.xml',
         'stock_view.xml',
@@ -60,3 +59,5 @@ This module adds a submenu for acquisition setting with a field Barcode and Acti
     'installable': False,
     'active': False,
 }
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
