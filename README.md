@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/OCA/stock-logistics-tracking.svg?branch=master)](https://travis-ci.org/OCA/stock-logistics-tracking)
-[![Coverage Status](https://img.shields.io/coveralls/OCA/stock-logistics-tracking.svg)](https://coveralls.io/r/OCA/stock-logistics-tracking?branch=master)
+[![Build Status](https://travis-ci.org/OCA/stock-logistics-tracking.svg?branch=7.0)](https://travis-ci.org/OCA/stock-logistics-tracking)
+[![Coverage Status](https://img.shields.io/coveralls/OCA/stock-logistics-tracking.svg)](https://coveralls.io/r/OCA/stock-logistics-tracking?branch=7.0)
 
 Odoo Stock Logistic Tracking
 ============================
