@@ -38,7 +38,7 @@ This module adds the packaging into the production lot
     "demo" : [],
     "data" : [],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
 

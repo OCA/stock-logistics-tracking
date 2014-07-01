@@ -38,7 +38,7 @@ This module allows to define and identify package in parent or child
     "demo" : [],
     "data" : [],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
 

@@ -41,7 +41,7 @@ This module allows to define and identify package in parent or child
         'stock_tracking_view.xml',
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
 

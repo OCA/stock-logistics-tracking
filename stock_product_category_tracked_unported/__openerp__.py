@@ -40,7 +40,7 @@ This module adds a field into the product category to define if this should be t
         'product_category_view.xml',
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
 

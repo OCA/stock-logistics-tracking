@@ -40,7 +40,7 @@ This module adds a sequence for generating automatically inventories name
         'inventory_sequence.xml',
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
 

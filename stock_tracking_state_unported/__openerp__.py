@@ -41,7 +41,7 @@ This module will add the state field to make changes of closed packed
         'stock_tracking_view.xml',
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
 

@@ -42,7 +42,7 @@ This module adds some info into packs to get a better tracking of products and s
         "security/ir.model.access.csv",
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
 
