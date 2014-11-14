@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,12 +17,14 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
-from openerp.osv import fields, osv, orm
-from openerp.tools.translate import _
+from openerp.osv import fields
+from openerp.osv import orm
+
 
 class one2many_special(fields.one2many):
+
     def get(self, cr, obj, ids, name, user=None, offset=0, context=None, values=None):
         if context is None:
             context = {}
@@ -36,8 +38,9 @@ class one2many_special(fields.one2many):
         location_ids = []
         for id in ids:
             res[id] = []
-            location_id = obj.read(cr, user, id, ['location_id'], context=context)['location_id']
-            if isinstance(location_id, (list,tuple)):
+            location_id = obj.read(
+                cr, user, id, ['location_id'], context=context)['location_id']
+            if isinstance(location_id, (list, tuple)):
                 location_id = location_id and location_id[0] or False
             if location_id and (location_id not in location_ids):
                 location_ids.append(location_id)
@@ -45,15 +48,17 @@ class one2many_special(fields.one2many):
         domain2 = [(self._fields_id, 'in', ids)]
         if location_ids:
             domain2 += [('location_dest_id', 'in', location_ids)]
-        ids2 = obj.pool.get(self._obj).search(cr, user, domain + domain2, limit=self._limit, context=context)
+        ids2 = obj.pool.get(self._obj).search(
+            cr, user, domain + domain2, limit=self._limit, context=context)
         for r in obj.pool.get(self._obj)._read_flat(cr, user, ids2, [self._fields_id], context=context, load='_classic_write'):
             if r[self._fields_id] in res:
                 res[r[self._fields_id]].append(r['id'])
         return res
 
+
 class stock_tracking(orm.Model):
     _inherit = 'stock.tracking'
-    
+
     def _get_default_location(self, cr, uid, context=None):
         """ By default we get the location defined on the main warehouse of the user's company """
         # Initialization #
@@ -67,12 +72,13 @@ class stock_tracking(orm.Model):
         # Process #
         user_data = user_obj.browse(cr, uid, uid, context=context)
         warehouse_ids = warehouse_obj.search(cr, uid, [
-                ('company_id', '=', user_data.company_id.id),
-            ], limit=1, context=context)
+            ('company_id', '=', user_data.company_id.id),
+        ], limit=1, context=context)
         if warehouse_ids:
-            warehouse = warehouse_obj.browse(cr, uid, warehouse_ids[0], context=context)
+            warehouse = warehouse_obj.browse(
+                cr, uid, warehouse_ids[0], context=context)
             location_id = warehouse.lot_stock_id and warehouse.lot_stock_id.id or False
-        return location_id 
+        return location_id
 
     _columns = {
         'location_id': fields.many2one('stock.location', 'Location', readonly=True),
@@ -82,11 +88,11 @@ class stock_tracking(orm.Model):
         'date': fields.datetime('Creation Date', required=True, readonly=True),
         'serial_ids': fields.one2many('serial.stock.tracking', 'tracking_id', 'Products', readonly=True),
     }
-    
+
     _defaults = {
         'location_id': lambda self, cr, uid, context: self._get_default_location(cr, uid, context),
     }
-    
+
     def get_products_process(self, cr, uid, pack_ids, context=None):
         stock_track = self.pool.get('product.stock.tracking')
         for pack in pack_ids:
@@ -99,10 +105,10 @@ class stock_tracking(orm.Model):
                     product_list[x.product_id.id] += x.product_qty
             for product in product_list.iterkeys():
                 stock_track.create(cr, uid, {
-                        'product_id': product,
-                        'quantity': product_list[product],
-                        'tracking_id': pack.id
-                    }, context=context)
+                    'product_id': product,
+                    'quantity': product_list[product],
+                    'tracking_id': pack.id
+                }, context=context)
         return True
 
     def get_serial_process(self, cr, uid, pack_ids, context=None):
@@ -119,11 +125,12 @@ class stock_tracking(orm.Model):
             for serial in serial_list.keys():
                 if serial:
                     serial_track.create(cr, uid, {
-                            'serial_id': serial,
-                            'quantity': serial_list[serial],
-                            'tracking_id': pack.id
-                        }, context=context)
-                    serial_obj.write(cr, uid, [serial], {'tracking_id': pack.id}, context=context)
+                        'serial_id': serial,
+                        'quantity': serial_list[serial],
+                        'tracking_id': pack.id
+                    }, context=context)
+                    serial_obj.write(
+                        cr, uid, [serial], {'tracking_id': pack.id}, context=context)
         return True
 
     def get_products(self, cr, uid, ids, context=None):
@@ -133,6 +140,7 @@ class stock_tracking(orm.Model):
     def get_serial(self, cr, uid, ids, context=None):
         pack_ids = self.browse(cr, uid, ids, context)
         return self.get_serial(cr, uid, pack_ids, context=context)
+
 
 class product_stock_tracking(orm.Model):
 
@@ -144,6 +152,7 @@ class product_stock_tracking(orm.Model):
         'quantity': fields.float('Quantity'),
         'tracking_id': fields.many2one('stock.tracking', 'Tracking'),
     }
+
 
 class serial_stock_tracking(orm.Model):
 
@@ -158,6 +167,7 @@ class serial_stock_tracking(orm.Model):
         'quantity': fields.float('Quantity'),
         'tracking_id': fields.many2one('stock.tracking', 'Tracking'),
     }
+
 
 class stock_tracking_history(orm.Model):
 
@@ -175,6 +185,7 @@ class stock_tracking_history(orm.Model):
     }
 
     _rec_name = "tracking_id"
+
 
 class stock_move(orm.Model):
     _inherit = 'stock.move'

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2012 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,12 +17,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
 {
-    "name" : "Stock tracking add packs",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
+    "name": "Stock tracking add packs",
+    "version": "1.0",
+    "author": "Julius Network Solutions",
     "description" : """Presentation:
 
 This module add a wizard to fill in packaging.
@@ -30,16 +30,16 @@ This wizard is used to add or remove an object from a package.
 Adding to the historical movements and parent objects
 
 """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
-         "stock_tracking_extended",
-         "stock_tracking_child",
-         "stock_tracking_add_remove",
+    "website": "http://www.julius.fr",
+    "depends": [
+        "stock_tracking_extended",
+        "stock_tracking_child",
+        "stock_tracking_add_remove",
     ],
-    "category" : "Warehouse Management",
-    "images" : [],
-    "demo" : [],
-    "data" : [
+    "category": "Warehouse Management",
+    "images": [],
+    "demo": [],
+    "data": [
         "wizard/add_pack_view.xml",
         "wizard/remove_pack_view.xml",
         "data/type.xml",

@@ -1,5 +1,5 @@
- # -*- coding: utf-8 -*-
-#################################################################################
+# -*- coding: utf-8 -*-
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,25 +17,28 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
-from openerp.osv import fields, osv, orm
-from openerp.tools.translate import _
+from openerp.osv import fields
+from openerp.osv import orm
 
 '''Add a field in order to store the current pack in a production lot'''
+
+
 class stock_production_lot(orm.Model):
     _inherit = 'stock.production.lot'
     _columns = {
         'tracking_id': fields.many2one('stock.tracking', 'pack'),
     }
+
     def copy(self, cr, uid, id, default=None, context=None):
         if default is None:
             default = {}
         default.update({
-#            'state': 'draft',
-#            'shipped': False,
+            #            'state': 'draft',
+            #            'shipped': False,
             'tracking_id': False,
-#            'move_ids': [],
+            #            'move_ids': [],
         })
         return super(stock_production_lot, self).copy(cr, uid, id, default, context=context)
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,21 +17,24 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
-from openerp.osv import fields, osv, orm
-from openerp.tools.translate import _
+from openerp.osv import fields
+from openerp.osv import orm
+
 
 class split_in_production_lot(orm.TransientModel):
     _inherit = "stock.move.split"
     _columns = {
-        'use_exist' : fields.boolean('Existing Lots', invisible=True),
-     }
+        'use_exist': fields.boolean('Existing Lots', invisible=True),
+    }
     _defaults = {
         'use_exist': True,
     }
+
     def default_get(self, cr, uid, fields, context=None):
-        res = super(split_in_production_lot, self).default_get(cr, uid, fields, context=context)
+        res = super(split_in_production_lot, self).default_get(
+            cr, uid, fields, context=context)
         res.update({'use_exist': True})
         return res
 
