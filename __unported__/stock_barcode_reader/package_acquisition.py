@@ -785,7 +785,6 @@ class acquisition_setting(orm.Model):
         if context == None:
             context = {}
         '''Get barcode number'''
-        barcode_data = barcode_obj.browse(cr, uid, barcode_id)
         ''' Call of adding function '''
         tracking_obj.add_validation(
             cr, uid, [parent_id], [barcode_id], context=None)
