@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,12 +17,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
 {
-    "name" : "Move Stock Packaging",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
+    "name": "Move Stock Packaging",
+    "version": "1.0",
+    "author": "Julius Network Solutions",
     "description" : """
 
 Presentation:
@@ -31,15 +31,15 @@ This module allows to move packing with a wizard
 and adds fields for source location and destination location in History.
 
 """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
+    "website": "http://www.julius.fr",
+    "depends": [
         "stock",
         "stock_tracking_extended",
     ],
-    "category" : "Warehouse Management",
-#    "images" : ['images/Move packaging.png'],
-    "demo" : [],
-    "data" : [
+    "category": "Warehouse Management",
+    #    "images" : ['images/Move packaging.png'],
+    "demo": [],
+    "data": [
         'stock_view.xml',
         'wizard/move_pack_view.xml',
     ],
@@ -49,4 +49,3 @@ and adds fields for source location and destination location in History.
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-

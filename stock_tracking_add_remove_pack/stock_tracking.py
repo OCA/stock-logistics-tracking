@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,16 +17,16 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
 from openerp.osv import fields, osv, orm
-from openerp.tools.translate import _
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 import time
+
 
 class stock_tracking(orm.Model):
     _inherit = 'stock.tracking'
-    
+
     def _add_pack(self, cr, uid, pack_id, child_ids, context=None):
         if context is None:
             context = {}
@@ -35,43 +35,44 @@ class stock_tracking(orm.Model):
         pack = self.browse(cr, uid, pack_id, context=context)
         child = self.browse(cr, uid, child_ids, context=context)[0]
         hist_id = history_obj.create(cr, uid, {
-           'tracking_id': pack.id,
-           'type': 'add_pack',
-           'location_id': pack.location_id.id,
-           'location_dest_id': pack.location_id.id,
-           'child_pack_id': child.id,
-           'qty': 1.0,
-           'date' : date,
+            'tracking_id': pack.id,
+            'type': 'add_pack',
+            'location_id': pack.location_id.id,
+            'location_dest_id': pack.location_id.id,
+            'child_pack_id': child.id,
+            'qty': 1.0,
+            'date': date,
         }, context=context)
         self.write(cr, uid, child_ids, {'parent_id': pack_id}, context=context)
         self.get_products(cr, uid, [pack_id], context=context)
         self.get_serials(cr, uid, [pack_id], context=context)
         return True
-    
+
     def _remove_pack(self, cr, uid, pack_id, child_ids, context=None):
         if context is None:
             context = {}
-        history_obj = self.pool.get('stock.tracking.history')  
+        history_obj = self.pool.get('stock.tracking.history')
         pack = self.browse(cr, uid, pack_id, context=context)
         child = self.browse(cr, uid, child_ids, context=context)[0]
         hist_id = history_obj.create(cr, uid, {
-           'tracking_id': pack.id,
-           'type': 'remove_pack',
-           'location_id': pack.location_id.id,
-           'location_dest_id': pack.location_id.id,
-           'child_pack_id': child.id,
-           'qty': 1.0,
-           'date' : date,
+            'tracking_id': pack.id,
+            'type': 'remove_pack',
+            'location_id': pack.location_id.id,
+            'location_dest_id': pack.location_id.id,
+            'child_pack_id': child.id,
+            'qty': 1.0,
+            'date': date,
         }, context=context)
         self.write(cr, uid, child_ids, {'parent_id': False}, context=context)
         self.get_products(cr, uid, [pack_id], context=context)
         self.get_serials(cr, uid, [pack_id], context=context)
         return True
 
+
 class stock_tracking_history(osv.osv):
-    
+
     _inherit = "stock.tracking.history"
-    
+
     _columns = {
         'child_pack_id': fields.many2one('stock.tracking', 'Pack'),
     }

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2012 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,12 +17,13 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
 from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 import time
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+
 
 class stock_tracking_swap(orm.TransientModel):
     _name = "stock.tracking.swap"
@@ -36,27 +37,29 @@ class stock_tracking_swap(orm.TransientModel):
         'previous_product_id': fields.many2one('product.product', 'Previous Product'),
         'new_product_id': fields.many2one('product.product', 'New Product'),
     }
-    
+
     def default_get(self, cr, uid, fields, context=None):
-        res=super(stock_tracking_swap, self).default_get(cr, uid, fields, context=context)
+        res = super(stock_tracking_swap, self).default_get(
+            cr, uid, fields, context=context)
         if context is None:
-            context = {}                                                                      
+            context = {}
         res.update({
             'parent_pack_id': context.get('active_id', False),
         })
         return res
-    
-    def onchange_location(self, cr , uid, ids, location_id, parent_pack_id, context=None):
+
+    def onchange_location(self, cr, uid, ids, location_id, parent_pack_id, context=None):
         if context is None:
             context = {}
         swap_type = context.get('swap_type') or False
-        tracking_obj = self.pool.get('stock.tracking')            
+        tracking_obj = self.pool.get('stock.tracking')
         prodlot_ids = []
         product_ids = []
         domain_prodlot_id = []
         domain_product_id = []
         if parent_pack_id:
-            move_ids = tracking_obj.browse(cr, uid, parent_pack_id).current_move_ids
+            move_ids = tracking_obj.browse(
+                cr, uid, parent_pack_id).current_move_ids
             for move_id in move_ids:
                 if swap_type and swap_type == 'prodlot' or not swap_type:
                     if move_id.prodlot_id.id not in prodlot_ids:
@@ -64,12 +67,12 @@ class stock_tracking_swap(orm.TransientModel):
                 if swap_type and swap_type == 'product' or not swap_type:
                     if (move_id.product_id.id not in product_ids) and not move_id.prodlot_id:
                         product_ids.append(move_id.product_id.id)
-        
+
         if swap_type and swap_type == 'prodlot' or not swap_type:
-            var = ('id','in', tuple(prodlot_ids))
+            var = ('id', 'in', tuple(prodlot_ids))
             domain_prodlot_id.append(var)
         if swap_type and swap_type == 'product' or not swap_type:
-            var = ('id','in', tuple(product_ids))
+            var = ('id', 'in', tuple(product_ids))
             domain_product_id.append(var)
         return {
             'domain': {
@@ -91,8 +94,9 @@ class stock_tracking_swap(orm.TransientModel):
         for current in self.browse(cr, uid, ids, context=context):
             active_id = context.get('active_id')
             if not active_id:
-                raise osv.except_osv(_('Warning!'),_('Should Not Happen !'))
-            parent_pack = tracking_obj.browse(cr, uid, active_id, context=context)
+                raise osv.except_osv(_('Warning!'), _('Should Not Happen !'))
+            parent_pack = tracking_obj.browse(
+                cr, uid, active_id, context=context)
             origin_id = parent_pack.location_id.id
             destination_id = current.location_id.id
             date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
@@ -108,20 +112,25 @@ class stock_tracking_swap(orm.TransientModel):
             }, context=context)
             # Previous prodlot or product
             move_ids = [x.id for x in parent_pack.current_move_ids]
-            domain = [('id','in',move_ids)]
+            domain = [('id', 'in', move_ids)]
             if swap_type == 'product':
-                domain += [('product_id','=',current.previous_product_id.id),('prodlot_id','=',False)]
+                domain += [('product_id', '=', current.previous_product_id.id),
+                           ('prodlot_id', '=', False)]
             elif swap_type == 'prodlot':
-                domain += [('prodlot_id','=',current.previous_prodlot_id.id)]
-            move_ids = move_obj.search(cr, uid, domain, limit=1, context=context)
+                domain += [('prodlot_id', '=', current.previous_prodlot_id.id)]
+            move_ids = move_obj.search(
+                cr, uid, domain, limit=1, context=context)
             if not move_ids:
                 if swap_type == 'product':
-                    raise osv.except_osv(_('Warning!'),_('Product Not Found !'))
+                    raise osv.except_osv(
+                        _('Warning!'), _('Product Not Found !'))
                 if swap_type == 'prodlot':
-                    raise osv.except_osv(_('Warning!'),_('Production Lot Not Found !'))
+                    raise osv.except_osv(
+                        _('Warning!'), _('Production Lot Not Found !'))
             move_id = move_ids[0]
             if swap_type == 'product':
-                move_data = move_obj.browse(cr, uid, move_ids[0], context=context)
+                move_data = move_obj.browse(
+                    cr, uid, move_ids[0], context=context)
                 move_qty = move_data.product_qty
                 if move_qty != 1.0:
                     defaults = {
@@ -133,7 +142,8 @@ class stock_tracking_swap(orm.TransientModel):
                         'product_qty': move_qty - 1.0,
                         'state': 'done',
                     }
-                    new_id = move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
+                    new_id = move_obj.copy(
+                        cr, uid, move_data.id, default=defaults, context=context)
             defaults = {
                 'location_id': origin_id,
                 'location_dest_id': destination_id,
@@ -147,7 +157,8 @@ class stock_tracking_swap(orm.TransientModel):
                 defaults.update({
                     'product_qty': 1.0,
                 })
-            new_id = move_obj.copy(cr, uid, move_id, default=defaults, context=context)
+            new_id = move_obj.copy(
+                cr, uid, move_id, default=defaults, context=context)
             # New prodlot, product
             defaults = {
                 'location_id': destination_id,
@@ -163,8 +174,8 @@ class stock_tracking_swap(orm.TransientModel):
                 'tracking_id': parent_pack.id,
                 'location_id': destination_id,
                 'location_dest_id': origin_id,
-                'date' : date,
-                'qty' : 1,
+                'date': date,
+                'qty': 1,
             }
             if swap_type == 'product':
                 defaults.update({
@@ -185,10 +196,13 @@ class stock_tracking_swap(orm.TransientModel):
                     'new_prodlot_id': current.new_prodlot_id.id,
                     'type': 'swap_prodlot',
                 })
-            hist_id = history_obj.create(cr, uid, history_vals, context=context)
-            new_id = move_obj.copy(cr, uid, move_id, default=defaults, context=context)
-            move_obj.write(cr, uid, [move_id], {'pack_history_id': hist_id}, context=context)
+            hist_id = history_obj.create(
+                cr, uid, history_vals, context=context)
+            new_id = move_obj.copy(
+                cr, uid, move_id, default=defaults, context=context)
+            move_obj.write(
+                cr, uid, [move_id], {'pack_history_id': hist_id}, context=context)
         tracking_obj.get_products(cr, uid, [parent_pack.id], context=context)
         return {'type': 'ir.actions.act_window_close'}
-       
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

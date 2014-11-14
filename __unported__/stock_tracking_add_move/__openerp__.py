@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,12 +17,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
 {
-    "name" : "Stock tracking add moves",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
+    "name": "Stock tracking add moves",
+    "version": "1.0",
+    "author": "Julius Network Solutions",
     "description" : """
 
 Presentation:
@@ -32,16 +32,16 @@ This wizard is used to add or remove an object from a package.
 Adding to the historical movements and parent objects
 
 """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
-         "stock",
-         "stock_tracking_extended",
-         "tr_barcode",
+    "website": "http://www.julius.fr",
+    "depends": [
+        "stock",
+        "stock_tracking_extended",
+        "tr_barcode",
     ],
-    "category" : "Warehouse Management",
-#    "images" : ['images/Add move.png'],
-    "demo" : [],
-    "data" : [
+    "category": "Warehouse Management",
+    #    "images" : ['images/Add move.png'],
+    "demo": [],
+    "data": [
         'wizard/add_move_view.xml',
         'stock_view.xml',
         "security/ir.model.access.csv",

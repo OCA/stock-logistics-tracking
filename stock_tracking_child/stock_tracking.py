@@ -1,5 +1,5 @@
- # -*- coding: utf-8 -*-
-#################################################################################
+# -*- coding: utf-8 -*-
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,15 +17,16 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
-from openerp.osv import fields, osv, orm
-from openerp.tools.translate import _
+from openerp.osv import fields
+from openerp.osv import orm
+
 
 class stock_tracking(orm.Model):
 
     _inherit = 'stock.tracking'
-    
+
     def hierarchy_ids(self, tracking):
         result_list = [tracking]
         for child in tracking.child_ids:
@@ -53,7 +54,7 @@ class stock_tracking(orm.Model):
                 for serial in child.serial_ids:
                     res[pack.id].append(serial.id)
         return res
-    
+
     _columns = {
         'parent_id': fields.many2one('stock.tracking', 'Parent'),
         'child_ids': fields.one2many('stock.tracking', 'parent_id', 'Children', readonly=True),
@@ -61,19 +62,19 @@ class stock_tracking(orm.Model):
         'child_product_ids': fields.function(_get_child_products, method=True, type='one2many', obj='product.stock.tracking', string='Child Products'),
         'child_serial_ids': fields.function(_get_child_serials, method=True, type='one2many', obj='serial.stock.tracking', string='Child Serials'),
     }
-    
+
     def _create_data_product(self, cr, uid, child, product_list, context=None):
         if context is None:
             context = {}
         stock_track = self.pool.get('product.stock.tracking')
         for product in product_list.iterkeys():
             stock_track.create(cr, uid, {
-                    'product_id': product,
-                    'quantity': product_list[product],
-                    'tracking_id': child.id
-                }, context=context)
+                'product_id': product,
+                'quantity': product_list[product],
+                'tracking_id': child.id
+            }, context=context)
         return True
-    
+
     def get_products(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
@@ -89,9 +90,10 @@ class stock_tracking(orm.Model):
                     if x.location_dest_id.id == child.location_id.id:
                         product_list.setdefault(x.product_id.id, 0)
                         product_list[x.product_id.id] += x.product_qty
-                self._create_data_product(cr, uid, child, product_list, context=context)
+                self._create_data_product(
+                    cr, uid, child, product_list, context=context)
         return True
-    
+
     def _create_data_prodlot(self, cr, uid, child, serial_list, context=None):
         if context is None:
             context = {}
@@ -100,10 +102,10 @@ class stock_tracking(orm.Model):
         for serial in serial_list.iterkeys():
             if serial:
                 serial_track.create(cr, uid, {
-                        'serial_id': serial,
-                        'quantity': serial_list[serial],
-                        'tracking_id': child.id
-                    }, context=context)
+                    'serial_id': serial,
+                    'quantity': serial_list[serial],
+                    'tracking_id': child.id
+                }, context=context)
 #                serial_obj.write(cr, uid, [serial], {'tracking_id': child.id}, context=context)
         return True
 
@@ -122,30 +124,33 @@ class stock_tracking(orm.Model):
                     if x.location_dest_id.id == child.location_id.id:
                         serial_list.setdefault(x.prodlot_id.id, 0)
                         serial_list[x.prodlot_id.id] += x.product_qty
-                self._create_data_prodlot(cr, uid, child, serial_list, context=context)
+                self._create_data_prodlot(
+                    cr, uid, child, serial_list, context=context)
         return True
-    
+
     def _check_parent_id(self, cr, uid, ids, context=None):
         trackings = self.browse(cr, uid, ids, context=context)
         for track in trackings:
             if track.parent_id and track.parent_id.ul_id and track.ul_id and \
-                track.ul_id.capacity_index > track.parent_id.ul_id.capacity_index:
+                    track.ul_id.capacity_index > track.parent_id.ul_id.capacity_index:
                 return False
         return True
 
-    _constraints = [(_check_parent_id, 'Bad parent type selection. The UL is not well set.', ['parent_id']),]
+    _constraints = [
+        (_check_parent_id, 'Bad parent type selection. The UL is not well set.', ['parent_id']), ]
 
     _defaults = {
-#        'location_id': lambda x, y, z, c: c and c.get('location_id') or False,
+        #        'location_id': lambda x, y, z, c: c and c.get('location_id') or False,
     }
-    
+
+
 class product_ul(orm.Model):
     _inherit = "product.ul"
-    
+
     _columns = {
         'capacity_index': fields.integer('Capacity index'),
     }
-    
+
     _order = 'capacity_index'
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

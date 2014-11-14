@@ -1,5 +1,5 @@
- # -*- coding: utf-8 -*-
-#################################################################################
+# -*- coding: utf-8 -*-
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,10 +17,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
-from openerp.osv import fields, osv, orm
-from openerp.tools.translate import _
+from openerp.osv import orm
+
 
 class stock_inventory(orm.Model):
     _inherit = 'stock.inventory'

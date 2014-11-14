@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,12 +17,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
 {
-    "name" : "Stock Product Category Tracked",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
+    "name": "Stock Product Category Tracked",
+    "version": "1.0",
+    "author": "Julius Network Solutions",
     "description" : """
 
 Presentation:
@@ -30,13 +30,13 @@ Presentation:
 This module adds a field into the product category to define if this should be tracked or not.
 
 """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
+    "website": "http://www.julius.fr",
+    "depends": [
         "stock",
     ],
-    "category" : "Warehouse Management",
-    "demo" : [],
-    "data" : [
+    "category": "Warehouse Management",
+    "demo": [],
+    "data": [
         'product_category_view.xml',
     ],
     'test': [],

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,12 +17,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
 {
-    "name" : "Stock Tracking extended",
-    "version" : "1.1",
-    "author" : "Julius Network Solutions",
+    "name": "Stock Tracking extended",
+    "version": "1.1",
+    "author": "Julius Network Solutions",
     "description" : """
 
 Presentation:
@@ -30,14 +30,14 @@ Presentation:
 This module adds some info into packs to get a better tracking of products and serial lots inside of these packs
 
 """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
+    "website": "http://www.julius.fr",
+    "depends": [
         "stock",
     ],
-    "category" : "Warehouse Management",
-#    "images" : ['images/Tracking_extended.png'],
-    "demo" : [],
-    "data" : [
+    "category": "Warehouse Management",
+    #    "images" : ['images/Tracking_extended.png'],
+    "demo": [],
+    "data": [
         'stock_tracking_view.xml',
         "security/ir.model.access.csv",
     ],

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,12 +17,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
 {
-    "name" : "Stock bar code reader",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
+    "name": "Stock bar code reader",
+    "version": "1.0",
+    "author": "Julius Network Solutions",
     "description" : """
 
 Presentation:
@@ -39,16 +39,16 @@ Warehouse>Configuration>Acquisition Setting
 This module adds a submenu for acquisition setting with a field Barcode and Action type.
 
  """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
-         "stock",
-         "stock_tracking_extended",
-         "stock_tracking_add_move",
+    "website": "http://www.julius.fr",
+    "depends": [
+        "stock",
+        "stock_tracking_extended",
+        "stock_tracking_add_move",
     ],
-    "category" : "Warehouse Management",
-    "images" : ['images/Acquisition.png'],
-    "demo" : [],
-    "data" : [
+    "category": "Warehouse Management",
+    "images": ['images/Acquisition.png'],
+    "demo": [],
+    "data": [
         'wizard/reference_view.xml',
         'acquisition_view.xml',
         'stock_view.xml',

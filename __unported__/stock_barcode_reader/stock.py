@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,10 +17,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
-from openerp.osv import osv, fields, orm
-from openerp.tools.translate import _
+from openerp.osv import orm
+
 
 class stock_picking(orm.Model):
     _inherit = "stock.picking"
@@ -30,7 +30,8 @@ class stock_picking(orm.Model):
             context = {}
         active = self.browse(cr, uid, ids[0])
         name = active.name
-        action_context = {'default_type': 'order', 'default_name': 'Preparation ' + name, 'default_picking_id': ids[0]}
+        action_context = {'default_type': 'order', 'default_name':
+                          'Preparation ' + name, 'default_picking_id': ids[0]}
         address_id = active.address_id and active.address_id.id or False
         if address_id:
             action_context.update({'default_address_id': address_id})
@@ -46,7 +47,7 @@ class stock_picking(orm.Model):
             'view_mode': 'form',
             'res_model': 'acquisition.acquisition',
             'view_id': self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock_barcode_reader', 'view_stock_tracking_acquisition_form')[1],
-#            'menu_id': self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'menu_stock_root')[1],
+            #            'menu_id': self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'menu_stock_root')[1],
             'context': action_context
         }
         return action

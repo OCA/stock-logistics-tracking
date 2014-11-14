@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2012 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,10 +17,11 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
-from openerp.osv import fields, osv, orm
-from openerp.tools.translate import _
+from openerp.osv import fields
+from openerp.osv import orm
+
 
 class stock_packaging_add(orm.TransientModel):
 
@@ -28,12 +29,12 @@ class stock_packaging_add(orm.TransientModel):
 
     _columns = {
         'location_id': fields.many2one('stock.location', 'Location'),
-        'pack_ids': fields.many2many('stock.tracking', 'add_pack_child_rel', 'wizard_id', 'pack_id', 'Packs', domain=[('parent_id', '=', False),('state', '=', 'close')]),
+        'pack_ids': fields.many2many('stock.tracking', 'add_pack_child_rel', 'wizard_id', 'pack_id', 'Packs', domain=[('parent_id', '=', False), ('state', '=', 'close')]),
     }
-    
+
     def _get_location_id(self, cr, uid, context):
-        if context==None:
-            context={}
+        if context == None:
+            context = {}
         location_id = False
         active_id = context.get('active_id')
         if active_id:
@@ -41,22 +42,24 @@ class stock_packaging_add(orm.TransientModel):
             tracking = tracking_obj.browse(cr, uid, active_id, context=context)
             location_id = tracking.location_id and tracking.location_id.id or False
         return location_id
-    
+
     _defaults = {
         'location_id': lambda self, cr, uid, context: self._get_location_id(cr, uid, context),
     }
-    
+
     def add_object(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
         tracking_obj = self.pool.get('stock.tracking')
-        res = super(stock_packaging_add, self).add_object(cr, uid, ids, context=context)
+        res = super(stock_packaging_add, self).add_object(
+            cr, uid, ids, context=context)
         for current in self.browse(cr, uid, ids, context=context):
             code_type = current.type_id.code
             pack_id = current.pack_id.id
             child_ids = [x.id for x in current.pack_ids]
             if code_type == 'pack':
-                tracking_obj._add_pack(cr, uid, pack_id, child_ids, context=context)
+                tracking_obj._add_pack(
+                    cr, uid, pack_id, child_ids, context=context)
         return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
