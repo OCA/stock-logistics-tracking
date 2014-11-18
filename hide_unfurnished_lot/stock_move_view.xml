@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="hide_unfurnished_lot_view_form" model="ir.ui.view">
+            <field name="name">stock.move.split: hide unfurnished lot</field>
+            <field name="model">stock.move.split</field>
+            <field name="inherit_id" ref="sale_lot_available.lot_available_move_wizard"/>
+            <field name="inherit_id" ref="stock.view_split_in_lots" />
+            <field name="priority" eval="17"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='prodlot_id']" position="attributes">
+                    <attribute name="domain">[('product_id','=',parent.product_id), ('stock_available', '!=', 0.0)]</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
