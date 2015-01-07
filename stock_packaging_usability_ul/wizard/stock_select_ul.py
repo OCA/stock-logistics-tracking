@@ -26,13 +26,14 @@ from openerp import models, fields, api
 class StockSelectUL(models.TransientModel):
     _name = 'stock.select.ul'
     _description = 'Select UL'
+    _rec_name = 'ul_id'
 
     ul_id = fields.Many2one('product.ul', string='Logistic Unit')
     # required=False, because we accept that it can be left empty
 
     @api.multi
     def validate(self):
-        assert len(self) == 1, 'Only 1 record'
+        self.ensure_one()
         ul = self[0].ul_id
         assert self.env.context.get('pack_function') is not None, \
             'missing context key pack_function'
