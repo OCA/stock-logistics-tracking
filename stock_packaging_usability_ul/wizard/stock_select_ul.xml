@@ -21,7 +21,8 @@
             <footer>
                 <button name="validate" type="object"
                     string="Validate" class="oe_highlight"/>
-                <button special="cancel" string="Cancel" class="oe_link"/>
+                <button name="cancel" type="object"
+                    string="Cancel" class="oe_link"/>
             </footer>
         </form>
     </field>

@@ -54,3 +54,21 @@ class StockSelectUL(models.TransientModel):
             trf_line_wiz.put_in_pack()
             action = trf_line_wiz.transfer_id.wizard_view()
         return action
+
+    @api.multi
+    def cancel(self):
+        """We have to re-call the wizard when the user clicks on Cancel"""
+        self.ensure_one()
+        if self.env.context.get('pack_function') == 'put_residual_in_new_pack':
+            assert self.env.context.get('active_model') == \
+                'stock.transfer_details', 'Wrong underlying model'
+            trf_wiz = self.env['stock.transfer_details'].browse(
+                self.env.context['active_id'])
+            action = trf_wiz.wizard_view()
+        elif self.env.context.get('pack_function') == 'put_in_pack':
+            assert self.env.context.get('active_model') == \
+                'stock.transfer_details_items', 'Wrong underlying model'
+            trf_line_wiz = self.env['stock.transfer_details_items'].browse(
+                self.env.context['active_id'])
+            action = trf_line_wiz.transfer_id.wizard_view()
+        return action
