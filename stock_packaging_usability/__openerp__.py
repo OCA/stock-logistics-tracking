@@ -26,22 +26,6 @@
     'category': 'Warehouse Management',
     'license': 'AGPL-3',
     'summary': "Faster packaging process in Odoo",
-    'description': """
-This module adds 2 buttons in the *Transfer* wizard of the picking:
-
-* *Put in current pack* (this button is native in v7 but not in v8)
-
-* *Put residual in new pack* : all the lines that are not in a package
-    will be put in a new package.
-
-So this module is a time saver when you use the packaging features of Odoo !
-For example, on a picking where all the products go in the same package, you
-just have to click on the button *Put residual in new pack* and you're done:
-no need to click on each line !
-
-This module has been written by Alexis de Lattre from Akretion
-<alexis.delattre@akretion.com>
-    """,
     'author': 'Akretion',
     'website': 'http://www.akretion.com',
     'depends': ['stock'],
