@@ -26,15 +26,6 @@
     'category': 'Warehouse Management',
     'license': 'AGPL-3',
     'summary': "Faster packaging process with logistical units",
-    'description': """
-This module modifies the behavior of the 2 buttons *Put in new pack*
-(native button) and *Put residual in one pack* (provided by the module
-*stock_packing_usability*) : it will ask the user to select the
-logistical unit (object *product.ul*) of the package.
-
-This module has been written by Alexis de Lattre from Akretion
-<alexis.delattre@akretion.com>
-    """,
     'author': 'Akretion',
     'website': 'http://www.akretion.com',
     'depends': ['stock_packaging_usability'],
