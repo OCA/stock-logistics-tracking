@@ -23,12 +23,12 @@ msgstr "Annuler"
 #. module: stock_packaging_usability_ul
 #: field:stock.select.ul,create_uid:0
 msgid "Created by"
-msgstr "Created by"
+msgstr "Créé par"
 
 #. module: stock_packaging_usability_ul
 #: field:stock.select.ul,create_date:0
 msgid "Created on"
-msgstr "Created on"
+msgstr "Créé le"
 
 #. module: stock_packaging_usability_ul
 #: field:stock.select.ul,id:0
@@ -38,12 +38,12 @@ msgstr "ID"
 #. module: stock_packaging_usability_ul
 #: field:stock.select.ul,write_uid:0
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Dernière mise-à-jour par"
 
 #. module: stock_packaging_usability_ul
 #: field:stock.select.ul,write_date:0
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Dernière mise-à-jour le"
 
 #. module: stock_packaging_usability_ul
 #: field:stock.select.ul,ul_id:0
@@ -53,12 +53,12 @@ msgstr "Unité logistique"
 #. module: stock_packaging_usability_ul
 #: model:ir.model,name:stock_packaging_usability_ul.model_stock_transfer_details
 msgid "Picking wizard"
-msgstr "Picking wizard"
+msgstr ""
 
 #. module: stock_packaging_usability_ul
 #: model:ir.model,name:stock_packaging_usability_ul.model_stock_transfer_details_items
 msgid "Picking wizard items"
-msgstr "Picking wizard items"
+msgstr ""
 
 #. module: stock_packaging_usability_ul
 #: model:ir.actions.act_window,name:stock_packaging_usability_ul.stock_select_ul_action

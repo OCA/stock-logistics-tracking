@@ -18,12 +18,12 @@ msgstr ""
 #. module: stock_packaging_usability
 #: model:ir.model,name:stock_packaging_usability.model_stock_transfer_details
 msgid "Picking wizard"
-msgstr "Picking wizard"
+msgstr ""
 
 #. module: stock_packaging_usability
 #: model:ir.model,name:stock_packaging_usability.model_stock_transfer_details_items
 msgid "Picking wizard items"
-msgstr "Picking wizard items"
+msgstr ""
 
 #. module: stock_packaging_usability
 #: view:stock.transfer_details:stock_packaging_usability.view_stock_enter_transfer_details

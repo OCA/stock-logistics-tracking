@@ -34,7 +34,7 @@ class StockSelectUL(models.TransientModel):
     @api.multi
     def validate(self):
         self.ensure_one()
-        ul = self[0].ul_id
+        ul = self.ul_id
         assert self.env.context.get('pack_function') is not None, \
             'missing context key pack_function'
         self = self.with_context(default_ul_id=(ul and ul.id or False))
