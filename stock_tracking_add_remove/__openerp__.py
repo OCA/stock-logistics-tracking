@@ -22,7 +22,7 @@
 {
     "name" : "Stock tracking add or remove object",
     "version" : "1.0",
-    "author" : "Julius Network Solutions",
+    "author" : "Julius Network Solutions,Odoo Community Association (OCA)",
     "description" : """Presentation:
 
 This module add a wizard to fill in packaging. It will also add a wizard to remove pieces from a pack
