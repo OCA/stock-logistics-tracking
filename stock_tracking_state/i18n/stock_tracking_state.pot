@@ -18,11 +18,6 @@ msgstr ""
 
 #. module: stock_tracking_state
 #: view:stock.tracking:0
-msgid "{'invisible':[('state', '=', 'close')]}"
-msgstr ""
-
-#. module: stock_tracking_state
-#: view:stock.tracking:0
 msgid "Close Pack"
 msgstr ""
 
