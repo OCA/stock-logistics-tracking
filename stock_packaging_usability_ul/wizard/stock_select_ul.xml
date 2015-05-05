@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright (C) 2014 Akretion (http://www.akretion.com/)
+    @author Alexis de Lattre <alexis.delattre@akretion.com>
+    The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+
+<record id="stock_select_ul_form" model="ir.ui.view">
+    <field name="name">stock_packaging_usability_ul.stock_select_ul</field>
+    <field name="model">stock.select.ul</field>
+    <field name="arch" type="xml">
+        <form string="Select Logistical Unit">
+            <group name="main">
+                <field name="ul_id"/>
+            </group>
+            <footer>
+                <button name="validate" type="object"
+                    string="Validate" class="oe_highlight"/>
+                <button name="cancel" type="object"
+                    string="Cancel" class="oe_link"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="stock_select_ul_action" model="ir.actions.act_window">
+    <field name="name">Select Logistical Unit</field>
+    <field name="res_model">stock.select.ul</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+</data>
+</openerp>

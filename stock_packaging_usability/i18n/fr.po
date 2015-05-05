@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_packaging_usability
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-21 08:57+0000\n"
+"PO-Revision-Date: 2014-11-21 08:57+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_packaging_usability
+#: model:ir.model,name:stock_packaging_usability.model_stock_transfer_details
+msgid "Picking wizard"
+msgstr ""
+
+#. module: stock_packaging_usability
+#: model:ir.model,name:stock_packaging_usability.model_stock_transfer_details_items
+msgid "Picking wizard items"
+msgstr ""
+
+#. module: stock_packaging_usability
+#: view:stock.transfer_details:stock_packaging_usability.view_stock_enter_transfer_details
+msgid "Products To Move"
+msgstr "Produits à déplacer"
+
+#. module: stock_packaging_usability
+#: view:stock.transfer_details:stock_packaging_usability.view_stock_enter_transfer_details
+msgid "Put Residual in New Pack"
+msgstr "Mettre le reste dans un nouveau paquet"
+
+#. module: stock_packaging_usability
+#: view:stock.transfer_details:stock_packaging_usability.view_stock_enter_transfer_details
+msgid "Put in current pack"
+msgstr "Mettre dans le paquet actuel"
+
+#. module: stock_packaging_usability
+#: view:stock.transfer_details:stock_packaging_usability.view_stock_enter_transfer_details
+msgid "Put in new pack"
+msgstr "Mettre dans un nouveau paquet"
+
+#. module: stock_packaging_usability
+#: code:addons/stock_packaging_usability/wizard/stock_transfer_details.py:58
+#, python-format
+msgid "There is no current package"
+msgstr "Il n'y a pas de paquet actuel"
+
+#. module: stock_packaging_usability
+#: code:addons/stock_packaging_usability/wizard/stock_transfer_details.py:52
+#, python-format
+msgid "This product is already in a package !"
+msgstr "Ce produit est déjà dans un paquet !"
+
+#. module: stock_packaging_usability
+#: view:stock.transfer_details:stock_packaging_usability.view_stock_enter_transfer_details
+msgid "terp-accessories-archiver+"
+msgstr "terp-accessories-archiver+"
+
