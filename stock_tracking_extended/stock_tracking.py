@@ -105,27 +105,6 @@ class stock_tracking(orm.Model):
                     }, context=context)
         return True
 
-    def get_serial_process(self, cr, uid, pack_ids, context=None):
-        serial_track = self.pool.get('serial.stock.tracking')
-        serial_obj = self.pool.get('stock.production.lot')
-        for pack in pack_ids:
-            serial_ids = [x.id for x in child.serial_ids]
-            serial_track.unlink(cr, uid, serial_ids)
-            serial_list = {}
-            for x in child.current_move_ids:
-                if x.location_dest_id.id == pack.location_id.id:
-                    serial_list.setdefault(x.prodlot_id.id, 0)
-                    serial_list[x.prodlot_id.id] += x.product_qty
-            for serial in serial_list.keys():
-                if serial:
-                    serial_track.create(cr, uid, {
-                            'serial_id': serial,
-                            'quantity': serial_list[serial],
-                            'tracking_id': pack.id
-                        }, context=context)
-                    serial_obj.write(cr, uid, [serial], {'tracking_id': pack.id}, context=context)
-        return True
-
     def get_products(self, cr, uid, ids, context=None):
         pack_ids = self.browse(cr, uid, ids, context)
         return self.get_products_process(cr, uid, pack_ids, context=context)
