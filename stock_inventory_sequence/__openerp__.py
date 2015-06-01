@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##############################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,31 +17,27 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##############################################################################
 
 {
-    "name" : "Stock Inventory Sequence",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions,Odoo Community Association (OCA)",
-    "description" : """
+    "name": "Stock Inventory Sequence",
+    "version": "1.0",
+    "author": "Julius Network Solutions,Odoo Community Association (OCA)",
+    "description": """
 
 Presentation:
 
 This module adds a sequence for generating automatically inventories name
 
 """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
+    "website": "http://www.julius.fr",
+    "depends": [
         "stock",
     ],
-    "category" : "Warehouse Management",
-    "demo" : [],
-    "data" : [
+    "category": "Warehouse Management",
+    "data": [
         'inventory_sequence.xml',
     ],
-    'test': [],
     'installable': True,
     'active': False,
 }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

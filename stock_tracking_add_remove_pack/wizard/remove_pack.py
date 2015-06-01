@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##############################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2012 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,30 +17,32 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##############################################################################
 
-from openerp.osv import fields, osv, orm
-from openerp.tools.translate import _
+from openerp.osv import fields, orm
+
 
 class stock_packaging_remove(orm.TransientModel):
 
     _inherit = "stock.packaging.remove"
 
     _columns = {
-        'pack_ids': fields.many2many('stock.tracking', 'remove_pack_child_rel', 'wizard_id', 'pack_id', 'Packs', domain="[('parent_id', '=', pack_id)]"),
+        'pack_ids': fields.many2many(
+            'stock.tracking', 'remove_pack_child_rel', 'wizard_id', 'pack_id',
+            'Packs', domain="[('parent_id', '=', pack_id)]"),
     }
 
     def remove_object(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
         tracking_obj = self.pool.get('stock.tracking')
-        res = super(stock_packaging_remove, self).remove_object(cr, uid, ids, context=context)
+        res = super(stock_packaging_remove, self).remove_object(
+            cr, uid, ids, context=context)
         for current in self.browse(cr, uid, ids, context=context):
             code_type = current.type_id.code
             pack_id = current.pack_id.id
             child_ids = [x.id for x in current.pack_ids]
             if code_type == 'pack':
-                tracking_obj._remove_pack(cr, uid, pack_id, child_ids, context=context)
+                tracking_obj._remove_pack(cr, uid, pack_id, child_ids,
+                                          context=context)
         return res
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

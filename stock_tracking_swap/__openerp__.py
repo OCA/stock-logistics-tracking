@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##############################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2012 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,34 +17,31 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##############################################################################
 
 {
-    "name" : "Stock tracking swap",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions,Odoo Community Association (OCA)",
-    "description" : """Presentation:
+    "name": "Stock tracking swap",
+    "version": "1.0",
+    "author": "Julius Network Solutions,Odoo Community Association (OCA)",
+    "description": """Presentation:
 
 This module add a wizard to swap products or prodlots in packaging.
 This wizard is used to replace an object from a package.
 Adding to the historical movements and parent objects
 
 """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
-         "stock",
-         "stock_tracking_extended",
+    "website": "http://www.julius.fr",
+    "depends": [
+        "stock",
+        "stock_tracking_extended",
     ],
-    "category" : "Warehouse Management",
-    "images" : [],
-    "demo" : [],
-    "data" : [
+    "category": "Warehouse Management",
+    "images": [],
+    "demo": [],
+    "data": [
         "wizard/swap_view.xml",
         'stock_view.xml',
     ],
-    'test': [],
     'installable': True,
     'active': False,
 }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

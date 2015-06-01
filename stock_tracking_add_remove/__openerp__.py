@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##############################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2012 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,35 +17,35 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##############################################################################
 
 {
-    "name" : "Stock tracking add or remove object",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions,Odoo Community Association (OCA)",
-    "description" : """Presentation:
+    "name": "Stock tracking add or remove object",
+    "version": "1.0",
+    "author": "Julius Network Solutions,Odoo Community Association (OCA)",
+    "description": """Presentation:
 
-This module add a wizard to fill in packaging. It will also add a wizard to remove pieces from a pack
+This module add a wizard to fill in packaging. It will also add a wizard to
+remove pieces from a pack.
 This wizard is used to add or remove an object from a package.
 Adding to the historical movements and parent objects
 
 """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
-         "stock",
-         "stock_tracking_extended",
+    "website": "http://www.julius.fr",
+    "depends": [
+        "stock",
+        "stock_tracking_extended",
     ],
-    "category" : "Warehouse Management",
-    "images" : [],
-    "demo" : [],
-    "data" : [
+    "category": "Warehouse Management",
+    "images": [],
+    "demo": [],
+    "data": [
         "security/ir.model.access.csv",
         "wizard/add_object_view.xml",
         "wizard/remove_object_view.xml",
         "data/type.xml",
         'stock_view.xml',
     ],
-    'test': [],
     'installable': True,
     'active': False,
 }
