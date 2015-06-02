@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##############################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,29 +17,24 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##############################################################################
 
 {
-    "name" : "Stock Tracking Prodlot",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions,Odoo Community Association (OCA)",
-    "description" : """
+    "name": "Stock Tracking Prodlot",
+    "version": "1.0",
+    "author": "Julius Network Solutions,Odoo Community Association (OCA)",
+    "description": """
 
 Presentation:
 
 This module adds the packaging into the production lot
 
 """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
+    "website": "http://www.julius.fr",
+    "depends": [
         "stock",
     ],
-    "category" : "Warehouse Management",
-    "demo" : [],
-    "data" : [],
-    'test': [],
+    "category": "Warehouse Management",
     'installable': True,
     'active': False,
 }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

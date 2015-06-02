@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##############################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,17 +17,19 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##############################################################################
 
 from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 import time
+
 
 class stock_tracking(orm.Model):
     _inherit = 'stock.tracking'
-    
-    def _get_move_product_vals(self, cr, uid, pack_id, product, qty=False, move_data=False, context=None):
+
+    def _get_move_product_vals(self, cr, uid, pack_id, product, qty=False,
+                               move_data=False, context=None):
         if context is None:
             context = {}
         pack = self.browse(cr, uid, pack_id, context=context)
@@ -42,8 +44,9 @@ class stock_tracking(orm.Model):
             'state': 'done',
         }
         return vals
-    
-    def _add_products(self, cr, uid, pack_id, product_ids, quantities=False, context=None):
+
+    def _add_products(self, cr, uid, pack_id, product_ids,
+                      quantities=False, context=None):
         """ Method to add products into a pack """
         if context is None:
             context = {}
@@ -60,39 +63,47 @@ class stock_tracking(orm.Model):
             if quantities and quantities[product.id]:
                 qty = quantities[product.id]
             vals = {}
-            vals = self._get_move_product_vals(cr, uid, pack_id, product, qty, move_data=False, context=context)
+            vals = self._get_move_product_vals(cr, uid, pack_id, product, qty,
+                                               move_data=False,
+                                               context=context)
             if vals:
-                new_move_id = move_obj.create(cr, uid, vals, context=context)
-                hist_id = history_obj.create(cr, uid, {
-                       'tracking_id': pack.id,
-                       'type': 'add_product',
-                       'location_id': pack.location_id.id,
-                       'location_dest_id': pack.location_id.id,
-                       'product_id': product.id,
-                       'qty': qty,
-                       'date' : date,
-                    }, context=context)
+                move_obj.create(cr, uid, vals, context=context)
+                history_obj.create(cr, uid, {
+                    'tracking_id': pack.id,
+                    'type': 'add_product',
+                    'location_id': pack.location_id.id,
+                    'location_dest_id': pack.location_id.id,
+                    'product_id': product.id,
+                    'qty': qty,
+                    'date': date
+                }, context=context)
         self.get_products(cr, uid, [pack.id], context=context)
         return True
-    
-    def _get_move_prodlot_vals(self, cr, uid, pack_id, prodlot_data, qty=False, move_data=False, context=None):
+
+    def _get_move_prodlot_vals(self, cr, uid, pack_id, prodlot_data,
+                               qty=False, move_data=False, context=None):
         if context is None:
             context = {}
         pack = self.browse(cr, uid, pack_id, context=context)
         vals = {
             'name': move_data.name if move_data else prodlot_data.name,
             'state': 'done',
-            'product_id': move_data and move_data.prodlot_id.product_id.id or prodlot_data.product_id.id,
-            'product_uom': move_data and move_data.product_uom.id or prodlot_data.product_id.uom_id.id,
-            'prodlot_id': move_data and move_data.prodlot_id.id or prodlot_data.id,
-            'location_id': move_data and move_data.location_dest_id.id or pack.location_id.id,
+            'product_id': move_data and move_data.prodlot_id.product_id.id or
+            prodlot_data.product_id.id,
+            'product_uom': move_data and move_data.product_uom.id or
+            prodlot_data.product_id.uom_id.id,
+            'prodlot_id': move_data and move_data.prodlot_id.id or
+            prodlot_data.id,
+            'location_id': move_data and move_data.location_dest_id.id or
+            pack.location_id.id,
             'location_dest_id': pack.location_id.id,
             'tracking_id': pack.id,
             'product_qty': qty,
         }
         return vals
-    
-    def _add_prodlots(self, cr, uid, pack_id, prodlot_ids, quantities=False, context=None):
+
+    def _add_prodlots(self, cr, uid, pack_id, prodlot_ids,
+                      quantities=False, context=None):
         """ Method to add prodlots into a pack """
         if context is None:
             context = {}
@@ -102,44 +113,45 @@ class stock_tracking(orm.Model):
         history_obj = self.pool.get('stock.tracking.history')
         pack = pack_obj.browse(cr, uid, pack_id, context=context)
         date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-        modified = False
-        for prodlot_data in prodlot_obj.browse(cr, uid, prodlot_ids, context=context):
+        for prodlot_data in prodlot_obj.browse(cr, uid, prodlot_ids,
+                                               context=context):
             if quantities and quantities[prodlot_data.id]:
                 qty = quantities[prodlot_data.id]
             move_ids = move_obj.search(cr, uid, [
-                            ('state', '=', 'done'),
-                            ('prodlot_id', '=', prodlot_data.id),
-                        ], order='date desc', limit=1, context=context)
+                ('state', '=', 'done'),
+                ('prodlot_id', '=', prodlot_data.id)],
+                order='date desc', limit=1, context=context)
             vals = {}
             if move_ids:
-                move_data = move_obj.browse(cr, uid, move_ids[0], context=context)
-                vals = self._get_move_prodlot_vals(cr, uid, pack_id,
-                            prodlot_data, qty, move_data=move_data, context=context)
+                move_data = move_obj.browse(cr, uid, move_ids[0],
+                                            context=context)
+                vals = self._get_move_prodlot_vals(
+                    cr, uid, pack_id, prodlot_data, qty, move_data=move_data,
+                    context=context)
             else:
-                vals = self._get_move_prodlot_vals(cr, uid, pack_id,
-                            prodlot_data, qty, move_data=False, context=context)
+                vals = self._get_move_prodlot_vals(
+                    cr, uid, pack_id, prodlot_data, qty, move_data=False,
+                    context=context)
             if vals:
-                new_move_id = move_obj.create(cr, uid, vals, context=context)
-                hist_id = history_obj.create(cr, uid, {
-                       'tracking_id': pack.id,
-                       'type': 'add_prodlot',
-                       'location_id': pack.location_id.id,
-                       'location_dest_id': pack.location_id.id,
-                       'prodlot_id': prodlot_data.id,
-                       'qty': qty,
-                       'date' : date,
+                move_obj.create(cr, uid, vals, context=context)
+                history_obj.create(cr, uid, {
+                    'tracking_id': pack.id,
+                    'type': 'add_prodlot',
+                    'location_id': pack.location_id.id,
+                    'location_dest_id': pack.location_id.id,
+                    'prodlot_id': prodlot_data.id,
+                    'qty': qty,
+                    'date': date,
                     }, context=context)
         self.get_products(cr, uid, [pack_id], context=context)
         self.get_serials(cr, uid, [pack_id], context=context)
         return True
 
-    
     def _remove_products(self, cr, uid, pack_id, products, context=None):
         """ Method to remove products from a pack """
         # Initialization #
         move_obj = self.pool.get('stock.move')
         history_obj = self.pool.get('stock.tracking.history')
-        prod_obj = self.pool.get('product.product')
         date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         if context is None:
             context = {}
@@ -153,21 +165,22 @@ class stock_tracking(orm.Model):
             remove_qty = product.quantity
             if not remove_qty:
                 continue
-            
-            #if the quantity to remove is bigger than the move quantity we only remove the move value
+
+            # if the quantity to remove is bigger than the move quantity we
+            # only remove the move value
             if move_qty < remove_qty:
                 remove_qty = move_qty
 
             # Process #
             hist_id = history_obj.create(cr, uid, {
-                   'tracking_id': pack.id,
-                   'type': 'remove_product',
-                   'location_id': pack.location_id.id,
-                   'location_dest_id': pack.location_id.id,
-                   'product_id': product.product_id.id,
-                   'qty': remove_qty,
-                   'date' : date,
-                }, context=context)
+                'tracking_id': pack.id,
+                'type': 'remove_product',
+                'location_id': pack.location_id.id,
+                'location_dest_id': pack.location_id.id,
+                'product_id': product.product_id.id,
+                'qty': remove_qty,
+                'date': date,
+            }, context=context)
             if remove_qty != move_qty:
                 defaults = {
                     'location_id': pack.location_id.id,
@@ -179,7 +192,8 @@ class stock_tracking(orm.Model):
                     'product_qty': move_qty - remove_qty,
                     'state': 'done',
                 }
-                new_id = move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
+                move_obj.copy(cr, uid, move_data.id, default=defaults,
+                              context=context)
             defaults = {
                 'location_id': pack.location_id.id,
                 'location_dest_id': pack.location_id.id,
@@ -189,8 +203,11 @@ class stock_tracking(orm.Model):
                 'product_qty': remove_qty,
                 'state': 'done',
             }
-            move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
-            move_obj.write(cr, uid, [move_data.id], {'pack_history_id': hist_id}, context=context)
+            move_obj.copy(cr, uid, move_data.id, default=defaults,
+                          context=context)
+            move_obj.write(
+                cr, uid, [move_data.id], {'pack_history_id': hist_id},
+                context=context)
         self.get_products(cr, uid, [pack.id], context=context)
         return True
 
@@ -199,12 +216,10 @@ class stock_tracking(orm.Model):
         # Initialization #
         move_obj = self.pool.get('stock.move')
         history_obj = self.pool.get('stock.tracking.history')
-        prodlot_obj = self.pool.get('stock.production.lot')
-        product_obj = self.pool.get('product.product')
         date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         if context is None:
             context = {}
-            
+
         pack = self.browse(cr, uid, pack_id, context=context)
         for prodlot in prodlots:
             if not prodlot.move_id:
@@ -214,20 +229,21 @@ class stock_tracking(orm.Model):
             remove_qty = prodlot.quantity
             if not remove_qty:
                 continue
-            
-            #if the quantity to remove is bigger than the move quantity we only remove the move value
+
+            # if the quantity to remove is bigger than the move quantity we
+            # only remove the move value
             if move_qty < remove_qty:
                 remove_qty = move_qty
-        
+
             # Process #
             hist_id = history_obj.create(cr, uid, {
-               'tracking_id': pack.id,
-               'type': 'remove_prodlot',
-               'location_id': pack.location_id.id,
-               'location_dest_id': pack.location_id.id,
-               'prodlot_id': prodlot.prodlot_id.id,
-               'qty': remove_qty,
-               'date' : date,
+                'tracking_id': pack.id,
+                'type': 'remove_prodlot',
+                'location_id': pack.location_id.id,
+                'location_dest_id': pack.location_id.id,
+                'prodlot_id': prodlot.prodlot_id.id,
+                'qty': remove_qty,
+                'date': date,
             }, context=context)
             if remove_qty != move_qty:
                 defaults = {
@@ -240,7 +256,8 @@ class stock_tracking(orm.Model):
                     'product_qty': move_qty - remove_qty,
                     'state': 'done',
                 }
-                new_id = move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
+                move_obj.copy(cr, uid, move_data.id,
+                              default=defaults, context=context)
             defaults = {
                 'location_id': pack.location_id.id,
                 'location_dest_id': pack.location_id.id,
@@ -250,29 +267,33 @@ class stock_tracking(orm.Model):
                 'product_qty': remove_qty,
                 'state': 'done',
             }
-            move_obj.copy(cr, uid, move_data.id, default=defaults, context=context)
-            move_obj.write(cr, uid, [move_data.id], {'pack_history_id': hist_id}, context=context)
+            move_obj.copy(cr, uid, move_data.id, default=defaults,
+                          context=context)
+            move_obj.write(cr, uid, [move_data.id],
+                           {'pack_history_id': hist_id}, context=context)
         self.get_serials(cr, uid, [pack.id], context=context)
         self.get_products(cr, uid, [pack.id], context=context)
         return True
 
+
 class stock_tracking_history(osv.osv):
-    
+
     _inherit = "stock.tracking.history"
-    
-    def _get_types(self, cr, uid, context={}):
+
+    def _get_types(self, cr, uid, context=None):
         res = super(stock_tracking_history, self)._get_types(cr, uid, context)
         if not res:
             res = []
-        res = res + [('add_product',_('Add product')),('remove_product',_('Remove product')),
-                     ('add_prodlot',_('Add prodlot')),('remove_prodlot',_('Remove prodlot'))]
+        res = res + [('add_product', _('Add product')),
+                     ('remove_product', _('Remove product')),
+                     ('add_prodlot', _('Add prodlot')),
+                     ('remove_prodlot', _('Remove prodlot'))]
         return res
-    
+
     _columns = {
         'type': fields.selection(_get_types, 'Type'),
         'product_id': fields.many2one('product.product', 'Product'),
-        'prodlot_id': fields.many2one('stock.production.lot', 'Production lot'),
+        'prodlot_id': fields.many2one(
+            'stock.production.lot', 'Production lot'),
         'qty': fields.float('Quantity'),
     }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##############################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,30 +17,37 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##############################################################################
 
-from openerp.osv import fields, osv, orm
+from openerp.osv import fields, orm
 from openerp.tools.translate import _
 
+
 class stock_tracking_history(orm.Model):
-    
+
     _inherit = "stock.tracking.history"
-    
-    def _get_types(self, cr, uid, context={}):
+
+    def _get_types(self, cr, uid, context=None):
         res = super(stock_tracking_history, self)._get_types(cr, uid, context)
         if not res:
             res = []
-        res = res + [('swap_product',_('Swap product')),('swap_prodlot',_('Swap prodlot'))]
+        res = res + [('swap_product', _('Swap product')),
+                     ('swap_prodlot', _('Swap prodlot'))]
         return res
-    
-    _columns = {
-        'type': fields.selection(_get_types, 'Type'),
-        'location_id': fields.many2one('stock.location', 'Source Location'),
-        'location_dest_id': fields.many2one('stock.location', 'Destination Location'),
-        'swap_product_id': fields.many2one('product.product', 'Swap Product'),
-        'new_product_id': fields.many2one('product.product', 'New Product'),
-        'swap_prodlot_id': fields.many2one('stock.production.lot', 'Swap Production lot'),
-        'new_prodlot_id': fields.many2one('stock.production.lot', 'New Production lot'),
-    }
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    _columns = {
+        'type': fields.selection(
+            _get_types, 'Type'),
+        'location_id': fields.many2one(
+            'stock.location', 'Source Location'),
+        'location_dest_id': fields.many2one(
+            'stock.location', 'Destination Location'),
+        'swap_product_id': fields.many2one(
+            'product.product', 'Swap Product'),
+        'new_product_id': fields.many2one(
+            'product.product', 'New Product'),
+        'swap_prodlot_id': fields.many2one(
+            'stock.production.lot', 'Swap Production lot'),
+        'new_prodlot_id': fields.many2one(
+            'stock.production.lot', 'New Production lot'),
+    }

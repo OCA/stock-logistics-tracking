@@ -5,7 +5,6 @@
         <record id="product_category_tracked_form" model="ir.ui.view">
             <field name="name">product.category.property.form.inherit</field>
             <field name="model">product.category</field>
-            <field name="type">form</field>
             <field name="inherit_id" ref="product.product_category_form_view"/>
             <field name="arch" type="xml">
                 <field name="type" position="after">
