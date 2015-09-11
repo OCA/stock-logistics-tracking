@@ -1,0 +1,254 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* stock_tracking_add_remove
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-01 14:47+0000\n"
+"PO-Revision-Date: 2015-02-01 15:54+0100\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: de\n"
+
+#. module: stock_tracking_add_remove
+#: view:stock.tracking.history:0
+msgid "History"
+msgstr "Verlauf"
+
+#. module: stock_tracking_add_remove
+#: code:addons/stock_tracking_add_remove/stock_tracking.py:267
+#, python-format
+msgid "Add product"
+msgstr "Produkt hinzufügen"
+
+#. module: stock_tracking_add_remove
+#: view:stock.packaging.add:0
+msgid "Add production lots"
+msgstr "Fertigungslos hinzufügen"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model,name:stock_tracking_add_remove.model_stock_packaging_add
+msgid "Add objects to a pack"
+msgstr "Objekte zu einem Packet hinzufügen"
+
+#. module: stock_tracking_add_remove
+#: view:stock.tracking:0
+msgid "Remove production lot"
+msgstr "Fertigungslos entfernen"
+
+#. module: stock_tracking_add_remove
+#: code:addons/stock_tracking_add_remove/stock_tracking.py:267
+#: view:stock.tracking:0
+#, python-format
+msgid "Remove product"
+msgstr "Produkt entfernen"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_add_line_location_id
+#: field:stock.packaging.add.line,location_id:0
+msgid "Location"
+msgstr "Lagerplatz"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_add_type
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_add_type_id
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_remove_type
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_remove_type_id
+#: field:stock.packaging.add,type:0 field:stock.packaging.add,type_id:0
+#: field:stock.packaging.remove,type:0 field:stock.packaging.remove,type_id:0
+msgid "Type"
+msgstr "Art"
+
+#. module: stock_tracking_add_remove
+#: model:ir.actions.act_window,name:stock_tracking_add_remove.action_stock_packaging_add
+msgid "Stock packaging add"
+msgstr "Lagerpackung hinzufügen"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_add_line_product_id
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_remove_line_product_id
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_tracking_history_product_id
+#: field:stock.packaging.add.line,product_id:0
+#: field:stock.packaging.remove.line,product_id:0
+#: field:stock.tracking.history,product_id:0
+msgid "Product"
+msgstr "Produkt"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_add_line_parent_id
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_remove_line_parent_id
+#: field:stock.packaging.add.line,parent_id:0
+#: field:stock.packaging.remove.line,parent_id:0
+msgid "Parent"
+msgstr "Übergeordnet"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model,name:stock_tracking_add_remove.model_stock_tracking
+msgid "Packs"
+msgstr "Packung"
+
+#. module: stock_tracking_add_remove
+#: view:stock.packaging.add.line:0
+msgid "Add line"
+msgstr "Position hinzufügen"
+
+#. module: stock_tracking_add_remove
+#: view:stock.packaging.remove:0
+msgid "Remove object"
+msgstr "Objekt entfernen"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_add_line_quantity
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_remove_line_quantity
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_tracking_history_qty
+#: field:stock.packaging.add.line,quantity:0
+#: field:stock.packaging.remove.line,quantity:0
+#: field:stock.tracking.history,qty:0
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model,name:stock_tracking_add_remove.model_stock_packaging_remove
+msgid "stock.packaging.remove"
+msgstr "stock.packaging.remove"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model,name:stock_tracking_add_remove.model_stock_tracking_history
+msgid "Packs history"
+msgstr "Packungsverlauf"
+
+#. module: stock_tracking_add_remove
+#: view:stock.packaging.add:0
+msgid "Add to the pack"
+msgstr "Der Packung hinzufügen"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_add_type_name
+#: field:stock.packaging.add.type,name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_add_line_prodlot_id
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_tracking_history_prodlot_id
+#: field:stock.packaging.add.line,prodlot_id:0
+#: field:stock.tracking.history,prodlot_id:0
+msgid "Production lot"
+msgstr "Fertigungslos"
+
+#. module: stock_tracking_add_remove
+#: view:stock.packaging.add:0
+msgid "Add object"
+msgstr "Objekt hinzufügen"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_add_prodlot_ids
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_add_product_ids
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_remove_prodlot_ids
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_remove_product_ids
+#: field:stock.packaging.add,prodlot_ids:0
+#: field:stock.packaging.add,product_ids:0
+#: field:stock.packaging.remove,prodlot_ids:0
+#: field:stock.packaging.remove,product_ids:0
+msgid "Lines"
+msgstr "Positionen"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_add_type_code
+#: field:stock.packaging.add.type,code:0
+msgid "Code"
+msgstr "Schlüssel"
+
+#. module: stock_tracking_add_remove
+#: view:stock.packaging.add:0
+msgid "Products"
+msgstr "Produkte"
+
+#. module: stock_tracking_add_remove
+#: code:addons/stock_tracking_add_remove/stock_tracking.py:268
+#, python-format
+msgid "Remove prodlot"
+msgstr "Fertigungslos entfernen"
+
+#. module: stock_tracking_add_remove
+#: view:stock.packaging.add:0
+msgid "Production lots"
+msgstr "Fertigungslose"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_add_pack_id
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_remove_line_pack_id
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_remove_pack_id
+#: field:stock.packaging.add,pack_id:0 field:stock.packaging.remove,pack_id:0
+#: field:stock.packaging.remove.line,pack_id:0
+msgid "Pack"
+msgstr "Packung"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_remove_line_prodlot_id
+#: field:stock.packaging.remove.line,prodlot_id:0
+msgid "Production Lot"
+msgstr "Fertigungslos"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model,name:stock_tracking_add_remove.model_stock_packaging_add_line
+msgid "Add object to a pack"
+msgstr "Objekt der Packung hinzufügen"
+
+#. module: stock_tracking_add_remove
+#: view:stock.packaging.add:0 view:stock.tracking:0
+msgid "Add products"
+msgstr "Produkt hinzufügen"
+
+#. module: stock_tracking_add_remove
+#: view:stock.packaging.remove:0
+msgid "Remove Object"
+msgstr "Objekt entfernen"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model.fields,field_description:stock_tracking_add_remove.field_stock_packaging_remove_line_move_id
+#: field:stock.packaging.remove.line,move_id:0
+msgid "Move"
+msgstr "Umlagern"
+
+#. module: stock_tracking_add_remove
+#: view:stock.tracking:0
+msgid "Add production lot"
+msgstr "Fertigungslos hinzufügen"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model,name:stock_tracking_add_remove.model_stock_packaging_add_type
+msgid "stock.packaging.add.type"
+msgstr "stock.packaging.add.type"
+
+#. module: stock_tracking_add_remove
+#: code:addons/stock_tracking_add_remove/stock_tracking.py:268
+#, python-format
+msgid "Add prodlot"
+msgstr "Fertigungslos hinzufügen"
+
+#. module: stock_tracking_add_remove
+#: model:ir.actions.act_window,name:stock_tracking_add_remove.action_stock_packaging_remove
+msgid "Stock packaging remove"
+msgstr "Lagerpackung entfernen"
+
+#. module: stock_tracking_add_remove
+#: view:stock.packaging.add:0 view:stock.packaging.remove:0
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: stock_tracking_add_remove
+#: view:stock.packaging.add:0 view:stock.packaging.remove:0
+msgid "or"
+msgstr "oder"
+
+#. module: stock_tracking_add_remove
+#: model:ir.model,name:stock_tracking_add_remove.model_stock_packaging_remove_line
+msgid "Remove object to a pack"
+msgstr "Objekt aus Packung entfernen"

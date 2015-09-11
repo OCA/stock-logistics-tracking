@@ -1,0 +1,88 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* stock_tracking_state
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-01 15:08+0000\n"
+"PO-Revision-Date: 2015-02-01 16:12+0100\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: de\n"
+
+#. module: stock_tracking_state
+#: view:stock.tracking:0
+msgid "{'invisible':[('state', '=', 'close')]}"
+msgstr "{'invisible':[('state', '=', 'close')]}"
+
+#. module: stock_tracking_state
+#: view:stock.tracking:0
+msgid "Close Pack"
+msgstr "Packung schließen"
+
+#. module: stock_tracking_state
+#: model:ir.model,name:stock_tracking_state.model_stock_tracking
+msgid "Packs"
+msgstr "Packungen"
+
+#. module: stock_tracking_state
+#: code:addons/stock_tracking_state/stock_tracking.py:63
+#, python-format
+msgid ""
+"You can't close this pack because there is at least one not closed child"
+msgstr ""
+"Sie können diese Packung nicht schließen, da mindestens ein nicht "
+"geschlossenes Kind besteht"
+
+#. module: stock_tracking_state
+#: model:ir.model,name:stock_tracking_state.model_stock_move
+msgid "Stock Move"
+msgstr "Lagerbewegung"
+
+#. module: stock_tracking_state
+#: code:addons/stock_tracking_state/stock_tracking.py:50
+#, python-format
+msgid ""
+"You can't re-open this pack because there is at least one not closed child"
+msgstr ""
+"Sie dürfen diese Packung nicht wieder eröffnen, da mindestens eine nicht "
+"geschlossene Packung besteht"
+
+#. module: stock_tracking_state
+#: view:stock.tracking:0
+msgid "Reset Open"
+msgstr "Offen zurücksetzen"
+
+#. module: stock_tracking_state
+#: model:ir.model.fields,field_description:stock_tracking_state.field_stock_tracking_state
+#: field:stock.tracking,state:0
+msgid "State"
+msgstr "Status"
+
+#. module: stock_tracking_state
+#: code:addons/stock_tracking_state/stock_tracking.py:50
+#: code:addons/stock_tracking_state/stock_tracking.py:63
+#, python-format
+msgid "Not allowed !"
+msgstr "Nicht zulässig!"
+
+#. module: stock_tracking_state
+#: selection:stock.tracking,state:0
+msgid "Close"
+msgstr "Schließen"
+
+#. module: stock_tracking_state
+#: selection:stock.tracking,state:0
+msgid "Open"
+msgstr "Öffnen"
+
+#. module: stock_tracking_state
+#: constraint:stock.move:0
+msgid "You cannot choose this pack because it's closed."
+msgstr "Sie dürfen diese Packung nicht auswählen, da diese geschlossen ist."

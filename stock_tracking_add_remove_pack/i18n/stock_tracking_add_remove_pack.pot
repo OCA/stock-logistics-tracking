@@ -1,0 +1,73 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* stock_tracking_add_remove_pack
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-01 14:55+0000\n"
+"PO-Revision-Date: 2015-02-01 15:55+0100\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: stock_tracking_add_remove_pack
+#: model:ir.model,name:stock_tracking_add_remove_pack.model_stock_tracking_history
+msgid "Packs history"
+msgstr ""
+
+#. module: stock_tracking_add_remove_pack
+#: model:ir.model,name:stock_tracking_add_remove_pack.model_stock_tracking
+#: model:ir.model.fields,field_description:stock_tracking_add_remove_pack.field_stock_packaging_add_pack_ids
+#: model:ir.model.fields,field_description:stock_tracking_add_remove_pack.field_stock_packaging_remove_pack_ids
+#: field:stock.packaging.add,pack_ids:0
+#: field:stock.packaging.remove,pack_ids:0
+msgid "Packs"
+msgstr ""
+
+#. module: stock_tracking_add_remove_pack
+#: model:ir.model,name:stock_tracking_add_remove_pack.model_stock_packaging_add
+msgid "Add objects to a pack"
+msgstr ""
+
+#. module: stock_tracking_add_remove_pack
+#: model:ir.model.fields,field_description:stock_tracking_add_remove_pack.field_stock_packaging_add_location_id
+#: field:stock.packaging.add,location_id:0
+msgid "Location"
+msgstr ""
+
+#. module: stock_tracking_add_remove_pack
+#: view:stock.tracking:0
+msgid "Remove packs"
+msgstr ""
+
+#. module: stock_tracking_add_remove_pack
+#: model:ir.model,name:stock_tracking_add_remove_pack.model_stock_packaging_remove
+msgid "stock.packaging.remove"
+msgstr ""
+
+#. module: stock_tracking_add_remove_pack
+#: view:stock.tracking.history:0
+msgid "History"
+msgstr ""
+
+#. module: stock_tracking_add_remove_pack
+#: view:stock.packaging.add:0
+msgid "Add Packs"
+msgstr ""
+
+#. module: stock_tracking_add_remove_pack
+#: view:stock.tracking:0
+msgid "Add packs"
+msgstr ""
+
+#. module: stock_tracking_add_remove_pack
+#: model:ir.model.fields,field_description:stock_tracking_add_remove_pack.field_stock_tracking_history_child_pack_id
+#: field:stock.tracking.history,child_pack_id:0
+msgid "Pack"
+msgstr ""

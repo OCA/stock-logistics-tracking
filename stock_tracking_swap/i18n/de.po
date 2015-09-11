@@ -1,0 +1,174 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* stock_tracking_swap
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-01 15:13+0000\n"
+"PO-Revision-Date: 2015-02-01 16:18+0100\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: de\n"
+
+#. module: stock_tracking_swap
+#: code:addons/stock_tracking_swap/stock.py:33 view:stock.tracking:0
+#, python-format
+msgid "Swap product"
+msgstr "Produkt austauschen"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking.swap:0
+msgid "Swap the product"
+msgstr "Das Produkt tauschen"
+
+#. module: stock_tracking_swap
+#: model:ir.actions.act_window,name:stock_tracking_swap.action_stock_product_swap
+msgid "Product swap"
+msgstr "Produktaustausch"
+
+#. module: stock_tracking_swap
+#: model:ir.model.fields,field_description:stock_tracking_swap.field_stock_tracking_swap_parent_pack_id
+#: field:stock.tracking.swap,parent_pack_id:0
+msgid "Parent Pack"
+msgstr "Übergeordnete Packung"
+
+#. module: stock_tracking_swap
+#: model:ir.model.fields,field_description:stock_tracking_swap.field_stock_tracking_swap_location_id
+#: field:stock.tracking.swap,location_id:0
+msgid "Location"
+msgstr "Lagerort"
+
+#. module: stock_tracking_swap
+#: model:ir.model.fields,field_description:stock_tracking_swap.field_stock_tracking_swap_new_prodlot_id
+#: field:stock.tracking.swap,new_prodlot_id:0
+msgid "New Production Lot"
+msgstr "Neues Fertigungslos"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking.swap:0
+msgid "Product"
+msgstr "Produk"
+
+#. module: stock_tracking_swap
+#: model:ir.model.fields,field_description:stock_tracking_swap.field_stock_tracking_history_swap_product_id
+#: field:stock.tracking.history,swap_product_id:0
+msgid "Swap Product"
+msgstr "Produktaustausch"
+
+#. module: stock_tracking_swap
+#: code:addons/stock_tracking_swap/wizard/swap.py:121
+#, python-format
+msgid "Production Lot Not Found !"
+msgstr "Fertigungslos nicht gefunden!"
+
+#. module: stock_tracking_swap
+#: model:ir.model.fields,field_description:stock_tracking_swap.field_stock_tracking_history_new_prodlot_id
+#: field:stock.tracking.history,new_prodlot_id:0
+msgid "New Production lot"
+msgstr "Neues Fertigungslos"
+
+#. module: stock_tracking_swap
+#: model:ir.model,name:stock_tracking_swap.model_stock_tracking_history
+msgid "Packs history"
+msgstr "Packungs-Verlauf"
+
+#. module: stock_tracking_swap
+#: model:ir.model.fields,field_description:stock_tracking_swap.field_stock_tracking_swap_previous_prodlot_id
+#: field:stock.tracking.swap,previous_prodlot_id:0
+msgid "Previous Production Lot"
+msgstr "Voriges Fertigungslos"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking.swap:0
+msgid "Swap the prodlot"
+msgstr "Das Fertigungslos wechseln"
+
+#. module: stock_tracking_swap
+#: model:ir.model,name:stock_tracking_swap.model_stock_tracking_swap
+#: view:stock.tracking.swap:0
+msgid "Swap object"
+msgstr "Tauschobjekt"
+
+#. module: stock_tracking_swap
+#: model:ir.model.fields,field_description:stock_tracking_swap.field_stock_tracking_swap_previous_product_id
+#: field:stock.tracking.swap,previous_product_id:0
+msgid "Previous Product"
+msgstr "Voriges Produkt"
+
+#. module: stock_tracking_swap
+#: code:addons/stock_tracking_swap/wizard/swap.py:94
+#, python-format
+msgid "Should Not Happen !"
+msgstr "Sollte nicht passieren!"
+
+#. module: stock_tracking_swap
+#: model:ir.actions.act_window,name:stock_tracking_swap.action_stock_prodlot_swap
+msgid "Prodlot swap"
+msgstr "Fertigungslos-Wechsel"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking.history:0
+msgid "History"
+msgstr "Verlauf"
+
+#. module: stock_tracking_swap
+#: model:ir.model.fields,field_description:stock_tracking_swap.field_stock_tracking_history_swap_prodlot_id
+#: field:stock.tracking.history,swap_prodlot_id:0
+msgid "Swap Production lot"
+msgstr "Fertigungslos wechseln"
+
+#. module: stock_tracking_swap
+#: code:addons/stock_tracking_swap/wizard/swap.py:119
+#, python-format
+msgid "Product Not Found !"
+msgstr "Produkt nicht gefunden!"
+
+#. module: stock_tracking_swap
+#: model:ir.model.fields,field_description:stock_tracking_swap.field_stock_tracking_history_location_id
+#: field:stock.tracking.history,location_id:0
+msgid "Source Location"
+msgstr "Herkunftslagerort"
+
+#. module: stock_tracking_swap
+#: model:ir.model.fields,field_description:stock_tracking_swap.field_stock_tracking_history_new_product_id
+#: model:ir.model.fields,field_description:stock_tracking_swap.field_stock_tracking_swap_new_product_id
+#: field:stock.tracking.history,new_product_id:0
+#: field:stock.tracking.swap,new_product_id:0
+msgid "New Product"
+msgstr "Neues Produkt"
+
+#. module: stock_tracking_swap
+#: model:ir.model.fields,field_description:stock_tracking_swap.field_stock_tracking_history_location_dest_id
+#: field:stock.tracking.history,location_dest_id:0
+msgid "Destination Location"
+msgstr "Ziellagerort"
+
+#. module: stock_tracking_swap
+#: code:addons/stock_tracking_swap/stock.py:33 view:stock.tracking:0
+#, python-format
+msgid "Swap prodlot"
+msgstr "Fertigungslos wechseln"
+
+#. module: stock_tracking_swap
+#: code:addons/stock_tracking_swap/wizard/swap.py:94
+#: code:addons/stock_tracking_swap/wizard/swap.py:119
+#: code:addons/stock_tracking_swap/wizard/swap.py:121
+#, python-format
+msgid "Warning!"
+msgstr "Warnung!"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking.swap:0
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: stock_tracking_swap
+#: view:stock.tracking.swap:0
+msgid "or"
+msgstr "oder"
