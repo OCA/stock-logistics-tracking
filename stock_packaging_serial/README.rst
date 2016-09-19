@@ -2,19 +2,18 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==========================
+======================
 Stock Packaging Serial
-==========================
+======================
 
 Allows to generate serial numbers on packages through logistical units
-
-Installation
-============
-
 
 Configuration
 =============
 
+Go to Warehouse / Settings / Products / Logistical Units
+select the logisitical unit you want and choose an application identifier
+(GS1 Barcode) for that unit and create a sequence
 
 Usage
 =====
@@ -22,7 +21,7 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/{repo_id}/{branch}
+   :target: https://runbot.odoo-community.org/runbot/repo/github-com-oca-stock-logistics-tracking-152
 
 .. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
 .. branch is "8.0" for example
@@ -35,7 +34,7 @@ Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues
-<https://github.com/OCA/{project_repo}/issues>`_. In case of trouble, please
+<https://github.com/OCA/stock-logistics-tracking/issues/new?body=module:%20stock_packaging_serial%0Aversion:%208.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
 help us smashing it by providing a detailed and welcomed feedback.
 
@@ -50,8 +49,7 @@ Images
 Contributors
 ------------
 
-* Firstname Lastname <email.address@example.org>
-* Second Person <second.person@example.org>
+* Denis Roussel <denis.roussel@acsone.eu>
 
 Maintainer
 ----------
