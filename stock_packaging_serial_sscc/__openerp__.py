@@ -5,13 +5,13 @@
 {
     'name': 'Stock Packaging Serial SSCC',
     'summary': """
-        This extends stock_packaging_serial to take SSCC generation into account""",
+        This extends stock_packaging_serial to take SSCC generation into
+        account""",
     'version': '8.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'ACSONE S.A.,Odoo Community Association (OCA)',
     'website': 'http://acsone.eu',
-    'depends': ['stock_packaging_serial', 'partner_identification_gln'
-    ],
+    'depends': ['stock_packaging_serial', 'partner_identification_gln'],
     'data': [
     ],
     'demo': [

@@ -3,35 +3,25 @@
    :alt: License: AGPL-3
 
 ===========================
-Stock Packaging Serial Sscc
+Stock Packaging Serial SSCC
 ===========================
 
 This extends stock_packaging_serial to take SSCC generation into account
 
-Installation
-============
-
-To install this module, you need to:
-
-#. Do this ...
-
 Configuration
 =============
 
-To configure this module, you need to:
+In order to generate a well-formed SSCC, you have to configure your company
+GCP in the company partner (Id Numbers).
 
-#. Go to ...
+For the serial configuration, see stock_packaging_serial README
 
 Usage
 =====
 
-To use this module, you need to:
-
-#. Go to ...
-
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/{repo_id}/{branch}
+   :target: hhttps://runbot.odoo-community.org/runbot/repo/github-com-oca-stock-logistics-tracking-152
 
 .. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
 .. branch is "8.0" for example
@@ -45,7 +35,7 @@ Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues
-<https://github.com/OCA/{project_repo}/issues>`_. In case of trouble, please
+<https://github.com/OCA/stock-logistics-tracking/issues/new?body=module:%20stock_packaging_serial_sscc%0Aversion:%208.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
 help us smashing it by providing a detailed and welcomed feedback.
 
@@ -60,8 +50,7 @@ Images
 Contributors
 ------------
 
-* Firstname Lastname <email.address@example.org>
-* Second Person <second.person@example.org>
+* Denis Roussel <denis.roussel@acsone.eu>
 
 Maintainer
 ----------
