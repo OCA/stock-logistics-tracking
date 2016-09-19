@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 ACSONE S.A.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+    
+    <record id="product_ul_pack_serial_form_view" model="ir.ui.view">
+        <field name="name">product.ul.pack.serial.form.view</field>
+        <field name="model">product.ul</field>
+        <field name="inherit_id" ref="product.product_ul_form_view"/>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="gs1_barcode_id"/>
+                <field name="package_sequence_id"/>
+            </field>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_quant_package_serial_form">
+         <field name="name">stock.quant.package.form</field>
+         <field name="model">stock.quant.package</field>
+         <field name="inherit_id" ref="stock.view_quant_package_form"/>
+         <field name="arch" type="xml">
+             <field name="ul_id" position="after">
+                 <field name="serial_id"/>
+             </field>
+         </field>
+    </record>
+</data>
+</openerp>
