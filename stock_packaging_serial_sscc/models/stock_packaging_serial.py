@@ -14,7 +14,7 @@ class ProductUl(models.Model):
 
         header = self.env.user.company_id.partner_id.id_numbers
         if header:
-            length = 12 - (len(header[0].name) + len(seq))
+            length = 17 - (len(header[0].name) + len(seq))
             if length < 0:
 
                 seq = seq[-length:]
