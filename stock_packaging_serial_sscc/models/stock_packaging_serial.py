@@ -12,9 +12,15 @@ class ProductUl(models.Model):
 
         seq = self.package_sequence_id._next()
 
+        length_max = self.gs1_barcode_id.length_max
+        the_length = 0
+        if length_max > 1:
+            # We compute the length without digit
+            the_length = length_max - 1
+
         header = self.env.user.company_id.partner_id.id_numbers
         if header:
-            length = 17 - (len(header[0].name) + len(seq))
+            length = the_length - (len(header[0].name) + len(seq))
             if length < 0:
 
                 seq = seq[-length:]
@@ -23,15 +29,16 @@ class ProductUl(models.Model):
 
             gs1_header = header[0].name + seq
 
-            i = 1
+            i = 0
             number = 0
-            for num in gs1_header:
+            for num in reversed(gs1_header):
                 if (i % 2) == 0:
-                    number += int(num * 3)
+                    number += int(int(num) * 3)
                 else:
                     number += int(num)
                 i += 1
 
-            digit = (number % 10)
+            rest = (number % 10)
+            digit = 10 - rest
 
             return gs1_header + str(digit)
