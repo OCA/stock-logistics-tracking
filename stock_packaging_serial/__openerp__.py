@@ -18,4 +18,6 @@
     ],
     'demo': [
     ],
+    'test':[],
+    'installable': True
 }

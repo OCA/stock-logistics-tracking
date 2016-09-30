@@ -47,7 +47,13 @@ class ProductUl(models.Model):
             raise Exception('No Barcode Application associated to package')
 
         method = 'next_serial_' + str(self.gs1_barcode_id.ai)
-        if callable(getattr(self, method)):
+        func = False
+        try:
+            func = getattr(self, method)
+        except AttributeError:
+            pass
+
+        if callable(func):
             serial_function = getattr(self, method)
             sequence = serial_function()
         else:
