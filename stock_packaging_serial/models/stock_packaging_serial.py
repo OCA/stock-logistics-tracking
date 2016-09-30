@@ -2,7 +2,7 @@
 # Copyright 2016 ACSONE S.A.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models, _
+from openerp import api, fields, models
 
 
 class StockPackagingSerial(models.Model):
@@ -21,10 +21,11 @@ class ProductUl(models.Model):
     package_sequence_id = fields.Many2one('ir.sequence',
                                           string='Barcode Sequence')
 
-    automated_serial = fields.Boolean(compute='_get_automated_serial')
+    automated_serial = fields.Boolean(string='Automated Serial',
+                                      compute='_compute_automated_serial')
 
     @api.multi
-    def _get_automated_serial(self):
+    def _compute_automated_serial(self):
 
         for ul in self:
             if ul.gs1_barcode_id and ul.package_sequence_id:
@@ -37,11 +38,11 @@ class ProductUl(models.Model):
         self.ensure_one()
         sequence = ''
 
-        '''
+        """
         Methods get_serial_xxxx have to be defined in other modules
         The parameters depends on implementation
         e.g. : A header and a sequence
-        '''
+        """
 
         if not self.gs1_barcode_id:
             raise Exception('No Barcode Application associated to package')
