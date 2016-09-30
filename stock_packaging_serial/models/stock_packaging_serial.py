@@ -35,14 +35,11 @@ class ProductUl(models.Model):
 
     @api.multi
     def next_serial(self):
+        # Methods get_serial_xxxx have to be defined in other modules
+        # The parameters depends on implementation
+        # e.g. : A header and a sequence
         self.ensure_one()
         sequence = ''
-
-        """
-        Methods get_serial_xxxx have to be defined in other modules
-        The parameters depends on implementation
-        e.g. : A header and a sequence
-        """
 
         if not self.gs1_barcode_id:
             raise Exception('No Barcode Application associated to package')
