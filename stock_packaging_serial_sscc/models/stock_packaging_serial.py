@@ -39,6 +39,8 @@ class ProductUl(models.Model):
                 i += 1
 
             rest = (number % 10)
-            digit = 10 - rest
+            digit = 0
+            if rest > 0:
+                digit = 10 - rest
 
             return gs1_header + str(digit)
