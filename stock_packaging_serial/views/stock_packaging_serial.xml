@@ -2,18 +2,18 @@
 <!-- Copyright 2016 ACSONE S.A.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<openerp>
-<data>
-    
-    <record id="product_ul_pack_serial_form_view" model="ir.ui.view">
-        <field name="name">product.ul.pack.serial.form.view</field>
-        <field name="model">product.ul</field>
-        <field name="inherit_id" ref="product.product_ul_form_view"/>
+<odoo>
+    <record id="product_packaging_pack_serial_form_view" model="ir.ui.view">
+        <field name="name">product.packaging.pack.serial.form.view</field>
+        <field name="model">product.packaging</field>
+        <field name="inherit_id" ref="product.product_packaging_form_view"/>
         <field name="arch" type="xml">
-            <field name="type" position="after">
-                <field name="gs1_barcode_id"/>
-                <field name="package_sequence_id"/>
-            </field>
+            <group name="qty" position="after">
+                <group>
+                    <field name="gs1_barcode_id"/>
+                    <field name="package_sequence_id"/>
+                </group>
+            </group>
         </field>
     </record>
     
@@ -22,10 +22,9 @@
          <field name="model">stock.quant.package</field>
          <field name="inherit_id" ref="stock.view_quant_package_form"/>
          <field name="arch" type="xml">
-             <field name="ul_id" position="after">
+             <field name="packaging_id" position="after">
                  <field name="serial_id"/>
              </field>
          </field>
     </record>
-</data>
-</openerp>
+</odoo>

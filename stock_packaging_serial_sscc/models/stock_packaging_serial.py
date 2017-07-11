@@ -2,11 +2,11 @@
 # Copyright 2016 ACSONE S.A.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models
+from odoo import models
 
 
-class ProductUl(models.Model):
-    _inherit = 'product.ul'
+class ProductPackaging(models.Model):
+    _inherit = 'product.packaging'
 
     def next_serial_00(self):
 

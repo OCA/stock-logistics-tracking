@@ -2,7 +2,7 @@
 # © 2016  Denis Roussel, Acsone SA/NV (http://www.acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import openerp.tests.common as common
+import odoo.tests.common as common
 
 
 class TestStockPackagingSerial(common.TransactionCase):
@@ -17,18 +17,17 @@ class TestStockPackagingSerial(common.TransactionCase):
                               })
 
         ai = gs1_obj.search([('ai', '=', '00')])
-        product_ul_obj = self.env['product.ul']
-        self.ul_1 = product_ul_obj.create({'name': 'Pack Test',
-                                           'type': 'box',
-                                           'weight': 25.50,
-                                           'gs1_barcode_id': ai[0].id,
-                                           'package_sequence_id': seq.id})
+        product_pack_obj = self.env['product.packaging']
+        self.pack = product_pack_obj.create({
+            'name': 'Pack Test',
+            'gs1_barcode_id': ai[0].id,
+            'package_sequence_id': seq.id})
 
     def test_serial_01(self):
         pack_obj = self.env['stock.quant.package']
 
         pack_1 = pack_obj.create({'name': 'PACK001',
-                                  'ul_id': self.ul_1.id})
+                                  'packaging_id': self.pack.id})
 
         self.assertEqual(False, not pack_1.serial_id)
 

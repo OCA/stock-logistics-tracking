@@ -2,7 +2,7 @@
 # Copyright 2016 ACSONE S.A.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class StockPackagingSerial(models.Model):
@@ -13,8 +13,8 @@ class StockPackagingSerial(models.Model):
     name = fields.Char(string='Serial')
 
 
-class ProductUl(models.Model):
-    _inherit = 'product.ul'
+class ProductPackaging(models.Model):
+    _inherit = 'product.packaging'
 
     gs1_barcode_id = fields.Many2one('gs1_barcode', string='Barcode GS1')
 
@@ -27,11 +27,11 @@ class ProductUl(models.Model):
     @api.multi
     def _compute_automated_serial(self):
 
-        for ul in self:
-            if ul.gs1_barcode_id and ul.package_sequence_id:
-                ul.automated_serial = True
+        for pack in self:
+            if pack.gs1_barcode_id and pack.package_sequence_id:
+                pack.automated_serial = True
             else:
-                ul.automated_serial = False
+                pack.automated_serial = False
 
     @api.multi
     def next_serial(self):
@@ -71,11 +71,11 @@ class StockQuantPackage(models.Model):
     def create(self, vals):
         res = super(StockQuantPackage, self).create(vals)
 
-        if res and res.ul_id:
+        if res and res.packaging_id:
 
-            if res.ul_id.automated_serial:
+            if res.packaging_id.automated_serial:
                 sp_obj = self.env['stock.packaging.serial']
-                serial = res.ul_id.next_serial()
+                serial = res.packaging_id.next_serial()
                 ser = sp_obj.create({'name': serial})
                 res.serial_id = ser
 
@@ -86,10 +86,11 @@ class StockQuantPackage(models.Model):
         for package in self:
             # If We change the logistical unit for the package,
             # serial has to change
-            if 'ul_id' in vals:
-                ul = self.env['product.ul'].browse(vals.get('ul_id', False))
-                if ul and ul.automated_serial:
-                    serial = package.ul_id.next_serial()
+            if 'packaging_id' in vals:
+                packaging_id = self.env['stock_quant_package'].browse(
+                    vals.get('packaging_id', False))
+                if packaging_id and packaging_id.automated_serial:
+                    serial = package.packaging_id.next_serial()
                     sp_obj = self.env['stock.package.serial']
                     ser = sp_obj.create({'name': serial})
                     vals.update({'serial_id': ser})

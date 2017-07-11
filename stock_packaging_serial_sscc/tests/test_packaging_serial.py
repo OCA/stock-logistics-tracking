@@ -17,12 +17,10 @@ class TestStockPackagingSerialSSCC(common.TransactionCase):
                               })
 
         ai = gs1_obj.search([('ai', '=', '00')])
-        product_ul_obj = self.env['product.ul']
-        self.ul_1 = product_ul_obj.create({'name': 'Pack Test',
-                                           'type': 'box',
-                                           'weight': 25.50,
-                                           'gs1_barcode_id': ai[0].id,
-                                           'package_sequence_id': seq.id})
+        product_pack_obj = self.env['product.packaging']
+        self.pack_1 = product_pack_obj.create({'name': 'Pack Test',
+                                               'gs1_barcode_id': ai[0].id,
+                                               'package_sequence_id': seq.id})
 
         self.company = self.env.ref('base.main_company')
         pc_gcp = self.env.ref('partner_identification_gln.'
@@ -40,7 +38,7 @@ class TestStockPackagingSerialSSCC(common.TransactionCase):
         pack_obj = self.env['stock.quant.package']
 
         pack_1 = pack_obj.create({'name': 'PACK001',
-                                  'ul_id': self.ul_1.id})
+                                  'packaging_id': self.pack_1.id})
 
         self.assertEqual(False, not pack_1.serial_id)
 

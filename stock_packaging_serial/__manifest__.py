@@ -7,7 +7,7 @@
     'summary': """
         Allows to generate serial numbers on packages through
         logistical units""",
-    'version': '8.0.1.0.0',
+    'version': '10.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'ACSONE S.A.,Odoo Community Association (OCA)',
     'website': 'http://acsone.eu',
@@ -16,8 +16,5 @@
         'security/stock_packaging_serial.xml',
         'views/stock_packaging_serial.xml',
     ],
-    'demo': [
-    ],
-    'test': [],
     'installable': True
 }
