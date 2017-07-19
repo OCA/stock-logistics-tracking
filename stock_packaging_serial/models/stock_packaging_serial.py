@@ -87,12 +87,12 @@ class StockQuantPackage(models.Model):
             # If We change the logistical unit for the package,
             # serial has to change
             if 'packaging_id' in vals:
-                packaging_id = self.env['stock_quant_package'].browse(
+                packaging_id = self.env['product.packaging'].browse(
                     vals.get('packaging_id', False))
                 if packaging_id and packaging_id.automated_serial:
-                    serial = package.packaging_id.next_serial()
-                    sp_obj = self.env['stock.package.serial']
+                    serial = packaging_id.next_serial()
+                    sp_obj = self.env['stock.packaging.serial']
                     ser = sp_obj.create({'name': serial})
-                    vals.update({'serial_id': ser})
+                    vals.update({'serial_id': ser.id})
         res = super(StockQuantPackage, self).write(vals)
         return res
