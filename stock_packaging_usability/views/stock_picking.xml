@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2014-2018 Akretion (http://www.akretion.com/)
+  @author Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+
+<record id="view_picking_form" model="ir.ui.view">
+    <field name="name">stock_packaging_usability.stock.picking.form</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form" />
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='pack_operation_product_ids']/tree/button[@name='split_lot']" position="after">
+            <button name="put_in_last_pack" type="object"
+                string="Put in Current Pack"
+                icon="fa-stack-overflow"
+                groups="stock.group_tracking_lot"
+                attrs="{'invisible': ['|', ('result_package_id', '!=', False), ('qty_done', '=', 0)]}"/>
+            <button name="put_in_new_pack" type="object"
+                string="Put in New Pack"
+                icon="fa-dropbox"
+                groups="stock.group_tracking_lot"
+                attrs="{'invisible': ['|', ('result_package_id', '!=', False), ('qty_done', '=', 0)]}"/>
+        </xpath>
+    </field>
+</record>
+
+
+</odoo>
