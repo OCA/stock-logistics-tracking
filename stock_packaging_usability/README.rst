@@ -6,6 +6,13 @@
 Stock Packaging Usability
 =========================
 
+Configuration
+=============
+
+Go to the Settings page of the Inventory menu and enable the option
+*Record packages used on packing: pallets, boxes, ...*: it will add all
+users to the group *Manage Packages*.
+
 Usage
 =====
 
