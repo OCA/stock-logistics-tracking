@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo noupdate="1">
+
+
+<record id="box_50x40x30" model="product.ul">
+    <field name="name">Box 50x40x30</field>
+    <field name="type">box</field>
+    <field name="length">50</field>
+    <field name="width">40</field>
+    <field name="height">30</field>
+    <field name="weight">1</field>
+</record>
+
+<record id="pack_30x20x17" model="product.ul">
+    <field name="name">Package 30x20x17</field>
+    <field name="type">pack</field>
+    <field name="length">30</field>
+    <field name="width">20</field>
+    <field name="height">17</field>
+    <field name="weight">0.15</field>
+</record>
+
+<record id="pallet_eur" model="product.ul">
+    <field name="name">EUR-pallet</field>
+    <field name="type">pallet</field>
+    <field name="length">120</field>
+    <field name="width">80</field>
+    <field name="height">14.4</field>
+    <field name="weight">25</field>
+</record>
+
+
+</odoo>
