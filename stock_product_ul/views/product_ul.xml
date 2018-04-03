@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+<record id="product_ul_form" model="ir.ui.view">
+    <field name="model">product.ul</field>
+    <field name="arch" type="xml">
+        <form string="Logistics Unit">
+            <sheet>
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object"
+                        class="oe_stat_button" icon="fa-archive">
+                        <field name="active" widget="boolean_button"
+                            options='{"terminology": "archive"}'/>
+                    </button>
+                </div>
+                <div class="oe_title">
+                    <label for="name" class="oe_edit_only"/>
+                    <h1>
+                        <field name="name" class="oe_inline"/>
+                    </h1>
+                </div>
+                <group name="main">
+                    <field name="type"/>
+                    <field name="product_id" context="{'default_name': name, 'default_type': 'product', 'default_purchase_ok': True, 'default_sale_ok': False}"/>
+                    <label for="length"/>
+                    <div name="length">
+                        <field name="length" class="oe_inline"/>
+                        <label string=" cm"/>
+                    </div>
+                    <label for="width"/>
+                    <div name="width">
+                        <field name="width" class="oe_inline"/>
+                        <label string=" cm"/>
+                    </div>
+                    <label for="height"/>
+                    <div name="height">
+                        <field name="height" class="oe_inline"/>
+                        <label string=" cm"/>
+                    </div>
+                    <label for="weight"/>
+                    <div name="weight">
+                        <field name="weight" class="oe_inline"/>
+                        <label string=" kg"/>
+                    </div>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="product_ul_tree" model="ir.ui.view">
+    <field name="model">product.ul</field>
+    <field name="arch" type="xml">
+        <tree string="Logistics Units">
+            <field name="sequence" widget="handle"/>
+            <field name="name"/>
+            <field name="type"/>
+            <field name="length"/>
+            <field name="width"/>
+            <field name="height"/>
+            <field name="weight"/>
+        </tree>
+    </field>
+</record>
+
+<record id="product_ul_search" model="ir.ui.view">
+    <field name="model">product.ul</field>
+    <field name="arch" type="xml">
+        <search string="Search Logistics Units">
+            <field name="name"/>
+            <separator/>
+            <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            <group string="Group By" name="groupby">
+                <filter name="type_groupby" string="Type" context="{'group_by': 'type'}"/> <!-- TODO trigger a crash 'TypeError: key.indexOf is not a function' => find why -->
+            </group>
+        </search>
+    </field>
+</record>
+
+<record id="product_ul_action" model="ir.actions.act_window">
+    <field name="name">Logistics Units</field>
+    <field name="res_model">product.ul</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem id="product_ul_menu"
+    parent="stock.menu_product_in_config_stock"
+    action="product_ul_action"
+    groups="stock.group_tracking_lot"
+    sequence="100"/>
+
+</odoo>

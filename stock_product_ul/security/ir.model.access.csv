@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_ul_read,Read access on product.ul to Employees,model_product_ul,base.group_user,1,0,0,0
+access_product_ul_full,Full access on product.ul to Stock Manager,model_product_ul,stock.group_stock_manager,1,1,1,1
