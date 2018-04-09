@@ -7,7 +7,7 @@
     'version': '10.0.1.0.0',
     'category': 'Warehouse',
     'license': 'AGPL-3',
-    'summary': 'Restore product.ul object',
+    'summary': 'Restore Logisitics Units object',
     'author': 'Akretion,Odoo Community Association (OCA)',
     'website': 'http://www.akretion.com',
     'depends': ['stock'],
@@ -17,6 +17,6 @@
         'views/stock_quant_package.xml',
     ],
     'demo': ['demo/product_ul.xml'],
-    'url': 'https://odoo-community.org/',
+    'url': 'https://github.com/OCA/stock-logistics-tracking',
     'installable': True,
 }
