@@ -10,7 +10,7 @@
     'license': 'AGPL-3',
     'summary': "Faster packaging process with logistics units",
     'author': 'Akretion,Odoo Community Association (OCA)',
-    'website': 'http://www.akretion.com',
+    'website': 'https://github.com/OCA/stock-logistics-tracking',
     'depends': [
         'stock_packaging_usability',
         'stock_product_ul',
