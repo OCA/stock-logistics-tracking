@@ -11,6 +11,9 @@
     'author': 'Akretion,Odoo Community Association (OCA)',
     'website': 'http://www.akretion.com',
     'depends': ['stock'],
+    'external_dependencies': {
+        "python": ['openupgradelib'],
+    },
     'data': [
         'security/ir.model.access.csv',
         'views/product_ul.xml',
@@ -19,4 +22,5 @@
     'demo': ['demo/product_ul.xml'],
     'url': 'https://github.com/OCA/stock-logistics-tracking',
     'installable': True,
+    'post_init_hook': 'post_init_hook',
 }
