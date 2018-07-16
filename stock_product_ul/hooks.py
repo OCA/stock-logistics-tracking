@@ -2,7 +2,7 @@
 # Copyright 2018 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openupgrade import openupgradelib
+from openupgradelib import openupgrade
 
 
 def post_init_hook(cr, registry):
