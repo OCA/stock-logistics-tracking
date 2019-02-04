@@ -21,6 +21,7 @@ env:
   - VERSION="11.0" TESTS="0" LINT_CHECK="0"
 
 install:
+  - pip install openupgradelib
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly

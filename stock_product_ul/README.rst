@@ -41,6 +41,7 @@ Contributors
 ------------
 
 * Alexis de Lattre <alexis.delattre@akretion.com>
+* Gabriel Davini <gabrielfranciscodavini@gmail.com>
 
 Maintainer
 ----------
