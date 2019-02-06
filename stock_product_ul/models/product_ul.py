@@ -24,7 +24,7 @@ class ProductUl(models.Model):
         string='Type',
         required=True,
     )
-    length = fields.Float(
+    length = fields.Float(  # pylint: disable=W8105
         string='Length', help='Length of the logistics unit in cm')
     width = fields.Float(
         string='Width', help='Width of the logistics unit in cm')
