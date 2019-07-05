@@ -1,0 +1,93 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_packaging_usability_ul
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-21 09:06+0000\n"
+"PO-Revision-Date: 2014-11-21 09:06+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_packaging_usability_ul
+#: view:stock.select.ul:stock_packaging_usability_ul.stock_select_ul_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: stock_packaging_usability_ul
+#: field:stock.select.ul,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: stock_packaging_usability_ul
+#: field:stock.select.ul,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: stock_packaging_usability_ul
+#: field:stock.select.ul,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_packaging_usability_ul
+#: field:stock.select.ul,write_uid:0
+msgid "Last Updated by"
+msgstr "Dernière mise-à-jour par"
+
+#. module: stock_packaging_usability_ul
+#: field:stock.select.ul,write_date:0
+msgid "Last Updated on"
+msgstr "Dernière mise-à-jour le"
+
+#. module: stock_packaging_usability_ul
+#: field:stock.select.ul,ul_id:0
+msgid "Logistic Unit"
+msgstr "Unité logistique"
+
+#. module: stock_packaging_usability_ul
+#: model:ir.model,name:stock_packaging_usability_ul.model_stock_transfer_details
+msgid "Picking wizard"
+msgstr ""
+
+#. module: stock_packaging_usability_ul
+#: model:ir.model,name:stock_packaging_usability_ul.model_stock_transfer_details_items
+msgid "Picking wizard items"
+msgstr ""
+
+#. module: stock_packaging_usability_ul
+#: model:ir.actions.act_window,name:stock_packaging_usability_ul.stock_select_ul_action
+#: view:stock.select.ul:stock_packaging_usability_ul.stock_select_ul_form
+msgid "Select Logistical Unit"
+msgstr "Sélectionnez l'unité logistique"
+
+#. module: stock_packaging_usability_ul
+#: model:ir.model,name:stock_packaging_usability_ul.model_stock_select_ul
+msgid "Select UL"
+msgstr "Sélectionnez l'unité logistique"
+
+#. module: stock_packaging_usability_ul
+#: view:stock.select.ul:stock_packaging_usability_ul.stock_select_ul_form
+msgid "Validate"
+msgstr "Valider"
+
+#. module: stock_packaging_usability_ul
+#: view:stock.transfer_details:stock_packaging_usability_ul.view_stock_enter_transfer_details
+msgid "action"
+msgstr "action"
+
+#. module: stock_packaging_usability_ul
+#: view:stock.transfer_details:stock_packaging_usability_ul.view_stock_enter_transfer_details
+msgid "{'pack_function': 'put_in_pack'}"
+msgstr "{'pack_function': 'put_in_pack'}"
+
+#. module: stock_packaging_usability_ul
+#: view:stock.transfer_details:stock_packaging_usability_ul.view_stock_enter_transfer_details
+msgid "{'pack_function': 'put_residual_in_new_pack'}"
+msgstr "{'pack_function': 'put_residual_in_new_pack'}"
+

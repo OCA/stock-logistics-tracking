@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2019 Akretion France (http://www.akretion.com/)
+  @author Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+
+<!-- I don't know why the form view of product.packaging in the delivery
+     module has "<field name="inherit_id" eval="False"/>"
+    instead of a standard inherit of product.product_packaging_form_view -->
+<record id="product_packaging_delivery_form" model="ir.ui.view">
+    <field name="name">stock_packaging_usability_pp.product.packaging.form</field>
+    <field name="model">product.packaging</field>
+    <field name="inherit_id" ref="delivery.product_packaging_delivery_form" />
+    <field name="arch" type="xml">
+        <field name="height" position="replace">
+            <label for="height"/>
+            <div name="height">
+                <field name="height"/> cm
+            </div>
+        </field>
+        <field name="width" position="replace">
+            <label for="width"/>
+            <div name="width">
+                <field name="width"/> cm
+            </div>
+        </field>
+        <field name="length" position="replace">
+            <label for="length"/>
+            <div name="length">
+                <field name="length"/> cm
+            </div>
+        </field>
+        <field name="max_weight" position="replace">
+            <label for="max_weight"/>
+            <div name="max_weight">
+                <field name="max_weight"/> kg
+            </div>
+        </field>
+    </field>
+</record>
+
+
+</odoo>
