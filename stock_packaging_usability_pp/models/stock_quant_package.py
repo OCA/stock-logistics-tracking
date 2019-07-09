@@ -14,7 +14,6 @@ class StockQuantPackage(models.Model):
     @api.one
     @api.depends('quant_ids')
     def _compute_weight(self):
-        print('xxxxxxxxxxxxxxx')
         weight = 0.0
         weight_uom_categ = self.env.ref('uom.product_uom_categ_kgm')
         kg_uom = self.env.ref('uom.product_uom_kgm')
