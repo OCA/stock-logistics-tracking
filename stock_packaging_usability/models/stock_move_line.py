@@ -1,4 +1,4 @@
-# Copyright 2014-2019 Akretion France (http://www.akretion.com)
+# Copyright 2014-2021 Akretion France (http://www.akretion.com)
 # @author Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -14,18 +14,16 @@ class StockMoveLine(models.Model):
     def put_in_new_pack(self):
         self.ensure_one()
         pack = self.env['stock.quant.package'].create({})
+        picking = self.picking_id
         pack_level = self.env['stock.package_level'].create({
             'package_id': pack.id,
-            'picking_id': self.picking_id.id,
+            'picking_id': picking.id,
             'location_id': False,
             'location_dest_id': self.location_dest_id.id,
             'move_line_ids': [(6, 0, [self.id])],
+            'company_id': picking.company_id.id,
             })
         self._put_in_target_pack(pack, pack_level)
-        action = {}
-        if self._context.get('stock_packaging_usability_return_action'):
-            action = self.move_id.action_show_details()
-        return action
 
     def put_in_last_pack(self):
         all_cur_packs_ids = [
@@ -45,10 +43,6 @@ class StockMoveLine(models.Model):
                 "There are several package levels linked to package '%s'.")
                 % pack.display_name)
         self._put_in_target_pack(pack, pack_levels)
-        action = {}
-        if self._context.get('stock_packaging_usability_return_action'):
-            action = self.move_id.action_show_details()
-        return action
 
     def _put_in_target_pack(self, pack, pack_level):
         self.ensure_one()
@@ -62,19 +56,12 @@ class StockMoveLine(models.Model):
         moveline_to_pack = self
         if float_compare(
                 self.qty_done, self.product_uom_qty, precision_digits=prec) < 0:
-            # QUESTION it is still unclear to me why we have to put
-            # product_uom_qty = 0 instead of product_uom_qty = self.qty_done
-            # in copy(). It gives good results in Detailed operations, but slightly
-            # wired behavior in "Operations". But, if we set
-            # product_uom_qty = self.qty_done, we get the error msg
-            # "It is not possible to unreserve more products of xx
-            # than you have in stock"
             new_moveline = self.copy(
-                {'product_uom_qty': 0, 'qty_done': self.qty_done})
+                {'product_uom_qty': self.qty_done, 'qty_done': self.qty_done})
             self.write({
                 'product_uom_qty': self.product_uom_qty - self.qty_done,
                 'qty_done': 0,
                 })
             moveline_to_pack = new_moveline
-        pack_level.move_line_ids = [(4, moveline_to_pack.id)]
-        moveline_to_pack.result_package_id = pack.id
+        pack_level.write({'move_line_ids': [(4, moveline_to_pack.id)]})
+        moveline_to_pack.write({'result_package_id': pack.id})

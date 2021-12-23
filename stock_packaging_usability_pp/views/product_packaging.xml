@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright 2019 Akretion France (http://www.akretion.com/)
+  Copyright 2019-2021 Akretion France (http://www.akretion.com/)
   @author Alexis de Lattre <alexis.delattre@akretion.com>
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
@@ -18,43 +18,17 @@
     <field name="arch" type="xml">
         <field name="package_carrier_type" position="after">
             <field name="packaging_type"/>
+            <field name="active" invisible="1"/>
         </field>
-        <field name="height" position="replace">
-            <label for="height"/>
-            <div name="height">
-                <field name="height" class="oe_inline"/> cm
-            </div>
-        </field>
-        <field name="width" position="replace">
-            <label for="width"/>
-            <div name="width">
-                <field name="width" class="oe_inline"/> cm
-            </div>
-        </field>
-        <field name="length" position="replace">
-            <label for="length"/>
-            <div name="length">
-                <field name="length" class="oe_inline"/> cm
-            </div>
-        </field>
-        <field name="max_weight" position="replace">
+        <label for="max_weight" position="before">
             <label for="weight"/>
-            <div name="weight">
-                <field name="weight" class="oe_inline"/> kg
+            <div class="o_row" name="weight">
+                <field name="weight"/>
+                <span><field name="weight_uom_name"/></span>
             </div>
-            <label for="max_weight"/>
-            <div name="max_weight">
-                <field name="max_weight" class="oe_inline"/> kg
-            </div>
-        </field>
+        </label>
         <label for="name" position="before">
-            <div class="oe_button_box" name="button_box">
-                <button name="toggle_active" type="object"
-                    class="oe_stat_button" icon="fa-archive">
-                    <field name="active" widget="boolean_button"
-                        options='{"terminology": "archive"}'/>
-                </button>
-            </div>
+            <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
         </label>
     </field>
 </record>
@@ -65,8 +39,10 @@
     <field name="inherit_id" ref="delivery.product_packaging_delivery_tree" />
     <field name="arch" type="xml">
         <field name="name" position="after">
-            <field name="packaging_type"/>
-            <field name="weight"/>
+            <field name="packaging_type" optional="show"/>
+        </field>
+        <field name="max_weight" position="before">
+            <field name="weight" optional="show"/>
         </field>
     </field>
 </record>

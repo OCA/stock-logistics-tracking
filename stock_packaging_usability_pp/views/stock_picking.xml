@@ -11,18 +11,23 @@
 <record id="view_picking_form" model="ir.ui.view">
     <field name="name">stock_packaging_usability_pp.stock.picking.form</field>
     <field name="model">stock.picking</field>
-    <field name="inherit_id" ref="stock_packaging_usability.view_picking_form" />
+    <field name="inherit_id" ref="stock.view_picking_form" />
     <field name="arch" type="xml">
-        <button name="put_in_new_pack" position="attributes">
-            <attribute name="type">action</attribute>
-            <attribute name="name">%(stock_select_product_packaging_action)d</attribute>
-            <attribute name="context">{'pack_function': 'put_in_new_pack'}</attribute>
-        </button>
-        <button name="put_in_pack" position="attributes">
+        <xpath expr="//page[@name='detailed_operations_hidden']/button[@name='action_put_in_pack']" position="attributes">
             <attribute name="type">action</attribute>
             <attribute name="name">%(stock_select_product_packaging_action)d</attribute>
             <attribute name="context">{'pack_function': 'put_selection_in_new_pack'}</attribute>
-        </button>
+        </xpath>
+        <xpath expr="//page[@name='detailed_operations_shown']/button[@name='action_put_in_pack']" position="attributes">
+            <attribute name="type">action</attribute>
+            <attribute name="name">%(stock_select_product_packaging_action)d</attribute>
+            <attribute name="context">{'pack_function': 'put_selection_in_new_pack'}</attribute>
+        </xpath>
+        <xpath expr="//page[@name='operations']/button[@name='action_put_in_pack']" position="attributes">
+            <attribute name="type">action</attribute>
+            <attribute name="name">%(stock_select_product_packaging_action)d</attribute>
+            <attribute name="context">{'pack_function': 'put_selection_in_new_pack'}</attribute>
+        </xpath>
     </field>
 </record>
 
