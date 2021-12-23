@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_select_product_packaging,Full access on stock.select.product.packaging wizard,model_stock_select_product_packaging,stock.group_stock_user,1,1,1,1

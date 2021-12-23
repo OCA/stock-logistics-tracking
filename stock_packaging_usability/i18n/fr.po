@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_packaging_usability
+# 	* stock_packaging_usability
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-21 08:57+0000\n"
-"PO-Revision-Date: 2014-11-21 08:57+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2021-12-23 16:50+0000\n"
+"PO-Revision-Date: 2021-12-23 16:50+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,49 +16,63 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_packaging_usability
-#: model:ir.model,name:stock_packaging_usability.model_stock_transfer_details
-msgid "Picking wizard"
+#: code:addons/stock_packaging_usability/models/stock_move_line.py:0
+#, python-format
+msgid "Could not find any package level linked to package '%s'."
 msgstr ""
 
 #. module: stock_packaging_usability
-#: model:ir.model,name:stock_packaging_usability.model_stock_transfer_details_items
-msgid "Picking wizard items"
+#: model:ir.model.fields,field_description:stock_packaging_usability.field_stock_move_line__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: stock_packaging_usability
+#: model:ir.model.fields,field_description:stock_packaging_usability.field_stock_move_line__id
+msgid "ID"
 msgstr ""
 
 #. module: stock_packaging_usability
-#: view:stock.transfer_details:stock_packaging_usability.view_stock_enter_transfer_details
-msgid "Products To Move"
-msgstr "Produits à déplacer"
+#: model:ir.model.fields,field_description:stock_packaging_usability.field_stock_move_line____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
 
 #. module: stock_packaging_usability
-#: view:stock.transfer_details:stock_packaging_usability.view_stock_enter_transfer_details
-msgid "Put Residual in New Pack"
-msgstr "Mettre le reste dans un nouveau paquet"
+#: model:ir.model,name:stock_packaging_usability.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Mouvements d'article (Ligne de mouvement de stock)"
 
 #. module: stock_packaging_usability
-#: view:stock.transfer_details:stock_packaging_usability.view_stock_enter_transfer_details
-msgid "Put in current pack"
-msgstr "Mettre dans le paquet actuel"
+#: model_terms:ir.ui.view,arch_db:stock_packaging_usability.view_stock_move_line_detailed_operation_tree
+#: model_terms:ir.ui.view,arch_db:stock_packaging_usability.view_stock_move_line_operation_tree
+msgid "Put in Current Pack"
+msgstr ""
 
 #. module: stock_packaging_usability
-#: view:stock.transfer_details:stock_packaging_usability.view_stock_enter_transfer_details
-msgid "Put in new pack"
-msgstr "Mettre dans un nouveau paquet"
+#: model_terms:ir.ui.view,arch_db:stock_packaging_usability.view_stock_move_line_detailed_operation_tree
+#: model_terms:ir.ui.view,arch_db:stock_packaging_usability.view_stock_move_line_operation_tree
+msgid "Put in New Pack"
+msgstr ""
 
 #. module: stock_packaging_usability
-#: code:addons/stock_packaging_usability/wizard/stock_transfer_details.py:58
+#: code:addons/stock_packaging_usability/models/stock_move_line.py:0
 #, python-format
-msgid "There is no current package"
-msgstr "Il n'y a pas de paquet actuel"
+msgid "Qty done is 0"
+msgstr ""
 
 #. module: stock_packaging_usability
-#: code:addons/stock_packaging_usability/wizard/stock_transfer_details.py:52
+#: code:addons/stock_packaging_usability/models/stock_move_line.py:0
 #, python-format
-msgid "This product is already in a package !"
-msgstr "Ce produit est déjà dans un paquet !"
+msgid "There are several package levels linked to package '%s'."
+msgstr ""
 
 #. module: stock_packaging_usability
-#: view:stock.transfer_details:stock_packaging_usability.view_stock_enter_transfer_details
-msgid "terp-accessories-archiver+"
-msgstr "terp-accessories-archiver+"
+#: code:addons/stock_packaging_usability/models/stock_move_line.py:0
+#, python-format
+msgid "There is no current package."
+msgstr ""
 
+#. module: stock_packaging_usability
+#: code:addons/stock_packaging_usability/models/stock_move_line.py:0
+#, python-format
+msgid "This operation is already packaged."
+msgstr ""
