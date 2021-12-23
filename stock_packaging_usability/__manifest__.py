@@ -4,17 +4,17 @@
 
 
 {
-    'name': 'Stock Packaging Usability',
-    'version': '14.0.1.0.0',
-    'category': 'Inventory/Inventory',
-    'license': 'AGPL-3',
-    'summary': "Faster packaging process in Odoo",
-    'author': 'Akretion,Odoo Community Association (OCA)',
-    'maintainers': ['alexis-via'],
-    'website': 'https://github.com/OCA/stock-logistics-tracking',
-    'depends': ['stock'],
-    'data': [
-        'views/stock_move_line.xml',
-        ],
-    'installable': True,
+    "name": "Stock Packaging Usability",
+    "version": "14.0.1.0.0",
+    "category": "Inventory/Inventory",
+    "license": "AGPL-3",
+    "summary": "Faster packaging process in Odoo",
+    "author": "Akretion,Odoo Community Association (OCA)",
+    "maintainers": ["alexis-via"],
+    "website": "https://github.com/OCA/stock-logistics-tracking",
+    "depends": ["stock"],
+    "data": [
+        "views/stock_move_line.xml",
+    ],
+    "installable": True,
 }
