@@ -5,7 +5,7 @@
 
 from odoo import _, models
 from odoo.exceptions import UserError
-from odoo.tools import float_compare, float_is_zero
+from odoo.tools import float_compare, float_is_zero, float_round
 
 
 class StockMoveLine(models.Model):
@@ -65,15 +65,27 @@ class StockMoveLine(models.Model):
             float_compare(self.qty_done, self.product_uom_qty, precision_digits=prec)
             < 0
         ):
-            new_moveline = self.copy(
-                {"product_uom_qty": self.qty_done, "qty_done": self.qty_done}
+            quantity_left_todo = float_round(
+                self.product_uom_qty - self.qty_done,
+                precision_rounding=self.product_uom_id.rounding,
             )
+            done_to_keep = self.qty_done
+            # IMPORTANT: we first create the new move line with product_uom_qty=0
+            # and THEN we write product_uom_qty = qty_done on it.
+            # We MUSTN'T create the new move line directly with
+            # product_uom_qty=self.qty_done because it doesn't update
+            # the reserved_qty on the quant, because on stock.move.line
+            # the inherit of write() calls
+            # self.env['stock.quant']._update_reserved_quantity()
+            # but the inherit of create() doesn't !
+            new_moveline = self.copy({"product_uom_qty": 0, "qty_done": done_to_keep})
             self.write(
                 {
-                    "product_uom_qty": self.product_uom_qty - self.qty_done,
+                    "product_uom_qty": quantity_left_todo,
                     "qty_done": 0,
                 }
             )
+            new_moveline.write({"product_uom_qty": done_to_keep})
             moveline_to_pack = new_moveline
         pack_level.write({"move_line_ids": [(4, moveline_to_pack.id)]})
         moveline_to_pack.write({"result_package_id": pack.id})
