@@ -27,7 +27,11 @@ Please don't hesitate to suggest one of your module to this project. Also, you m
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[stock_picking_manual_package](stock_picking_manual_package/) | 13.0.1.0.0 |  | Select or create a package to put in pack for a picking
 
 [//]: # (end addons)
 
