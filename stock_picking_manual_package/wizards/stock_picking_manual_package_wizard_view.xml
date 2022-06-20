@@ -5,13 +5,26 @@
         <field name="model">stock.picking.manual.package.wiz</field>
         <field name="arch" type="xml">
             <form string="Stock Picking Manual Package">
-                <p>Select or create a package to do 'Put in pack'</p>
+                <p class="mb-0">Select or create a package to do 'Put in pack'</p>
                 <group>
-                    <field name="package_id" />
+                    <field name="package_id" nolabel="1" />
                 </group>
-                <p>Set how many lines you want to 'Put in pack'</p>
+                <p
+                    class="mb-0"
+                >You can apply a filter by product to split in different packages</p>
                 <group>
-                    <field name="nbr_lines_into_package" />
+                    <field name="picking_product_ids" invisible="1" />
+                    <field
+                        name="product_ids"
+                        widget="many2many_tags"
+                        domain="[('id', 'in', picking_product_ids)]"
+                        options="{'no_create': True}"
+                        nolabel="1"
+                    />
+                </group>
+                <p class="mb-0">Set how many lines you want to 'Put in pack'</p>
+                <group>
+                    <field name="nbr_lines_into_package" nolabel="1" />
                 </group>
                 <footer>
                     <button

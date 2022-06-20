@@ -76,3 +76,21 @@ class TestStockPicking(TransactionCase):
         wiz.action_confirm()
         packages = self.picking_in.move_line_ids.mapped("result_package_id")
         self.assertEqual(len(packages), 1)
+
+    def test_one_product_manual_package(self):
+        self.picking_in.action_assign()
+        # Add done quantities
+        for line in self.picking_in.move_line_ids:
+            line.qty_done = line.product_uom_qty
+        action = self.picking_in.with_context(test_manual_package=True).put_in_pack()
+        wiz = self.env["stock.picking.manual.package.wiz"].browse(action["res_id"])
+        wiz.package_id = self.env["stock.quant.package"].create({"name": "TEST-0004"})
+        wiz.product_ids = [(6, 0, self.product_8.ids)]
+        wiz.nbr_lines_into_package = 0
+        wiz.action_confirm()
+        packages = self.picking_in.move_line_ids.mapped("result_package_id")
+        self.assertEqual(len(packages), 1)
+        products_in_package = self.picking_in.move_line_ids.filtered(
+            lambda ln: ln.result_package_id == packages
+        ).mapped("product_id")
+        self.assertEqual(products_in_package, self.product_8)

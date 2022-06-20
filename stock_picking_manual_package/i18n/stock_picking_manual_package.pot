@@ -6,12 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-21 09:15+0000\n"
+"PO-Revision-Date: 2022-06-21 09:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: stock_picking_manual_package
+#: model_terms:ir.ui.view,arch_db:stock_picking_manual_package.view_manual_package_wizard_form
+msgid "You can apply a filter by product to split in different packages"
+msgstr ""
 
 #. module: stock_picking_manual_package
 #: model_terms:ir.ui.view,arch_db:stock_picking_manual_package.view_manual_package_wizard_form
@@ -92,8 +99,23 @@ msgid "Picking"
 msgstr ""
 
 #. module: stock_picking_manual_package
+#: model:ir.model.fields,field_description:stock_picking_manual_package.field_stock_picking_manual_package_wiz__picking_product_ids
+msgid "Picking Product"
+msgstr ""
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,field_description:stock_picking_manual_package.field_stock_picking_manual_package_wiz__product_ids
+msgid "Products"
+msgstr ""
+
+#. module: stock_picking_manual_package
 #: model_terms:ir.ui.view,arch_db:stock_picking_manual_package.view_manual_package_wizard_form
 msgid "Select or create a package to do 'Put in pack'"
+msgstr ""
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,help:stock_picking_manual_package.field_stock_picking_manual_package_wiz__product_ids
+msgid "Select which products to include in the package"
 msgstr ""
 
 #. module: stock_picking_manual_package
@@ -110,6 +132,12 @@ msgstr ""
 #. module: stock_picking_manual_package
 #: model:ir.model,name:stock_picking_manual_package.model_stock_picking_manual_package_wiz
 msgid "Stock picking manual package wizard"
+msgstr ""
+
+#. module: stock_picking_manual_package
+#: code:addons/stock_picking_manual_package/models/stock_picking.py:0
+#, python-format
+msgid "There are no lines to pack."
 msgstr ""
 
 #. module: stock_picking_manual_package
