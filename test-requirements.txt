@@ -1,0 +1,1 @@
+odoo-addon-stock-quant-package-number @ git+https://github.com/acsone/stock-logistics-tracking.git@79a370d53e6ca99b5ff3f3c7037e65ee633c899c#subdirectory=setup/stock_quant_package_number
