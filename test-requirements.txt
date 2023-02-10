@@ -1,0 +1,2 @@
+# https://github.com/OCA/stock-logistics-workflow/pull/1158
+odoo-addon-delivery-procurement-group-carrier @ git+https://github.com/acsone/stock-logistics-workflow.git@16.0-mig-delivery_procurement_group_carrier-dro#subdirectory=setup/delivery_procurement_group_carrier
