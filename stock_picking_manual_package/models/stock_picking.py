@@ -1,7 +1,8 @@
 # Copyright 2022 Sergio Teruel - Tecnativa
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import models
+from odoo import _, models
+from odoo.exceptions import UserError
 from odoo.tools import config
 
 
@@ -25,6 +26,11 @@ class StockPicking(models.Model):
 
     def _put_in_pack(self, move_line_ids):
         nbr_lines_into_package = self.env.context.get("nbr_lines_into_package", False)
+        products = self.env.context.get("products_in_package", False)
+        if products:
+            move_line_ids = move_line_ids.filtered(lambda ln: ln.product_id in products)
         if nbr_lines_into_package:
             move_line_ids = move_line_ids[:nbr_lines_into_package]
+        if not move_line_ids:
+            raise UserError(_("There are no lines to pack."))
         return super()._put_in_pack(move_line_ids)
