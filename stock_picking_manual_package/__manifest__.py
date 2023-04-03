@@ -3,7 +3,7 @@
 {
     "name": "Stock Picking Manual Package",
     "summary": "Select or create a package to put in pack for a picking",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.1.0",
     "category": "Stock",
     "website": "https://github.com/OCA/stock-logistics-tracking",
     "author": "Tecnativa, Odoo Community Association (OCA)",
