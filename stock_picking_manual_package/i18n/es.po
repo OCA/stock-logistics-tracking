@@ -19,12 +19,6 @@ msgstr ""
 
 #. module: stock_picking_manual_package
 #: model_terms:ir.ui.view,arch_db:stock_picking_manual_package.view_manual_package_wizard_form
-msgid "You can apply a filter by product to split in different packages"
-msgstr ""
-"Puede aplicar un filtro por producto para separar en distintos paquetes"
-
-#. module: stock_picking_manual_package
-#: model_terms:ir.ui.view,arch_db:stock_picking_manual_package.view_manual_package_wizard_form
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -150,3 +144,9 @@ msgstr "No hay líneas a empaquetar."
 #: model:ir.model,name:stock_picking_manual_package.model_stock_picking
 msgid "Transfer"
 msgstr "Transferir"
+
+#. module: stock_picking_manual_package
+#: model_terms:ir.ui.view,arch_db:stock_picking_manual_package.view_manual_package_wizard_form
+msgid "You can apply a filter by product to split in different packages"
+msgstr ""
+"Puede aplicar un filtro por producto para separar en distintos paquetes"
