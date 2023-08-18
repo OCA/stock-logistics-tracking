@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <field name="name" position="attributes">
                 <attribute name="readonly">True</attribute>
+                <attribute name="force_save">1</attribute>
             </field>
             <xpath
                 expr="//group/group/field[@name='package_type_id']"
