@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_quant_package_multi_reference_stock_quant_package_reference_user,stock_quant_package_multi_reference_stock_quant_package_reference.user,model_stock_quant_package_reference,base.group_user,1,1,1,1

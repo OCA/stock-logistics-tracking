@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_quant_package_form_multi_reference" model="ir.ui.view">
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.view_quant_package_form" />
+        <field name="arch" type="xml">
+            <field name="name" position="attributes">
+                <attribute name="readonly">True</attribute>
+                <attribute name="force_save">1</attribute>
+            </field>
+            <xpath
+                expr="//group/group/field[@name='package_type_id']"
+                position="before"
+            >
+                <field name="reference_ids">
+                    <tree editable="bottom">
+                        <field name="sequence" widget="handle" />
+                        <field name="name" />
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
+</odoo>
