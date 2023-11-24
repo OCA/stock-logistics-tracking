@@ -6,83 +6,85 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-11-24 17:36+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model.fields,field_description:stock_quant_package_multi_reference.field_stock_quant_package_reference__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model.fields,field_description:stock_quant_package_multi_reference.field_stock_quant_package_reference__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model.fields,field_description:stock_quant_package_multi_reference.field_stock_quant_package_reference__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model.fields,field_description:stock_quant_package_multi_reference.field_stock_quant_package_reference__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model,name:stock_quant_package_multi_reference.model_stock_quant_package_reference
 msgid "Individual item in a package's reference list"
-msgstr ""
+msgstr "Singolo elemento in un elenco riferimenti del collo"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model.fields,field_description:stock_quant_package_multi_reference.field_stock_quant_package_reference____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model.fields,field_description:stock_quant_package_multi_reference.field_stock_quant_package_reference__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model.fields,field_description:stock_quant_package_multi_reference.field_stock_quant_package_reference__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model.fields,field_description:stock_quant_package_multi_reference.field_stock_quant_package_reference__stock_quant_package_id
 msgid "Package"
-msgstr ""
+msgstr "Collo"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model.fields,field_description:stock_quant_package_multi_reference.field_stock_quant_package__name
 msgid "Package Reference"
-msgstr ""
+msgstr "Riferimento collo"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model,name:stock_quant_package_multi_reference.model_stock_quant_package
 msgid "Packages"
-msgstr ""
+msgstr "Colli"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model.fields,field_description:stock_quant_package_multi_reference.field_stock_quant_package_reference__name
 msgid "Reference"
-msgstr ""
+msgstr "Riferimento"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model.fields,field_description:stock_quant_package_multi_reference.field_stock_quant_package__reference_ids
 msgid "References"
-msgstr ""
+msgstr "Riferimenti"
 
 #. module: stock_quant_package_multi_reference
 #: model:ir.model.fields,field_description:stock_quant_package_multi_reference.field_stock_quant_package_reference__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Sequenza"
 
 #. module: stock_quant_package_multi_reference
 #. odoo-python
@@ -92,10 +94,12 @@ msgid ""
 "The Reference \"%(reference_name)s\" already exists for package "
 "\"%(package_name)s\" in the company %(company_name)s"
 msgstr ""
+"Il riferimento \"%(reference_name)s\" esiste già per il collo \""
+"%(package_name)s\" nell'azienda %(company_name)s"
 
 #. module: stock_quant_package_multi_reference
 #. odoo-python
 #: code:addons/stock_quant_package_multi_reference/models/stock_quant_package.py:0
 #, python-format
 msgid "Unknown Pack"
-msgstr ""
+msgstr "Pacco sconosciuto"
