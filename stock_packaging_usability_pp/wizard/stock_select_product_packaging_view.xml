@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2014-2019 Akretion (http://www.akretion.com/)
+  @author Alexis de Lattre <alexis.delattre@akretion.com>
+-->
+<odoo>
+
+
+<record id="stock_select_product_packaging_form" model="ir.ui.view">
+    <field name="model">stock.select.product.packaging</field>
+    <field name="arch" type="xml">
+        <form string="Select Packaging">
+            <group name="main">
+                <field name="packaging_id" />
+            </group>
+            <footer>
+                <button
+                        name="validate"
+                        type="object"
+                        string="Validate"
+                        class="btn-primary"
+                    />
+                <button
+                        name="cancel"
+                        special="cancel"
+                        string="Cancel"
+                        class="btn-default"
+                    />
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="stock_select_product_packaging_action" model="ir.actions.act_window">
+    <field name="name">Select Packaging</field>
+    <field name="res_model">stock.select.product.packaging</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+
+</odoo>

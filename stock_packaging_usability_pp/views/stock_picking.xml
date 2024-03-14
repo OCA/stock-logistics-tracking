@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2018-2019 Akretion France (http://www.akretion.com/)
+  @author Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+
+<record id="view_picking_form" model="ir.ui.view">
+    <field name="name">stock_packaging_usability_pp.stock.picking.form</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form" />
+    <field name="arch" type="xml">
+        <xpath
+                expr="//page[@name='detailed_operations_hidden']/button[@name='action_put_in_pack']"
+                position="attributes"
+            >
+            <attribute name="type">action</attribute>
+            <attribute name="name">%(stock_select_product_packaging_action)d</attribute>
+            <attribute
+                    name="context"
+                >{'pack_function': 'put_selection_in_new_pack'}</attribute>
+        </xpath>
+        <xpath
+                expr="//page[@name='detailed_operations_shown']/button[@name='action_put_in_pack']"
+                position="attributes"
+            >
+            <attribute name="type">action</attribute>
+            <attribute name="name">%(stock_select_product_packaging_action)d</attribute>
+            <attribute
+                    name="context"
+                >{'pack_function': 'put_selection_in_new_pack'}</attribute>
+        </xpath>
+        <xpath
+                expr="//page[@name='operations']/button[@name='action_put_in_pack']"
+                position="attributes"
+            >
+            <attribute name="type">action</attribute>
+            <attribute name="name">%(stock_select_product_packaging_action)d</attribute>
+            <attribute
+                    name="context"
+                >{'pack_function': 'put_selection_in_new_pack'}</attribute>
+        </xpath>
+    </field>
+</record>
+
+
+</odoo>
