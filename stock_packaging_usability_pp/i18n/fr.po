@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2021-12-23 16:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -127,14 +128,10 @@ msgstr "Colisage"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.actions.act_window,name:stock_packaging_usability_pp.stock_select_product_packaging_action
+#: model:ir.model,name:stock_packaging_usability_pp.model_stock_select_product_packaging
 #: model_terms:ir.ui.view,arch_db:stock_packaging_usability_pp.stock_select_product_packaging_form
 msgid "Select Packaging"
 msgstr "Sélectionner le type de colis"
-
-#. module: stock_packaging_usability_pp
-#: model:ir.model,name:stock_packaging_usability_pp.model_stock_select_product_packaging
-msgid "Select Product Packaging"
-msgstr "Sélectionner le colisage"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model,name:stock_packaging_usability_pp.model_stock_move
@@ -155,3 +152,6 @@ msgstr "Unité"
 #: model_terms:ir.ui.view,arch_db:stock_packaging_usability_pp.stock_select_product_packaging_form
 msgid "Validate"
 msgstr "Valider"
+
+#~ msgid "Select Product Packaging"
+#~ msgstr "Sélectionner le colisage"
