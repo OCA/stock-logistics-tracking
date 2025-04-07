@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2025 Camptocamp SA
+@author: Italo LOPES <italo.lopes@camptocamp.com>
+License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_quant_package_form" model="ir.ui.view">
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.view_quant_package_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='package_type_id']" position="after">
+                <field name="order_number" />
+                <field name="sheet_number" widget="char" />
+                <field name="package_number" invisible="not package_number" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
