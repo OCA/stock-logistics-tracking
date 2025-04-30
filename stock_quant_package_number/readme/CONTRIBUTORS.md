@@ -1,2 +1,2 @@
 - Italo LOPES \<<italo.lopes@camptocamp.com>\>
-
+- Victor Vermot \<<victor.vermot@camptocamp.com>\>

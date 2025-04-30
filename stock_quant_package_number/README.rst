@@ -58,7 +58,8 @@ Authors
 Contributors
 ------------
 
--  Italo LOPES <italo.lopes@camptocamp.com>
+- Italo LOPES <italo.lopes@camptocamp.com>
+- Victor Vermot <victor.vermot@camptocamp.com>
 
 Maintainers
 -----------
