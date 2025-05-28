@@ -6,7 +6,7 @@
     "version": "16.0.1.0.0",
     "development_status": "Alpha",
     "category": "Warehouse Management",
-    "website": "https://github.com/OCA/stock-logistics-workflow",
+    "website": "https://github.com/OCA/stock-logistics-tracking",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
