@@ -6,44 +6,46 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-05-29 16:26+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_product_packaging__active
 msgid "Active"
-msgstr ""
+msgstr "Attivo"
 
 #. module: stock_packaging_usability_pp
 #: model_terms:ir.ui.view,arch_db:stock_packaging_usability_pp.product_packaging_delivery_form
 #: model_terms:ir.ui.view,arch_db:stock_packaging_usability_pp.product_packaging_search
 msgid "Archived"
-msgstr ""
+msgstr "In archivio"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields.selection,name:stock_packaging_usability_pp.selection__product_packaging__packaging_type__box
 msgid "Box"
-msgstr ""
+msgstr "Scatola"
 
 #. module: stock_packaging_usability_pp
 #: model_terms:ir.ui.view,arch_db:stock_packaging_usability_pp.stock_select_product_packaging_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_stock_select_product_packaging__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_stock_select_product_packaging__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_product_packaging__display_name
@@ -51,17 +53,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_stock_quant_package__display_name
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_stock_select_product_packaging__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_product_packaging__weight
 msgid "Empty Package Weight"
-msgstr ""
+msgstr "Peso imballo vuoto"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,help:stock_packaging_usability_pp.field_product_packaging__weight
 msgid "Empty package weight in kg"
-msgstr ""
+msgstr "Peso in kg imballo vuoto"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_product_packaging__id
@@ -69,7 +71,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_stock_quant_package__id
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_stock_select_product_packaging__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_product_packaging____last_update
@@ -77,76 +79,76 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_stock_quant_package____last_update
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_stock_select_product_packaging____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_stock_select_product_packaging__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_stock_select_product_packaging__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields.selection,name:stock_packaging_usability_pp.selection__product_packaging__packaging_type__pack
 msgid "Pack"
-msgstr ""
+msgstr "Pacco"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_product_packaging__name
 msgid "Package Type"
-msgstr ""
+msgstr "Tipo collo"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model,name:stock_packaging_usability_pp.model_stock_quant_package
 msgid "Packages"
-msgstr ""
+msgstr "Colli"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_stock_select_product_packaging__packaging_id
 msgid "Packaging"
-msgstr ""
+msgstr "Imballaggio"
 
 #. module: stock_packaging_usability_pp
 #: model_terms:ir.ui.view,arch_db:stock_packaging_usability_pp.product_packaging_search
 msgid "Packaging Type"
-msgstr ""
+msgstr "Tipo imballaggio"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields.selection,name:stock_packaging_usability_pp.selection__product_packaging__packaging_type__pallet
 msgid "Pallet"
-msgstr ""
+msgstr "Bancale"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model,name:stock_packaging_usability_pp.model_product_packaging
 msgid "Product Packaging"
-msgstr ""
+msgstr "Imballaggio prodotto"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.actions.act_window,name:stock_packaging_usability_pp.stock_select_product_packaging_action
 #: model:ir.model,name:stock_packaging_usability_pp.model_stock_select_product_packaging
 #: model_terms:ir.ui.view,arch_db:stock_packaging_usability_pp.stock_select_product_packaging_form
 msgid "Select Packaging"
-msgstr ""
+msgstr "Seleziona imballaggio"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model,name:stock_packaging_usability_pp.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields,field_description:stock_packaging_usability_pp.field_product_packaging__packaging_type
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: stock_packaging_usability_pp
 #: model:ir.model.fields.selection,name:stock_packaging_usability_pp.selection__product_packaging__packaging_type__unit
 msgid "Unit"
-msgstr ""
+msgstr "Unità"
 
 #. module: stock_packaging_usability_pp
 #: model_terms:ir.ui.view,arch_db:stock_packaging_usability_pp.stock_select_product_packaging_form
 msgid "Validate"
-msgstr ""
+msgstr "Valida"
