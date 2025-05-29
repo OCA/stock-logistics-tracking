@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-27 14:26+0000\n"
+"PO-Revision-Date: 2025-05-29 16:26+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -20,13 +20,13 @@ msgstr ""
 #: code:addons/stock_packaging_usability/models/stock_move_line.py:0
 #, python-format
 msgid "Could not find any package level linked to package '%s'."
-msgstr ""
+msgstr "Non si trova nessun livello collo collegato al collo '%s'."
 
 #. module: stock_packaging_usability
 #: model_terms:ir.ui.view,arch_db:stock_packaging_usability.view_stock_move_line_detailed_operation_tree
 #: model_terms:ir.ui.view,arch_db:stock_packaging_usability.view_stock_move_line_operation_tree
 msgid "Current Pack"
-msgstr ""
+msgstr "Pacco attuale"
 
 #. module: stock_packaging_usability
 #: model:ir.model.fields,field_description:stock_packaging_usability.field_stock_move_line__display_name
@@ -36,44 +36,44 @@ msgstr "Nome visualizzato"
 #. module: stock_packaging_usability
 #: model:ir.model.fields,field_description:stock_packaging_usability.field_stock_move_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_packaging_usability
 #: model:ir.model.fields,field_description:stock_packaging_usability.field_stock_move_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_packaging_usability
 #: model_terms:ir.ui.view,arch_db:stock_packaging_usability.view_stock_move_line_detailed_operation_tree
 #: model_terms:ir.ui.view,arch_db:stock_packaging_usability.view_stock_move_line_operation_tree
 msgid "New Pack"
-msgstr ""
+msgstr "Nuovo pacco"
 
 #. module: stock_packaging_usability
 #: model:ir.model,name:stock_packaging_usability.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Movimenti prodotto (riga movimento di magazzino)"
 
 #. module: stock_packaging_usability
 #: code:addons/stock_packaging_usability/models/stock_move_line.py:0
 #, python-format
 msgid "Qty done is 0"
-msgstr ""
+msgstr "Q.tà completata è 0"
 
 #. module: stock_packaging_usability
 #: code:addons/stock_packaging_usability/models/stock_move_line.py:0
 #, python-format
 msgid "There are several package levels linked to package '%s'."
-msgstr ""
+msgstr "Ci sono diversi livelli collo collegati al collo '%s'."
 
 #. module: stock_packaging_usability
 #: code:addons/stock_packaging_usability/models/stock_move_line.py:0
 #, python-format
 msgid "There is no current package."
-msgstr ""
+msgstr "Con c'è in collo attuale."
 
 #. module: stock_packaging_usability
 #: code:addons/stock_packaging_usability/models/stock_move_line.py:0
 #, python-format
 msgid "This operation is already packaged."
-msgstr ""
+msgstr "Quasta operazione è già assegnata al collo."
