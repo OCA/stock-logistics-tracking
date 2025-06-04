@@ -21,8 +21,8 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[stock_packaging_usability](stock_packaging_usability/) | 14.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Faster packaging process in Odoo
-[stock_packaging_usability_pp](stock_packaging_usability_pp/) | 14.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Faster packaging process with product packaging
+[stock_packaging_usability](stock_packaging_usability/) | 14.0.1.0.0 | <a href='https://github.com/alexis-via'><img src='https://github.com/alexis-via.png' width='32' height='32' style='border-radius:50%;' alt='alexis-via'/></a> | Faster packaging process in Odoo
+[stock_packaging_usability_pp](stock_packaging_usability_pp/) | 14.0.1.0.0 | <a href='https://github.com/alexis-via'><img src='https://github.com/alexis-via.png' width='32' height='32' style='border-radius:50%;' alt='alexis-via'/></a> | Faster packaging process with product packaging
 
 [//]: # (end addons)
 
