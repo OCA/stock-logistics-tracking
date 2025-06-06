@@ -51,20 +51,3 @@ class TestStockQuantPackageProductPackaging(common.TestStockQuantPackageCommon):
             self.package,
             [{"pack_length": 12, "width": 13, "height": 14, "pack_weight": 15}],
         )
-
-    def test_package_estimated_pack_weight_kg(self):
-        self.env["stock.quant"]._update_available_quantity(
-            self.product,
-            self.wh.out_type_id.default_location_src_id,
-            7.0,
-            package_id=self.package,
-        )
-        # Weight are taken from product, like the delivery module
-        self.assertEqual(self.package.estimated_pack_weight_kg, 7)
-        self.move._action_assign()
-        self.assertEqual(
-            self.package.with_context(
-                picking_id=self.move.picking_id.id
-            ).estimated_pack_weight_kg,
-            7,
-        )
