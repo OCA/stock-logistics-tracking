@@ -1,3 +1,6 @@
 - Akim Juillerat \<<akim.juillerat@camptocamp.com>\>
 - Fernando La Chica - GreenIce \<<fernandolachica@gmail.com>\>
 - Denis Roussel \<<denis.roussel@acsone.eu>\>
+- Alexandre Fayolle \<<alexandre.fayolle@camptocamp.com>\>
+- Jacques-Etienne Baudoux \<<je@bcim.be>\>
+- Guewen Baconnier \<<guewen.baconnier@camptocamp.com>\>
