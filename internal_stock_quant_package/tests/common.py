@@ -22,7 +22,7 @@ class TestStockPickingInternal(TransactionCase):
         )
         cls.external_package = cls.env["stock.quant.package"].create({})
         cls.product_a = cls.env["product.product"].create(
-            {"name": "Product A", "type": "product"}
+            {"name": "Product A", "type": "consu", "is_storable": True}
         )
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
         cls.stock_location = cls.env.ref("stock.stock_location_stock")

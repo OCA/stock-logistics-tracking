@@ -14,7 +14,7 @@ class TestStockPickingInternalFlow(TestStockPickingInternal):
         packop.write(
             dict(
                 result_package_id=self.internal_package.id,
-                qty_done=packop.reserved_qty,
+                picked=True,
             )
         )
         self.picking.button_validate()
@@ -28,7 +28,7 @@ class TestStockPickingInternalFlow(TestStockPickingInternal):
         packop.write(
             dict(
                 result_package_id=self.internal_package.id,
-                qty_done=packop.reserved_qty,
+                picked=True,
             )
         )
         self.picking.button_validate()
@@ -41,7 +41,7 @@ class TestStockPickingInternalFlow(TestStockPickingInternal):
         packop.write(
             dict(
                 result_package_id=self.external_package.id,
-                qty_done=packop.reserved_qty,
+                picked=True,
             )
         )
         self.picking.button_validate()
@@ -54,7 +54,7 @@ class TestStockPickingInternalFlow(TestStockPickingInternal):
         packop.write(
             dict(
                 result_package_id=self.internal_package.id,
-                qty_done=packop.reserved_qty,
+                picked=True,
             )
         )
         self.picking.action_put_in_pack()
@@ -70,7 +70,7 @@ class TestStockPickingInternalFlow(TestStockPickingInternal):
         packop.write(
             dict(
                 result_package_id=self.internal_package.id,
-                qty_done=packop.reserved_qty,
+                picked=True,
             )
         )
         msg = "Please add 'Done' quantities to the picking to create a new pack."

@@ -30,10 +30,10 @@
             <field name="warehouse_id" position="after">
                 <field name="empty_internal_package_on_transfer" />
                 <field name="stock_internal_package_config_line_ids">
-                    <tree>
+                    <list>
                         <field name="delivery_carrier_id" />
                         <field name="empty" />
-                    </tree>
+                    </list>
                 </field>
             </field>
         </field>
@@ -49,10 +49,10 @@
             <field name="warehouse_id" position="after">
                 <field name="empty_internal_package_on_transfer" />
                 <field name="stock_internal_package_config_line_ids">
-                    <tree>
+                    <list>
                         <field name="delivery_carrier_id" />
                         <field name="empty" />
-                    </tree>
+                    </list>
                 </field>
             </field>
         </field>

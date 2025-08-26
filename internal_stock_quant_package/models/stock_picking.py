@@ -40,7 +40,7 @@ class StockPicking(models.Model):
         pickings = self.filtered(
             lambda p: p.empty_internal_package_on_transfer and p.state == "done"
         )
-        packages = pickings.mapped("move_line_ids.package_id")
+        packages = pickings.move_line_ids.package_id
         internal_packages = packages.filtered("is_internal")
         if internal_packages:
             internal_packages.unpack()
@@ -55,6 +55,6 @@ class StockPicking(models.Model):
 
     def _get_move_lines_internal_package_used_to_empty(self):
         pickings = self.filtered("empty_internal_package_on_transfer")
-        return pickings.mapped("move_line_ids").filtered(
+        return pickings.move_line_ids.filtered(
             lambda line: line.result_package_id.is_internal
         )

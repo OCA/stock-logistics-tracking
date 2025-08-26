@@ -27,7 +27,5 @@ class StockInternalPackageConfigLine(models.Model):
         return res
 
     def _invalidate_empty_internal_package_on_transfer_cache(self):
-        domain = [("stock_internal_package_config_line_ids", "in", self.ids)]
-        picking_types = self.env["stock.picking.type"].search(domain)
-        picking_types.clear_caches()
+        self.env.registry.clear_cache()
         self.env["stock.picking"].invalidate_model()
