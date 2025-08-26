@@ -2,7 +2,6 @@
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="stock_quant_package_form_view">
         <field
             name="name"
@@ -24,7 +23,7 @@
         <field name="inherit_id" ref="stock.quant_package_search_view" />
         <field name="arch" type="xml">
             <field name="package_type_id" position="after">
-                 <filter
+                <filter
                     string="Internal"
                     name="internal"
                     domain="[('is_internal','=',True)]"
@@ -45,5 +44,4 @@
             </field>
         </field>
     </record>
-
 </odoo>

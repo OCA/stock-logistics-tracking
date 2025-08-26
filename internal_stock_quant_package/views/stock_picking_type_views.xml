@@ -2,14 +2,12 @@
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
-        <record model="ir.ui.view" id="stock_internal_package_config_line_form_view">
+    <record model="ir.ui.view" id="stock_internal_package_config_line_form_view">
         <field name="name">stock.internal.package.config.line.form</field>
         <field name="model">stock.internal.package.config.line</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                </header>
+                <header />
                 <sheet>
                     <group>
                         <group>
@@ -41,7 +39,6 @@
         </field>
     </record>
 
-
     <record model="ir.ui.view" id="stock_picking_type_tree_view">
         <field
             name="name"
@@ -50,15 +47,14 @@
         <field name="inherit_id" ref="stock.view_picking_type_tree" />
         <field name="arch" type="xml">
             <field name="warehouse_id" position="after">
-            <field name="empty_internal_package_on_transfer" />
-            <field name="stock_internal_package_config_line_ids">
-                <tree>
-                    <field name="delivery_carrier_id" />
-                    <field name="empty" />
-                </tree>
+                <field name="empty_internal_package_on_transfer" />
+                <field name="stock_internal_package_config_line_ids">
+                    <tree>
+                        <field name="delivery_carrier_id" />
+                        <field name="empty" />
+                    </tree>
+                </field>
             </field>
         </field>
-        </field>
     </record>
-
 </odoo>

@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class StockQuantPackage(models.Model):
-
     _inherit = "stock.quant.package"
 
     is_internal = fields.Boolean("Internal use?")

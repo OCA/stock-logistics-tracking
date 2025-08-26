@@ -5,7 +5,6 @@ from odoo import api, fields, models
 
 
 class StockPicking(models.Model):
-
     _inherit = "stock.picking"
 
     empty_internal_package_on_transfer = fields.Boolean(
