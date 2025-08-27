@@ -9,7 +9,8 @@ class ProductProduct(models.Model):
     def _find_best_packaging(self, quantity):
         self.ensure_one()
         packagings = self.env["product.packaging"].search(
-            [("product_id", "=", self.id)], order="qty DESC, sequence ASC"
+            [("product_id", "=", self.id), ("qty", "<=", quantity)],
+            order="qty DESC, sequence ASC",
         )
         for packaging in packagings:
             nb, rem = divmod(quantity, packaging.qty)

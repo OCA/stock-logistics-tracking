@@ -27,13 +27,14 @@ class StockQuantPackage(models.Model):
     @api.model_create_multi
     def create(self, vals):
         records = super().create(vals)
-        records._sync_package_type_from_packaging()
+        for rec in records:
+            rec._sync_package_type_from_packaging(rec.product_packaging_id)
         return records
 
     def write(self, vals):
         result = super().write(vals)
         if vals.get("product_packaging_id"):
-            self._sync_package_type_from_packaging()
+            self._sync_package_type_from_packaging(self.product_packaging_id)
         return result
 
     @api.depends("quant_ids", "quant_ids.product_id")
@@ -55,44 +56,42 @@ class StockQuantPackage(models.Model):
                 and pack.single_product_id
                 and pack.single_product_qty
             ):
-                packaging = self.env["product.packaging"].search(
-                    [
-                        ("product_id", "=", pack.single_product_id.id),
-                        ("qty", "=", pack.single_product_qty),
-                    ],
-                    limit=1,
+                pack._assign_package_type(
+                    pack.single_product_id, pack.single_product_qty
                 )
-                if packaging:
-                    pack.write({"product_packaging_id": packaging.id})
 
-            if not pack.package_type_id:
-                # if no package type could be set by auto assign,
-                # fallback on the default product's package type (if any)
-                pack._sync_package_type_from_single_product()
+    def _assign_package_type(self, product, quantity):
+        self.ensure_one()
+        packaging = product._find_best_packaging(quantity)
+        if packaging and packaging.qty == quantity:
+            self.write({"product_packaging_id": packaging.id})
+        elif packaging:
+            self._sync_package_type_from_packaging(packaging)
+        else:
+            self._sync_package_type_from_single_product()
 
-    def _sync_package_type_from_packaging(self):
+        if not self.package_type_id and product.package_type_id:
+            self.package_type_id = product.package_type_id
+
+    def _sync_package_type_from_packaging(self, packaging):
         for package in self:
             if package.package_type_id:
                 # Do not set package type for delivery packages
                 # to not trigger constraint like height requirement
                 # (we are delivering them, not storing them)
                 continue
-            package_type = package.product_packaging_id.package_type_id
+            package_type = packaging.package_type_id
             if not package_type:
                 continue
             package.package_type_id = package_type
 
     def _sync_package_type_from_single_product(self):
         for package in self:
-            if package.package_type_id:
+            if package.single_product_id and package.package_type_id:
                 # Do not set package type for delivery packages
                 # to not trigger constraint like height requirement
                 # (we are delivering them, not storing them)
                 continue
+
             package_type = package.single_product_id.package_type_id
-            best_packaging = package.single_product_id._find_best_packaging(
-                package.single_product_qty
-            )
-            if best_packaging.package_type_id:
-                package_type = best_packaging.package_type_id
             package.package_type_id = package_type
