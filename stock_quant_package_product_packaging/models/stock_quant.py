@@ -9,8 +9,8 @@ class StockQuant(models.Model):
     def move_quants(
         self, location_dest_id=False, package_dest_id=False, message=False, unpack=False
     ):
-        package_ids = self.package_id
+        packages = self.package_id
         res = super().move_quants(location_dest_id, package_dest_id, message, unpack)
         if unpack:
-            package_ids.package_type_id = False
+            packages._reset_empty_package_package_type()
         return res
