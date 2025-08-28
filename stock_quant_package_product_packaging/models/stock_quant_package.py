@@ -56,19 +56,20 @@ class StockQuantPackage(models.Model):
                 and pack.single_product_id
                 and pack.single_product_qty
             ):
-                pack._assign_packaging(
-                    pack.single_product_id, pack.single_product_qty
-                )
+                pack._assign_packaging(pack.single_product_id, pack.single_product_qty)
 
     def _assign_packaging(self, product, quantity):
         self.ensure_one()
         packaging = product._find_best_packaging(quantity)
         if packaging and packaging.qty == quantity:
-            self.write({"product_packaging_id": packaging.id})
-        elif packaging:
+            # the call to write will trigger a call to _sync_package_type_from_packaging
+            self.product_packaging_id = packaging
+        elif self.product_packaging_id:
+            self.product_packaging_id = False
+        if packaging:
             self._sync_package_type_from_packaging(packaging)
         else:
-            self._sync_package_type_from_single_product()
+            self._sync_package_type_from_single_product(product, quantity)
 
         if not self.package_type_id and product.package_type_id:
             self.package_type_id = product.package_type_id
@@ -85,13 +86,12 @@ class StockQuantPackage(models.Model):
                 continue
             package.package_type_id = package_type
 
-    def _sync_package_type_from_single_product(self):
+    def _sync_package_type_from_single_product(self, product, quantity):
         for package in self:
-            if package.single_product_id and package.package_type_id:
+            if package.package_type_id:
                 # Do not set package type for delivery packages
                 # to not trigger constraint like height requirement
                 # (we are delivering them, not storing them)
                 continue
-
-            package_type = package.single_product_id.package_type_id
-            package.package_type_id = package_type
+            if product.package_type_id:
+                package.package_type_id = product.package_type_id
