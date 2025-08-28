@@ -56,11 +56,11 @@ class StockQuantPackage(models.Model):
                 and pack.single_product_id
                 and pack.single_product_qty
             ):
-                pack._assign_package_type(
+                pack._assign_packaging(
                     pack.single_product_id, pack.single_product_qty
                 )
 
-    def _assign_package_type(self, product, quantity):
+    def _assign_packaging(self, product, quantity):
         self.ensure_one()
         packaging = product._find_best_packaging(quantity)
         if packaging and packaging.qty == quantity:
