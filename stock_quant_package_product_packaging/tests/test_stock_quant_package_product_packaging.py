@@ -1,4 +1,5 @@
 # Copyright 2020 Camptocamp SA
+# Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 from odoo.tests import TransactionCase
 
@@ -61,3 +62,67 @@ class TestStockQuantPackageProductPackaging(TransactionCase):
         self.assertEqual(second_package.single_product_qty, 20.0)
         self.assertEqual(first_package.product_packaging_id, self.packaging)
         self.assertFalse(second_package.product_packaging_id)
+        # Add product to first package
+        picking = self.env["stock.picking"].create(
+            {
+                "picking_type_id": self.receipt_picking_type.id,
+                "location_id": self.env.ref("stock.stock_location_suppliers").id,
+                "location_dest_id": location_dest.id,
+            }
+        )
+        picking._onchange_picking_type()
+        picking.write(
+            {
+                "move_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "TEST",
+                            "product_id": self.product.id,
+                            "product_uom_qty": 5.0,
+                            "product_uom": self.product.uom_id.id,
+                            "location_id": picking.location_id.id,
+                            "location_dest_id": picking.location_dest_id.id,
+                        },
+                    )
+                ]
+            }
+        )
+        picking.action_confirm()
+        picking.action_assign()
+        picking.move_line_ids.result_package_id = first_package
+        picking.button_validate()
+        self.assertFalse(first_package.product_packaging_id)
+        # Remove product from first package
+        picking = self.env["stock.picking"].create(
+            {
+                "picking_type_id": self.receipt_picking_type.id,
+                "location_id": location_dest.id,
+                "location_dest_id": self.env.ref("stock.stock_location_suppliers").id,
+            }
+        )
+        picking._onchange_picking_type()
+        picking.write(
+            {
+                "move_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "TEST",
+                            "product_id": self.product.id,
+                            "product_uom_qty": 5.0,
+                            "product_uom": self.product.uom_id.id,
+                            "location_id": picking.location_dest_id.id,
+                            "location_dest_id": picking.location_id.id,
+                        },
+                    )
+                ]
+            }
+        )
+        picking.action_confirm()
+        picking.action_assign()
+        picking.move_line_ids.package_id = first_package
+        picking.button_validate()
+        self.assertEqual(first_package.product_packaging_id, self.packaging)
