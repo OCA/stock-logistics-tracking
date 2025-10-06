@@ -17,6 +17,21 @@ msgstr ""
 "X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_quant_package_product_packaging
+#: model:ir.model.fields,help:stock_quant_package_product_packaging.field_product_product__package_type_id
+#: model:ir.model.fields,help:stock_quant_package_product_packaging.field_product_template__package_type_id
+msgid ""
+"Defines a 'default' package type for this product to be applied on packages "
+"without product packagings and on put-away computation based on package type "
+"for product not in a package"
+msgstr ""
+
+#. module: stock_quant_package_product_packaging
+#: model:ir.model.fields,field_description:stock_quant_package_product_packaging.field_product_product__package_type_id
+#: model:ir.model.fields,field_description:stock_quant_package_product_packaging.field_product_template__package_type_id
+msgid "Package type"
+msgstr ""
+
+#. module: stock_quant_package_product_packaging
 #: model:ir.model,name:stock_quant_package_product_packaging.model_stock_quant_package
 msgid "Packages"
 msgstr "Paquetes"
@@ -31,6 +46,11 @@ msgstr ""
 "traslado, ..."
 
 #. module: stock_quant_package_product_packaging
+#: model:ir.model,name:stock_quant_package_product_packaging.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: stock_quant_package_product_packaging
 #: model:ir.model,name:stock_quant_package_product_packaging.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
 msgstr "Movimientos de producto (Movimiento de stock)"
@@ -39,6 +59,16 @@ msgstr "Movimientos de producto (Movimiento de stock)"
 #: model:ir.model.fields,field_description:stock_quant_package_product_packaging.field_stock_quant_package__product_packaging_id
 msgid "Product Packaging"
 msgstr "Empaquetado de producto"
+
+#. module: stock_quant_package_product_packaging
+#: model:ir.model,name:stock_quant_package_product_packaging.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: stock_quant_package_product_packaging
+#: model:ir.model,name:stock_quant_package_product_packaging.model_stock_quant
+msgid "Quants"
+msgstr ""
 
 #. module: stock_quant_package_product_packaging
 #: model:ir.model.fields,field_description:stock_quant_package_product_packaging.field_stock_quant_package__single_product_id
