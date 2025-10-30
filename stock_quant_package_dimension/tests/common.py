@@ -13,28 +13,44 @@ class TestStockQuantPackageCommon(TransactionCase):
         cls.wh.out_type_id.default_location_dest_id = cls.env.ref(
             "stock.stock_location_customers"
         )
-        cls.product = cls.env.ref("product.product_delivery_02")
+        location_dest = cls.wh.out_type_id.default_location_dest_id.id
+        cls.product = cls.env["product.product"].create(
+            {
+                "name": "Test Product",
+                "type": "consu",
+                "standard_price": 10,
+                "list_price": 20,
+            }
+        )
         cls.product.write(
             {
                 "weight": 1,
-                "packaging_ids": [
-                    (0, 0, {"name": "Small Box", "qty": "1", "weight": "2"}),
-                    (0, 0, {"name": "Box", "qty": "5", "weight": "7"}),
+                "uom_ids": [
+                    (0, 0, {"name": "Small Box"}),
+                    (0, 0, {"name": "Box"}),
                 ],
             }
         )
-        cls.package = cls.env["stock.quant.package"].create({})
+        cls.package = cls.env["stock.package"].create({})
         cls.move = cls.env["stock.move"].create(
             {
-                "name": cls.product.name,
                 "picking_type_id": cls.wh.out_type_id.id,
                 "product_id": cls.product.id,
                 "product_uom_qty": 11.0,
                 "product_uom": cls.product.uom_id.id,
                 "location_id": cls.wh.out_type_id.default_location_src_id.id,
-                "location_dest_id": cls.wh.out_type_id.default_location_dest_id.id,
+                "location_dest_id": location_dest,
                 "procure_method": "make_to_stock",
-                "group_id": cls.env["procurement.group"].create({"name": "Test"}).id,
+                "rule_id": cls.env["stock.rule"]
+                .create(
+                    {
+                        "name": "Test",
+                        "location_dest_id": location_dest,
+                        "route_id": cls.env.ref("stock.route_warehouse0_mto").id,
+                        "picking_type_id": cls.wh.out_type_id.id,
+                    }
+                )
+                .id,
             }
         )
         cls.move._assign_picking()
