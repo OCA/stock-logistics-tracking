@@ -14,5 +14,6 @@ class StockMoveLine(models.Model):
         # have to check if it still exists before reading/writing on it
         dest_packages = self.exists().result_package_id
         (dest_packages | source_packages).auto_assign_packaging()
-        source_packages._reset_empty_package_package_type()
+        if not self.env.context.get("skip_reset_empty_package_package_type"):
+            source_packages._reset_empty_package_package_type()
         return res
