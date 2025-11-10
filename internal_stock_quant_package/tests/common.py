@@ -14,13 +14,31 @@ class TestStockPickingInternal(TransactionCase):
                 cls.env.context, tracking_disable=True, test_queue_job_no_delay=True
             )
         )
-
         cls.picking_type_out = cls.env.ref("stock.picking_type_out")
         cls.picking_type_out.empty_internal_package_on_transfer = True
-        cls.internal_package = cls.env["stock.quant.package"].create(
-            {"is_internal": True}
+        cls.internal_package_type = cls.env["stock.package.type"].create(
+            {"name": "Internal Package Type", "package_carrier_type": False}
         )
-        cls.external_package = cls.env["stock.quant.package"].create({})
+        cls.env["stock.package.type"]._fields.get("package_carrier_type")._selection[
+            "dhl"
+        ] = "DHL"
+        cls.external_package_type = cls.env["stock.package.type"].create(
+            {"name": "External Package Type", "package_carrier_type": "dhl"}
+        )
+        cls.internal_package = cls.env["stock.quant.package"].create(
+            {
+                "name": "Internal Package",
+                "is_internal": True,
+                "package_type_id": cls.internal_package_type.id,
+            }
+        )
+        cls.external_package = cls.env["stock.quant.package"].create(
+            {
+                "name": "External Package",
+                "is_internal": False,
+                "package_type_id": cls.external_package_type.id,
+            }
+        )
         cls.product_a = cls.env["product.product"].create(
             {"name": "Product A", "type": "consu", "is_storable": True}
         )
