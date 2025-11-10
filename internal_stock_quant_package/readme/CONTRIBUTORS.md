@@ -1,0 +1,2 @@
+- Hughes Damry \<<hughes.damry@acsone.eu>\>
+- Henry Backman \<<henry.backman@camptocamp.com>\>

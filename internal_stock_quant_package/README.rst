@@ -17,7 +17,7 @@ Internal Stock Quant Package
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--tracking-lightgray.png?logo=github
@@ -37,16 +37,18 @@ This module allows to declare internal stock quant package.
 Sometimes, when an operator is picking, he needs to put the product in
 internal packages placed on his trolley that will be emptied later.
 
-Two kinds of operations can lead to the emptying of the internal packages:
+Two kinds of operations can lead to the emptying of the internal
+packages:
 
- * when product from the internal packages will be 'put in pack' at the pack station (in a pick / pack / ship scenario)
+   -  when product from the internal packages will be 'put in pack' at
+      the pack station (in a pick / pack / ship scenario)
+   -  when a carrier will load his truck with the products from the
+      internal packages (in a pick / ship scenario)
 
- * when a carrier will load his truck with the products from the internal packages (in a pick / ship scenario)
-
-This modules extends the stock module to add the concept of internal stock
-quant package and therefore allows you to manage this kind of operational need.
-It ensures that the internal stock quant packages are emptied when required
-depending on the picking type configuration.
+This modules extends the stock module to add the concept of internal
+stock quant package and therefore allows you to manage this kind of
+operational need. It ensures that the internal stock quant packages are
+emptied when required depending on the picking type configuration.
 
 **Table of contents**
 
@@ -57,31 +59,34 @@ Usage
 =====
 
 As this addon rely on the concept of "internal" packages. If you want to
-use packages into your picking operations, you need first to activate the
-package functionality in the stock settings (see the "Operations" section).
+use packages into your picking operations, you need first to activate
+the package functionality in the stock settings (see the "Operations"
+section).
 
 Then, you need to create packages and set them as internal. This is done
-by going to Inventory > Products > Packages and clicking on the "Create".
-(Don't forget to tick the "Internal use" box).
+by going to Inventory > Products > Packages and clicking on the
+"Create". (Don't forget to tick the "Internal use" box).
 
-By default, when you put your products into an internal package when processing
-a picking, once the picking is done, the package is automatically emptied.
-You can change this behavior at 2 levels:
+By default, when you put your products into an internal package when
+processing a picking, once the picking is done, the package is
+automatically emptied. You can change this behavior at 2 levels:
 
-1. At the picking type level: go to "Inventory > Configuration > Operation
-Types" and edit the picking type you want to change. Then, untick the "Empty
-Internal Package On Transfer" box. (By default internal packages are always
-emptied when the picking is done).
-2. At the picking type level for a specific carrier: go to "Inventory >
-Configuration > Operation Types" and edit the picking type you want to change.
-Then, add or remove lines in the "Stock Internal Package Config Line" table.
-You can add a line for a specific carrier and tick/untick the "Empty" box.
+1. At the picking type level: go to "Inventory > Configuration >
+Operation Types" and edit the picking type you want to change. Then,
+untick the "Empty Internal Package On Transfer" box. (By default
+internal packages are always emptied when the picking is done). 2. At
+the picking type level for a specific carrier: go to "Inventory >
+Configuration > Operation Types" and edit the picking type you want to
+change. Then, add or remove lines in the "Stock Internal Package Config
+Line" table. You can add a line for a specific carrier and tick/untick
+the "Empty" box.
 
-To know if internal packages must be emptied or not for a given picking, the
-system will first check if a configuration line exists on the picking type for
-the carrier of the picking. If a line exists, the system will use the value
-of the "Empty" box. If no line exists, the system will use the value of the
-"Empty Internal Package On Transfer" box of the picking type.
+To know if internal packages must be emptied or not for a given picking,
+the system will first check if a configuration line exists on the
+picking type for the carrier of the picking. If a line exists, the
+system will use the value of the "Empty" box. If no line exists, the
+system will use the value of the "Empty Internal Package On Transfer"
+box of the picking type.
 
 Bug Tracker
 ===========
@@ -97,17 +102,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ACSONE SA/NV
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Hughes Damry <hughes.damry@acsone.eu>
+-  Hughes Damry <hughes.damry@acsone.eu>
+-  Henry Backman <henry.backman@camptocamp.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
