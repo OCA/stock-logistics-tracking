@@ -18,6 +18,9 @@ class StockQuantPackage(models.Model):
         "product.product", compute="_compute_single_product"
     )
     single_product_qty = fields.Float(compute="_compute_single_product")
+    reset_package_type = fields.Boolean(
+        default=True, help="When set the package type will be reset on unpacking"
+    )
 
     @api.model_create_multi
     def create(self, vals):
@@ -90,5 +93,7 @@ class StockQuantPackage(models.Model):
                 package.package_type_id = product.package_type_id
 
     def _reset_empty_package_package_type(self):
-        empty_packages = self.filtered(lambda rec: not rec.quant_ids)
+        empty_packages = self.filtered(
+            lambda rec: not rec.quant_ids and rec.reset_package_type
+        )
         empty_packages.package_type_id = False
