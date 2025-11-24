@@ -71,6 +71,11 @@ msgid "Quants"
 msgstr ""
 
 #. module: stock_quant_package_product_packaging
+#: model:ir.model.fields,field_description:stock_quant_package_product_packaging.field_stock_quant_package__reset_package_type
+msgid "Reset Package Type"
+msgstr ""
+
+#. module: stock_quant_package_product_packaging
 #: model:ir.model.fields,field_description:stock_quant_package_product_packaging.field_stock_quant_package__single_product_id
 msgid "Single Product"
 msgstr "Producto individual"
@@ -79,3 +84,8 @@ msgstr "Producto individual"
 #: model:ir.model.fields,field_description:stock_quant_package_product_packaging.field_stock_quant_package__single_product_qty
 msgid "Single Product Qty"
 msgstr "Cantidad de producto individual"
+
+#. module: stock_quant_package_product_packaging
+#: model:ir.model.fields,help:stock_quant_package_product_packaging.field_stock_quant_package__reset_package_type
+msgid "When set the package type will be reset on unpacking"
+msgstr ""
