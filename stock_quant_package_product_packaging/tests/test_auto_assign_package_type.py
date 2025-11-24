@@ -41,6 +41,22 @@ class TestAutoAssignPackageType(TestPackageTypeCommon):
         quants.move_quants(location_dest_id=self.warehouse.lot_stock_id, unpack=True)
         self.assertFalse(package.package_type_id)
 
+    def test_unpack_package_no_reset_package_type(self):
+        """Check quants moved out of a package, the package type is NOT reset."""
+        package = self.env["stock.quant.package"].create(
+            {
+                "name": "TEST",
+                "product_packaging_id": self.product_packaging.id,
+                "reset_package_type": False,
+            }
+        )
+        self._update_qty_in_location(
+            self.warehouse.lot_stock_id, self.product, 5, package=package
+        )
+        quants = package.quant_ids
+        quants.move_quants(location_dest_id=self.warehouse.lot_stock_id, unpack=True)
+        self.assertTrue(package.package_type_id)
+
     def test_auto_assign_packaging(self):
         """
         Test the auto assignation for package type from
