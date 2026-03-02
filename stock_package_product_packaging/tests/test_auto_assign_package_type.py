@@ -21,7 +21,7 @@ class TestAutoAssignPackageType(TestPackageTypeCommon):
         are intended to be stored in the warehouse.
         On such packages, a package type is automatically defined.
         """
-        package = self.env["stock.quant.package"].create(
+        package = self.env["stock.package"].create(
             {"name": "TEST", "product_packaging_id": self.product_packaging.id}
         )
 
@@ -29,7 +29,7 @@ class TestAutoAssignPackageType(TestPackageTypeCommon):
 
     def test_unpack_package_reset_package_type(self):
         """When the quants are moved out of a package, the package type is reset"""
-        package = self.env["stock.quant.package"].create(
+        package = self.env["stock.package"].create(
             {"name": "TEST", "product_packaging_id": self.product_packaging.id}
         )
 
@@ -43,7 +43,7 @@ class TestAutoAssignPackageType(TestPackageTypeCommon):
 
     def test_unpack_package_no_reset_package_type(self):
         """Check quants moved out of a package, the package type is NOT reset."""
-        package = self.env["stock.quant.package"].create(
+        package = self.env["stock.package"].create(
             {
                 "name": "TEST",
                 "product_packaging_id": self.product_packaging.id,

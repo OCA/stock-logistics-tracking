@@ -1,14 +1,14 @@
 # Copyright 2019 Camptocamp SA
 # Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo import api, fields, models
+from odoo import api, fields, models, tools
 
 
 class StockQuantPackage(models.Model):
-    _inherit = "stock.quant.package"
+    _inherit = "stock.package"
 
     product_packaging_id = fields.Many2one(
-        "product.packaging",
+        "uom.uom",
         "Product Packaging",
         index=True,
         help="Packaging of the product, used for internal logistics"
@@ -57,7 +57,15 @@ class StockQuantPackage(models.Model):
     def _assign_packaging(self, product, quantity):
         self.ensure_one()
         packaging = product._find_best_packaging(quantity)
-        if packaging and packaging.qty == quantity:
+        packaging_qty = (
+            packaging._compute_quantity(1, product.uom_id, round=False)
+            if packaging
+            else 0
+        )
+        if (
+            packaging
+            and tools.float_compare(packaging_qty, quantity, precision_digits=3) == 0
+        ):
             # the call to write will trigger a call to _sync_package_type_from_packaging
             self.product_packaging_id = packaging
         elif self.product_packaging_id:

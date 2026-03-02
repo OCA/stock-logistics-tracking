@@ -8,12 +8,15 @@ class ProductProduct(models.Model):
 
     def _find_best_packaging(self, quantity):
         self.ensure_one()
-        packagings = self.env["product.packaging"].search(
-            [("product_id", "=", self.id), ("qty", "<=", quantity)],
-            order="qty DESC, sequence ASC",
+        base_uom = self.uom_id
+        packagings = self.product_tmpl_id.uom_ids.sorted(
+            key=lambda u: (-u._compute_quantity(1, base_uom, round=False), u.sequence)
         )
         for packaging in packagings:
-            nb, rem = divmod(quantity, packaging.qty)
+            pkg_qty = packaging._compute_quantity(1, base_uom, round=False)
+            if pkg_qty > quantity:
+                continue
+            nb, rem = divmod(quantity, pkg_qty)
             if tools.float_is_zero(rem, precision_digits=3):
                 return packaging
-        return self.env["product.packaging"]
+        return self.env["uom.uom"]

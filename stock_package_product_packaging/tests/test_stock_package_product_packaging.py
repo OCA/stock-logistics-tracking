@@ -14,10 +14,17 @@ class TestStockQuantPackageProductPackaging(TransactionCase):
         # if show_reserved: qty_done must be set on stock.picking.move_line_ids
         # if not show_reserved: qty_done must be set on
         #   stock.picking.move_line_nosuggest_ids
-        cls.product = cls.env.ref("product.product_delivery_02")
-        cls.packaging = cls.env["product.packaging"].create(
-            {"name": "10 pack", "product_id": cls.product.id, "qty": 10}
+        cls.product = cls.env["product.product"].create(
+            {"name": "Test Delivery Product", "is_storable": True}
         )
+        cls.packaging = cls.env["uom.uom"].create(
+            {
+                "name": "10 pack",
+                "relative_factor": 10,
+                "relative_uom_id": cls.product.uom_id.id,
+            }
+        )
+        cls.product.product_tmpl_id.uom_ids = [(4, cls.packaging.id)]
 
     def test_auto_assign_packaging(self):
         location_dest = self.receipt_picking_type.default_location_dest_id
@@ -36,7 +43,6 @@ class TestStockQuantPackageProductPackaging(TransactionCase):
                         0,
                         0,
                         {
-                            "name": "TEST",
                             "product_id": self.product.id,
                             "product_uom_qty": 30.0,
                             "product_uom": self.product.uom_id.id,
@@ -78,7 +84,6 @@ class TestStockQuantPackageProductPackaging(TransactionCase):
                         0,
                         0,
                         {
-                            "name": "TEST",
                             "product_id": self.product.id,
                             "product_uom_qty": 5.0,
                             "product_uom": self.product.uom_id.id,
@@ -110,7 +115,6 @@ class TestStockQuantPackageProductPackaging(TransactionCase):
                         0,
                         0,
                         {
-                            "name": "TEST",
                             "product_id": self.product.id,
                             "product_uom_qty": 5.0,
                             "product_uom": self.product.uom_id.id,

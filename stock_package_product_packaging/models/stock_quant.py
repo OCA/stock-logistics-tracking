@@ -7,10 +7,17 @@ class StockQuant(models.Model):
     _inherit = "stock.quant"
 
     def move_quants(
-        self, location_dest_id=False, package_dest_id=False, message=False, unpack=False
+        self,
+        location_dest_id=False,
+        package_dest_id=False,
+        message=False,
+        unpack=False,
+        up_to_parent_packages=False,
     ):
         packages = self.package_id
-        res = super().move_quants(location_dest_id, package_dest_id, message, unpack)
+        res = super().move_quants(
+            location_dest_id, package_dest_id, message, unpack, up_to_parent_packages
+        )
         if unpack:
             packages._reset_empty_package_package_type()
         return res

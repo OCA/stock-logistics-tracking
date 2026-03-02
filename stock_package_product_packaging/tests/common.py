@@ -25,8 +25,19 @@ class TestPackageTypeCommon(TransactionCase):
         cls.receipts_picking_type = ref("stock.picking_type_in")
         cls.internal_picking_type = ref("stock.picking_type_internal")
 
-        cls.product = ref("product.product_product_9")
-        cls.product_lot = ref("stock.product_cable_management_box")
+        cls.product = cls.env["product.product"].create(
+            {
+                "name": "Test Product",
+                "is_storable": True,
+            }
+        )
+        cls.product_lot = cls.env["product.product"].create(
+            {
+                "name": "Test Product Lot",
+                "is_storable": True,
+                "tracking": "lot",
+            }
+        )
 
         cls.package_type_pallets = cls.env["stock.package.type"].create(
             {"name": "Pallets"}
@@ -35,29 +46,34 @@ class TestPackageTypeCommon(TransactionCase):
             {"name": "Cardboxes"}
         )
 
-        cls.product_cardbox_product_packaging = cls.env["product.packaging"].create(
+        cls.product_cardbox_product_packaging = cls.env["uom.uom"].create(
             {
                 "name": "4 units cardbox",
-                "qty": 4,
-                "product_id": cls.product.id,
+                "relative_factor": 4,
+                "relative_uom_id": cls.product.uom_id.id,
                 "package_type_id": cls.package_type_cardboxes.id,
             }
         )
-        cls.product_single_bag_product_packaging = cls.env["product.packaging"].create(
+        cls.product_single_bag_product_packaging = cls.env["uom.uom"].create(
             {
                 "name": "Single Bag",
-                "qty": 1,
-                "product_id": cls.product.id,
+                "relative_factor": 1,
+                "relative_uom_id": cls.product.uom_id.id,
             }
         )
-        cls.product_pallet_product_packaging = cls.env["product.packaging"].create(
+        cls.product_pallet_product_packaging = cls.env["uom.uom"].create(
             {
                 "name": "Pallet",
-                "qty": 48,
-                "product_id": cls.product.id,
+                "relative_factor": 48,
+                "relative_uom_id": cls.product.uom_id.id,
                 "package_type_id": cls.package_type_pallets.id,
             }
         )
+        cls.product.product_tmpl_id.uom_ids = [
+            (4, cls.product_cardbox_product_packaging.id),
+            (4, cls.product_single_bag_product_packaging.id),
+            (4, cls.product_pallet_product_packaging.id),
+        ]
 
         cls.internal_picking_type.write({"show_entire_packs": True})
         cls.receipts_picking_type.show_entire_packs = True
@@ -79,7 +95,6 @@ class TestPackageTypeCommon(TransactionCase):
     def _create_single_move(cls, product, quantity=2.0):
         picking_type = cls.warehouse.int_type_id
         move_vals = {
-            "name": product.name,
             "picking_type_id": picking_type.id,
             "product_id": product.id,
             "product_uom_qty": quantity,
