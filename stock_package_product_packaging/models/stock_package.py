@@ -1,14 +1,14 @@
 # Copyright 2019 Camptocamp SA
 # Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo import api, fields, models
+from odoo import api, fields, models, tools
 
 
-class StockQuantPackage(models.Model):
-    _inherit = "stock.quant.package"
+class StockPackage(models.Model):
+    _inherit = "stock.package"
 
     product_packaging_id = fields.Many2one(
-        "product.packaging",
+        "uom.uom",
         "Product Packaging",
         index=True,
         help="Packaging of the product, used for internal logistics"
@@ -18,21 +18,26 @@ class StockQuantPackage(models.Model):
         "product.product", compute="_compute_single_product"
     )
     single_product_qty = fields.Float(compute="_compute_single_product")
+    allowed_product_packaging_ids = fields.Many2many(
+        "uom.uom",
+        compute="_compute_allowed_product_packaging_ids",
+        help="Packagings of the single product contained in this package"
+        " matching the contained quantity.",
+    )
     reset_package_type = fields.Boolean(
         default=True, help="When set the package type will be reset on unpacking"
     )
 
     @api.model_create_multi
-    def create(self, vals):
-        records = super().create(vals)
-        for rec in records:
-            rec._sync_package_type_from_packaging(rec.product_packaging_id)
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records._sync_package_type_from_packaging()
         return records
 
     def write(self, vals):
         result = super().write(vals)
         if vals.get("product_packaging_id"):
-            self._sync_package_type_from_packaging(self.product_packaging_id)
+            self._sync_package_type_from_packaging()
         return result
 
     @api.depends("quant_ids", "quant_ids.product_id")
@@ -47,6 +52,22 @@ class StockQuantPackage(models.Model):
                 pack.single_product_id = False
                 pack.single_product_qty = 0
 
+    @api.depends("single_product_id", "single_product_qty")
+    def _compute_allowed_product_packaging_ids(self):
+        for pack in self:
+            base_uom = pack.single_product_id.uom_id
+            qty = pack.single_product_qty
+            pack.allowed_product_packaging_ids = (
+                pack.single_product_id.product_tmpl_id.uom_ids.filtered(
+                    lambda packaging, base_uom=base_uom, qty=qty: tools.float_compare(
+                        packaging._compute_quantity(1, base_uom, round=False),
+                        qty,
+                        precision_digits=3,
+                    )
+                    == 0
+                )
+            )
+
     def auto_assign_packaging(self):
         for pack in self:
             if pack.single_product_id and pack.single_product_qty:
@@ -57,7 +78,15 @@ class StockQuantPackage(models.Model):
     def _assign_packaging(self, product, quantity):
         self.ensure_one()
         packaging = product._find_best_packaging(quantity)
-        if packaging and packaging.qty == quantity:
+        packaging_qty = (
+            packaging._compute_quantity(1, product.uom_id, round=False)
+            if packaging
+            else 0
+        )
+        if (
+            packaging
+            and tools.float_compare(packaging_qty, quantity, precision_digits=3) == 0
+        ):
             # the call to write will trigger a call to _sync_package_type_from_packaging
             self.product_packaging_id = packaging
         elif self.product_packaging_id:
@@ -70,14 +99,22 @@ class StockQuantPackage(models.Model):
         if not self.package_type_id and product.package_type_id:
             self.package_type_id = product.package_type_id
 
-    def _sync_package_type_from_packaging(self, packaging):
+    def _sync_package_type_from_packaging(self, packaging=None):
+        """Set the package type from ``packaging``.
+
+        When no ``packaging`` is given, each package uses its own
+        ``product_packaging_id``, so the method is safe on any recordset.
+        """
         for package in self:
             if package.package_type_id:
                 # Do not set package type for delivery packages
                 # to not trigger constraint like height requirement
                 # (we are delivering them, not storing them)
                 continue
-            package_type = packaging.package_type_id
+            package_packaging = (
+                packaging if packaging is not None else package.product_packaging_id
+            )
+            package_type = package_packaging.package_type_id
             if not package_type:
                 continue
             package.package_type_id = package_type

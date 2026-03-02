@@ -4,3 +4,4 @@
 - Alexandre Fayolle \<<alexandre.fayolle@camptocamp.com>\>
 - Jacques-Etienne Baudoux \<<je@bcim.be>\>
 - Guewen Baconnier \<<guewen.baconnier@camptocamp.com>\>
+- Jasmin Solanki \<<jasmin.solanki@forgeflow.com>\>

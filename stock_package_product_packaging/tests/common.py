@@ -1,5 +1,6 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
+from odoo import Command
 from odoo.tests import TransactionCase
 
 
@@ -25,8 +26,19 @@ class TestPackageTypeCommon(TransactionCase):
         cls.receipts_picking_type = ref("stock.picking_type_in")
         cls.internal_picking_type = ref("stock.picking_type_internal")
 
-        cls.product = ref("product.product_product_9")
-        cls.product_lot = ref("stock.product_cable_management_box")
+        cls.product = cls.env["product.product"].create(
+            {
+                "name": "Test Product",
+                "is_storable": True,
+            }
+        )
+        cls.product_lot = cls.env["product.product"].create(
+            {
+                "name": "Test Product Lot",
+                "is_storable": True,
+                "tracking": "lot",
+            }
+        )
 
         cls.package_type_pallets = cls.env["stock.package.type"].create(
             {"name": "Pallets"}
@@ -35,29 +47,34 @@ class TestPackageTypeCommon(TransactionCase):
             {"name": "Cardboxes"}
         )
 
-        cls.product_cardbox_product_packaging = cls.env["product.packaging"].create(
+        cls.product_cardbox_product_packaging = cls.env["uom.uom"].create(
             {
                 "name": "4 units cardbox",
-                "qty": 4,
-                "product_id": cls.product.id,
+                "relative_factor": 4,
+                "relative_uom_id": cls.product.uom_id.id,
                 "package_type_id": cls.package_type_cardboxes.id,
             }
         )
-        cls.product_single_bag_product_packaging = cls.env["product.packaging"].create(
+        cls.product_single_bag_product_packaging = cls.env["uom.uom"].create(
             {
                 "name": "Single Bag",
-                "qty": 1,
-                "product_id": cls.product.id,
+                "relative_factor": 1,
+                "relative_uom_id": cls.product.uom_id.id,
             }
         )
-        cls.product_pallet_product_packaging = cls.env["product.packaging"].create(
+        cls.product_pallet_product_packaging = cls.env["uom.uom"].create(
             {
                 "name": "Pallet",
-                "qty": 48,
-                "product_id": cls.product.id,
+                "relative_factor": 48,
+                "relative_uom_id": cls.product.uom_id.id,
                 "package_type_id": cls.package_type_pallets.id,
             }
         )
+        cls.product.product_tmpl_id.uom_ids = [
+            Command.link(cls.product_cardbox_product_packaging.id),
+            Command.link(cls.product_single_bag_product_packaging.id),
+            Command.link(cls.product_pallet_product_packaging.id),
+        ]
 
         cls.internal_picking_type.write({"show_entire_packs": True})
         cls.receipts_picking_type.show_entire_packs = True
@@ -76,10 +93,48 @@ class TestPackageTypeCommon(TransactionCase):
         )
 
     @classmethod
+    def _take_content_out_of_package(cls, package, product, quantity, context=None):
+        """Deliver the whole content of ``package`` in bulk, leaving it empty.
+
+        The destination package is cleared, otherwise the package travels
+        with the goods and is never emptied.
+        """
+        picking_type = cls.warehouse.out_type_id
+        location = cls.warehouse.lot_stock_id
+        location_dest = picking_type.default_location_dest_id
+        picking = cls.env["stock.picking"].create(
+            {
+                "picking_type_id": picking_type.id,
+                "location_id": location.id,
+                "location_dest_id": location_dest.id,
+                "move_ids": [
+                    Command.create(
+                        {
+                            "product_id": product.id,
+                            "product_uom_qty": quantity,
+                            "product_uom": product.uom_id.id,
+                            "location_id": location.id,
+                            "location_dest_id": location_dest.id,
+                        }
+                    )
+                ],
+            }
+        )
+        picking.action_confirm()
+        picking.action_assign()
+        picking.move_line_ids.write(
+            {"package_id": package.id, "quantity": quantity, "result_package_id": False}
+        )
+        picking.move_line_ids.picked = True
+        if context:
+            picking = picking.with_context(**context)
+        picking.button_validate()
+        return picking
+
+    @classmethod
     def _create_single_move(cls, product, quantity=2.0):
         picking_type = cls.warehouse.int_type_id
         move_vals = {
-            "name": product.name,
             "picking_type_id": picking_type.id,
             "product_id": product.id,
             "product_uom_qty": quantity,
