@@ -26,6 +26,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [internal_stock_quant_package](internal_stock_quant_package/) | 18.0.1.1.0 |  | This module allows to declare internal stock quant package
+[stock_quant_package_archive](stock_quant_package_archive/) | 18.0.1.0.0 |  | Allow to archive packages
 [stock_quant_package_dimension](stock_quant_package_dimension/) | 18.0.1.0.1 |  | Use dimensions on packages
 [stock_quant_package_product_packaging](stock_quant_package_product_packaging/) | 18.0.1.3.0 |  | Use product packagings on packages
 
