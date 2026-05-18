@@ -1,0 +1,35 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_quant_package_archive
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_quant_package_archive
+#: model:ir.model.fields,field_description:stock_quant_package_archive.field_stock_quant_package__active
+msgid "Active"
+msgstr ""
+
+#. module: stock_quant_package_archive
+#: model_terms:ir.ui.view,arch_db:stock_quant_package_archive.quant_package_search_view
+#: model_terms:ir.ui.view,arch_db:stock_quant_package_archive.view_quant_package_form
+msgid "Archived"
+msgstr ""
+
+#. module: stock_quant_package_archive
+#: model_terms:ir.ui.view,arch_db:stock_quant_package_archive.quant_package_search_view
+msgid "Archived or Active"
+msgstr ""
+
+#. module: stock_quant_package_archive
+#: model:ir.model,name:stock_quant_package_archive.model_stock_quant_package
+msgid "Packages"
+msgstr ""
