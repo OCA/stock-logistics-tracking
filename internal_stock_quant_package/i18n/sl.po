@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 17:59+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,42 +15,43 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_internal_package_config_line__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_internal_package_config_line__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_internal_package_config_line__delivery_carrier_id
 msgid "Delivery Carrier"
-msgstr ""
+msgstr "Prevoznik"
 
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_internal_package_config_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_internal_package_config_line__empty
 msgid "Empty"
-msgstr ""
+msgstr "Prazno"
 
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_picking__empty_internal_package_on_transfer
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_picking_type__empty_internal_package_on_transfer
 msgid "Empty Internal Package On Transfer"
-msgstr ""
+msgstr "Prazno interno pakiranje na transferju"
 
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_internal_package_config_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,help:internal_stock_quant_package.field_stock_picking_type__empty_internal_package_on_transfer
@@ -61,7 +63,7 @@ msgstr ""
 #. module: internal_stock_quant_package
 #: model_terms:ir.ui.view,arch_db:internal_stock_quant_package.stock_quant_package_search_view
 msgid "Internal"
-msgstr ""
+msgstr "Interno"
 
 #. module: internal_stock_quant_package
 #: model:ir.model,name:internal_stock_quant_package.model_stock_internal_package_config_line
@@ -71,27 +73,27 @@ msgstr ""
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_quant_package__is_internal
 msgid "Internal use?"
-msgstr ""
+msgstr "Interna raba?"
 
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_internal_package_config_line__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_internal_package_config_line__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: internal_stock_quant_package
 #: model:ir.model,name:internal_stock_quant_package.model_stock_quant_package
 msgid "Packages"
-msgstr ""
+msgstr "Pakiranja"
 
 #. module: internal_stock_quant_package
 #: model:ir.model,name:internal_stock_quant_package.model_stock_picking_type
 msgid "Picking Type"
-msgstr ""
+msgstr "Tip dobavnice"
 
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_picking_type__stock_internal_package_config_line_ids
@@ -101,9 +103,9 @@ msgstr ""
 #. module: internal_stock_quant_package
 #: model:ir.model.fields,field_description:internal_stock_quant_package.field_stock_internal_package_config_line__stock_picking_type_id
 msgid "Stock Picking Type"
-msgstr ""
+msgstr "Tip dobavnice"
 
 #. module: internal_stock_quant_package
 #: model:ir.model,name:internal_stock_quant_package.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Premestitev"
