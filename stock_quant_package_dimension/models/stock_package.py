@@ -7,9 +7,9 @@ class StockPackage(models.Model):
     _inherit = "stock.package"
 
     pack_weight = fields.Float()
-    pack_length = fields.Integer(help="length")
-    width = fields.Integer("Pack Width", help="width")
-    height = fields.Integer("Pack Height", help="height")
+    pack_length = fields.Float(help="length")
+    width = fields.Float("Pack Width", help="width")
+    height = fields.Float("Pack Height", help="height")
     volume = fields.Float(
         "Pack Volume",
         digits=(8, 4),
@@ -71,7 +71,13 @@ class StockPackage(models.Model):
         for package in self:
             package.weight_uom_name = package.weight_uom_id.name
 
-    @api.depends("pack_length", "width", "height")
+    @api.depends(
+        "pack_length",
+        "width",
+        "height",
+        "length_uom_id",
+        "volume_uom_id",
+    )
     def _compute_volume(self):
         PackageType = self.env["stock.package.type"]
         for pack in self:
@@ -89,6 +95,16 @@ class StockPackage(models.Model):
             self._update_dimensions_from_packaging(override=False)
         return res
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        packages = super().create(vals_list)
+        for package, vals in zip(packages, vals_list, strict=True):
+            package._update_dimensions_from_packaging(
+                override=False,
+                provided_fields=set(vals),
+            )
+        return packages
+
     def _update_dimensions_fields(self):
         # source: destination
         return {
@@ -98,15 +114,45 @@ class StockPackage(models.Model):
             "base_weight": "pack_weight",
         }
 
-    def _update_dimensions_from_packaging(self, override=False):
+    def _update_dimensions_from_packaging(self, override=False, provided_fields=None):
+        provided_fields = provided_fields or set()
         for package in self:
             if not package.package_type_id:
                 continue
-            dimension_fields = self._update_dimensions_fields()
-            for source, dest in dimension_fields.items():
+            package_type = package.package_type_id
+            values = {}
+            for source, dest in self._update_dimensions_fields().items():
+                if dest in provided_fields:
+                    continue
                 if not override and package[dest]:
                     continue
-                package[dest] = package.package_type_id[source]
+                value = package_type[source]
+                if source in ("packaging_length", "width", "height"):
+                    # stock.package.type stores dimensions in the global
+                    # length unit. It has no per-type length_uom_id field.
+                    source_uom = package.env[
+                        "product.template"
+                    ]._get_length_uom_id_from_ir_config_parameter()
+                    dest_uom = package.length_uom_id
+                else:
+                    # base_weight uses the global weight unit for the same
+                    # reason: stock.package.type has no weight_uom_id field.
+                    source_uom = package.env[
+                        "product.template"
+                    ]._get_weight_uom_id_from_ir_config_parameter()
+                    dest_uom = package.weight_uom_id
+                if value and source_uom and dest_uom:
+                    value = source_uom._compute_quantity(
+                        value,
+                        dest_uom,
+                        round=False,
+                    )
+                values[dest] = value
+            if values:
+                if package.id:
+                    package.write(values)
+                else:
+                    package.update(values)
 
     @api.onchange("package_type_id")
     def onchange_package_type_id(self):

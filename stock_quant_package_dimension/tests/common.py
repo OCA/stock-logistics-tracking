@@ -37,7 +37,7 @@ class TestStockQuantPackageCommon(TransactionCase):
                 "picking_type_id": cls.wh.out_type_id.id,
                 "product_id": cls.product.id,
                 "product_uom_qty": 11.0,
-                "product_uom": cls.product.uom_id.id,
+                "uom_id": cls.product.uom_id.id,
                 "location_id": cls.wh.out_type_id.default_location_src_id.id,
                 "location_dest_id": location_dest,
                 "procure_method": "make_to_stock",
