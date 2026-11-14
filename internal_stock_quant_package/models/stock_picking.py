@@ -23,9 +23,9 @@ class StockPicking(models.Model):
             )
             record.empty_internal_package_on_transfer = value
 
-    def action_put_in_pack(self):
-        self._move_lines_clear_internal_result_packages()
-        return super().action_put_in_pack()
+    def action_put_in_pack(self, move_lines_to_pack=False):
+        self._move_lines_clear_internal_result_packages(move_lines_to_pack)
+        return super().action_put_in_pack(move_lines_to_pack=move_lines_to_pack)
 
     def button_validate(self):
         self._move_lines_clear_internal_result_packages()
@@ -45,12 +45,14 @@ class StockPicking(models.Model):
         if internal_packages:
             internal_packages.unpack()
 
-    def _move_lines_clear_internal_result_packages(self):
+    def _move_lines_clear_internal_result_packages(self, move_lines_to_pack=False):
         """
         Remove links between move lines and stock quant package to ensure
         that move lines are put into a non internal stock.quant.package
         """
         move_lines = self._get_move_lines_internal_package_used_to_empty()
+        if move_lines_to_pack:
+            move_lines &= move_lines_to_pack
         move_lines.write({"result_package_id": False})
 
     def _get_move_lines_internal_package_used_to_empty(self):
