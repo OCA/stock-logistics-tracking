@@ -1,0 +1,11 @@
+[project]
+name = "odoo-addons-oca-stock-logistics-tracking"
+version = "19.0.20261117.0"
+dependencies = [
+    "odoo-addon-stock_package_sscc==19.0.*",
+]
+classifiers=[
+    "Programming Language :: Python",
+    "Framework :: Odoo",
+    "Framework :: Odoo :: 19.0",
+]
