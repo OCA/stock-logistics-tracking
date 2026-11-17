@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_package_sscc
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_package_sscc
+#: model:ir.model.fields,field_description:stock_package_sscc.field_stock_package__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_package_sscc
+#: model:ir.model.fields,field_description:stock_package_sscc.field_stock_package__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_package_sscc
+#: model:ir.model,name:stock_package_sscc.model_stock_package
+msgid "Package"
+msgstr ""
+
+#. module: stock_package_sscc
+#: model:ir.model.fields,field_description:stock_package_sscc.field_stock_package__sscc
+msgid "SSCC"
+msgstr ""
+
+#. module: stock_package_sscc
+#: model:ir.model.fields,help:stock_package_sscc.field_stock_package__sscc
+msgid ""
+"Serial Shipping Container Code (GS1) identifying this logistic unit, e.g. a "
+"pallet, as given by the warehouse. Left empty for units without SSCC, such "
+"as postal parcels."
+msgstr ""
